@@ -29,7 +29,7 @@ export default function Home() {
                 </button>
               </Link>
               <button
-                className="border border-black px-4 py-1 rounded text-xs hover:bg-black-700 border-none bg-black-600 text-white"
+                className="border border-black px-4 py-1 rounded text-xs hover:bg-black border-none bg-black text-white"
                 onClick={() => deleteTodoMutate(todo._id)}
               >
                 Delete
