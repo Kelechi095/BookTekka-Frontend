@@ -13,7 +13,7 @@ export default function EditTodo() {
   const queryClient = useQueryClient();
 
   const setTodo = async () => {
-    const response = await axios.get(`https://keltdmapi.onrender.com/api/todos/${id}`);
+    const response = await axios.get(`import.meta.env.BASE_ENDPOINT/api/todos/${id}`);
     setTitle(response.data.title);
   };
   useEffect(() => {
@@ -21,7 +21,7 @@ export default function EditTodo() {
   }, [id]);
 
   const editTodo = async () => {
-    await axios.patch(`https://keltdmapi.onrender.com/api/todos/${id}`, { title });
+    await axios.patch(`import.meta.env.BASE_ENDPOINT/api/todos/${id}`, { title });
   };
 
   const { mutate: editMutate, isLoading } = useMutation(editTodo, {
