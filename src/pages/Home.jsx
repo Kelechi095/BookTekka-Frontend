@@ -24,12 +24,12 @@ export default function Home() {
             <h4 className="font-semibold">{todo.title}</h4>
             <div className="button-container flex gap-4">
               <Link to={`/edit-todo/${todo._id}`}>
-                <button className="border border-black px-4 py-1 rounded text-xs hover:bg-slate-800 hover:text-white">
+                <button className="border border-black px-4 py-1 rounded text-xs hover:bg-green-700 border-none bg-green-600 text-white">
                   Edit
                 </button>
               </Link>
               <button
-                className="border border-black px-4 py-1 rounded text-xs hover:bg-slate-800 hover:text-white"
+                className="border border-black px-4 py-1 rounded text-xs hover:bg-red-700 border-none bg-red-600 text-white"
                 onClick={() => deleteTodoMutate(todo._id)}
               >
                 Delete
