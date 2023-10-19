@@ -13,15 +13,15 @@ export default function EditTodo() {
   const queryClient = useQueryClient();
 
   const setTodo = async () => {
-    const response = await axios.get(import.meta.env.VITE_BASE_ENDPOINT`/api/todos/${id}`);
+    const response = await axios.get(`${import.meta.env.VITE_BASE_ENDPOINT}/api/todos/${id}`);
     setTitle(response.data.title);
   };
-  useEffect(() => {
+  useEffect(() => {S
     setTodo();
   }, [id]);
 
   const editTodo = async () => {
-    await axios.patch(import.meta.env.VITE_BASE_ENDPOINT`/api/todos/${id}`, { title });
+    await axios.patch(`${import.meta.env.VITE_BASE_ENDPOINT}/api/todos/${id}`, { title });
   };
 
   const { mutate: editMutate, isLoading } = useMutation(editTodo, {
