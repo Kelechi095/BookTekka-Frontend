@@ -16,7 +16,7 @@ export default function EditTodo() {
     const response = await axios.get(`${import.meta.env.VITE_BASE_ENDPOINT}/api/todos/${id}`);
     setTitle(response.data.title);
   };
-  useEffect(() => {S
+  useEffect(() => {
     setTodo();
   }, [id]);
 
