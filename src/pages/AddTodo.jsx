@@ -16,6 +16,7 @@ export default function AddTodo() {
     e.preventDefault();
     createTodoMutate({ title });
   };
+  
 
   return (
     <div className="p-3 max-w-lg mx-auto">

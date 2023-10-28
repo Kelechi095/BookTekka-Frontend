@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
 import { useParams, useNavigate } from "react-router-dom";
-//import { Ring } from '@uiball/loaders'
+
 
 export default function EditTodo() {
   const [title, setTitle] = useState("");
@@ -13,7 +13,7 @@ export default function EditTodo() {
   const queryClient = useQueryClient();
 
   const setTodo = async () => {
-    const response = await axios.get(`${import.meta.env.VITE_BASE_ENDPOINT}/api/todos/${id}`);
+    const response = await axios.get(`${import.meta.env.VITE_BASE_ENDPOINT}/api/books/${id}`);
     setTitle(response.data.title);
   };
   useEffect(() => {
@@ -21,7 +21,7 @@ export default function EditTodo() {
   }, [id]);
 
   const editTodo = async () => {
-    await axios.patch(`${import.meta.env.VITE_BASE_ENDPOINT}/api/todos/${id}`, { title });
+    await axios.patch(`${import.meta.env.VITE_BASE_ENDPOINT}/api/books/${id}`, { title });
   };
 
   const { mutate: editMutate, isLoading } = useMutation(editTodo, {

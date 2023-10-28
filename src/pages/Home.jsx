@@ -2,41 +2,27 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import useGetTodos from "../hooks/useGetTodos";
 import useDeleteTodos from "../hooks/useDeleteTodos";
+import Loader from "../components/Loader";
+
 
 export default function Home() {
-  const { todos, isLoading} = useGetTodos();
+  const { todos, isLoading } = useGetTodos();
 
   const { deleteTodoMutate } = useDeleteTodos();
 
-  if (isLoading) return <h2>Loading...</h2>;
+  console.log(todos);
 
-  return (
-    <div className="px-6 py-4 max-w-lg mx-auto">
-      <Link to="/add-todo" className="underline text-blue-500">
-        Add Todo
-      </Link>
-      {todos &&
-        todos.map((todo) => (
-          <div
-            key={todo._id}
-            className="flex justify-between items-center mt-2"
-          >
-            <h4 className="font-semibold">{todo.title}</h4>
-            <div className="button-container flex gap-4">
-              <Link to={`/edit-todo/${todo._id}`}>
-                <button className="border border-black px-4 py-1 rounded text-xs hover:bg-blue-700 border-none bg-blue-600 text-white">
-                  Edit
-                </button>
-              </Link>
-              <button
-                className="border border-black px-4 py-1 rounded text-xs hover:bg-red-700 border-none bg-red-600 text-white"
-                onClick={() => deleteTodoMutate(todo._id)}
-              >
-                Delete
-              </button>
-            </div>
-          </div>
-        ))}
+  if (isLoading) return <Loader />
+
+  return <div className="mx-auto bg-zinc-100 text-slate-900">
+    <div className="bg-white p-6">
+      <p className="font-semibold text-sm">Sort by</p>
+      <div className="mt-2 grid gap-4 grid-cols-2 text-xs">
+        <button className="border-2 border-blue-500 p-1 text-blue-600 bg-zinc-100 rounded">Task</button>
+        <button className="border p-1 bg-zinc-100 rounded">Date</button>
+        <button className="border p-1 bg-zinc-100 rounded">Date</button>
+        <button className="border p-1 bg-zinc-100 rounded">Order ID</button>
+      </div>
     </div>
-  );
+  </div>;
 }
