@@ -5,6 +5,8 @@ import useCreateTodo from "../hooks/useCreateTodo";
 
 export default function AddTodo() {
   const [title, setTitle] = useState("");
+  const [completed, setCompleted] = useState('')
+  const [price, setPrice] = useState(null)
 
   const navigate = useNavigate();
 
