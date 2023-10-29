@@ -1,34 +1,46 @@
-export const buttons = [
+export const filterButtonsArr = [
     {
-      name: "all",
+      name: "All",
       isClicked: true,
     },
     {
-      name: "read",
+      name: "Finished",
       isClicked: false,
     },
     {
-      name: "unread",
+      name: "Unread",
       isClicked: false,
     },
     {
-      name: "reading",
+      name: "Reading",
+      isClicked: false,
+    },
+  ];
+
+
+export const sortButtonsArr = [
+    {
+      name: "Date(newest first)",
+      isClicked: true,
+    },
+    {
+      name: "Date(oldest first)",
       isClicked: false,
     },
     {
-      name: "title (A-Z)",
+      name: "Title (A-Z)",
       isClicked: false,
     },
     {
-      name: "title (Z-A)",
+      name: "Title (Z-A)",
       isClicked: false,
     },
     {
-      name: "price(lowest first)",
+      name: "Price(lowest first)",
       isClicked: false,
     },
     {
-      name: "price(highest first)",
+      name: "Price(highest first)",
       isClicked: false,
     },
   ];

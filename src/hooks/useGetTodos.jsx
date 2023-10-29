@@ -3,12 +3,12 @@ import { fetchTodos } from "../utils/fetchTodos";
 import { useEffect, useState } from "react";
 
 export default function useGetTodos() {
+  const todosQuery = useQuery("todos", fetchTodos, {
+    staleTime: 10 * (60 * 1000), // 10 mins
+    cacheTime: 15 * (60 * 1000), // 15 mins
+  });
 
-const todosQuery = useQuery("todos", fetchTodos, {
-    select: (data) => data.sort((a, b) => a.title.localeCompare(b.title)),
-})
-  
-  const { data: todos, isLoading, error } = todosQuery
+  const { data: todos, isLoading, error } = todosQuery;
 
-  return { todos, isLoading};
+  return { todos, isLoading };
 }

@@ -1,27 +1,44 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useGetTodos from "../hooks/useGetTodos";
 import useDeleteTodos from "../hooks/useDeleteTodos";
 import Loader from "../components/Loader";
 import { BsFillBellFill } from "react-icons/bs";
 import { AiOutlineSearch } from "react-icons/ai";
-import { buttons } from "../utils/buttons";
+import { sortButtonsArr } from "../utils/buttons";
+import { filterButtonsArr } from "../utils/buttons";
 
 export default function Home() {
   const { todos, isLoading } = useGetTodos();
-  const [buttonArr, setButtonArr] = useState(buttons)
+  const [sortButtons, setSortButtons] = useState(sortButtonsArr)
+  const [filterButtons, setFilterButtons] = useState(filterButtonsArr)
+
+  const navigate = useNavigate()
 
   const { deleteTodoMutate } = useDeleteTodos();
 
 
   const handleSort = (arg) => {
-     setButtonArr(buttons.map(button => {
+     setSortButtons(sortButtonsArr.map(button => {
       if(button.name === arg) {
         return {...button, isClicked: true}
         
       }
       return {...button, isClicked: false}
     }))
+  }
+  const handleFilter = (arg) => {
+     setFilterButtons(filterButtonsArr.map(button => {
+      if(button.name === arg) {
+        return {...button, isClicked: true}
+        
+      }
+      return {...button, isClicked: false}
+    }))
+  }
+
+  const handleAddBook = () => {
+    navigate('/add-todo')
   }
   
   if (isLoading) return <Loader />;
@@ -41,10 +58,16 @@ export default function Home() {
             placeholder="search..."
           />
         </div>
+        <button className="border p-1 px-2 mt-3 rounded text-xs bg-blue-500 text-white" onClick={handleAddBook}>Add Book</button>
         <p className="font-semibold text-sm mt-4">Sort by</p>
         <div className="mt-2 grid gap-4 grid-cols-2 text-[13px]">
-          {buttonArr.map((button, index) => (
-            <button className={button.isClicked ? "border-2 border-blue-500 p-[6px] text-blue-600 bg-zinc-100 rounded" : "border-2 p-[6px] bg-zinc-100 rounded"} key={index} onClick={() => handleSort(button.name)}>
+          {filterButtons.map((button, index) => (
+            <button className={button.isClicked ? "border border-blue-500 p-[6px] text-blue-600 bg-zinc-100 rounded" : "border-2 p-[6px] bg-zinc-100 rounded"} key={index} onClick={() => handleFilter(button.name)}>
+              {button.name}
+            </button>
+          ))}
+          {sortButtons.map((button, index) => (
+            <button className={button.isClicked ? "border border-blue-500 p-[6px] text-blue-600 bg-zinc-100 rounded" : "border-2 p-[6px] bg-zinc-100 rounded"} key={index} onClick={() => handleSort(button.name)}>
               {button.name}
             </button>
           ))}
