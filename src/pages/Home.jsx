@@ -75,7 +75,7 @@ export default function Home() {
           ))}
         </div>
       </div>
-      {books.map(book => (
+      {books?.map(book => (
         <div key={book._id}>
           <p>{book.title}</p>
           <p>{book.author}</p>
