@@ -8,6 +8,7 @@ import { BiSolidEditAlt, BiChevronRight } from "react-icons/bi";
 import { AiOutlineSearch } from "react-icons/ai";
 import { sortButtonsArr } from "../utils/buttons";
 import { filterButtonsArr } from "../utils/buttons";
+import { getDate } from "../utils/dateMaker";
 
 export default function Home() {
   const { books, isLoading } = useGetBooks();
@@ -45,6 +46,7 @@ export default function Home() {
 
   console.log(books);
 
+  
   if (isLoading) return <Loader />;
 
   return (
@@ -69,47 +71,32 @@ export default function Home() {
           Add Book
         </button>
         <p className="font-semibold text-sm mt-4">Sort by</p>
-        <div className="mt-2 grid gap-4 grid-cols-2 text-[13px]">
-          {filterButtons.map((button, index) => (
-            <button
-              className={
-                button.isClicked
-                  ? "border border-blue-500 p-[6px] text-blue-600 bg-zinc-100 rounded"
-                  : "border-2 p-[6px] bg-zinc-100 rounded"
-              }
-              key={index}
-              onClick={() => handleFilter(button.name)}
-            >
-              {button.name}
-            </button>
-          ))}
-          {sortButtons.map((button, index) => (
-            <button
-              className={
-                button.isClicked
-                  ? "border border-blue-500 p-[6px] text-blue-600 bg-zinc-100 rounded"
-                  : "border-2 p-[6px] bg-zinc-100 rounded"
-              }
-              key={index}
-              onClick={() => handleSort(button.name)}
-            >
-              {button.name}
-            </button>
-          ))}
-        </div>
+        
       </div>
       <div className="bg-white mt-1 p-4">
         {books?.map((book) => (
-          <div key={book._id} className="my-2">
+          <div key={book._id} className="my-2 border-b pb-1">
             <div className="flex justify-between items-center">
-                <p className="text-base font-bold text-slate-900">{book.title}</p>
+              <p className="text-sm font-bold text-slate-800">{book.title}</p>
               <div className="flex items-center gap-2">
-                <p className={book.read === "Reading" ? "text-[13px] font-medium text-blue-500" : book.read === "Unread" ? "text-sm font-medium text-red-500 text-[13px]" : "text-sm font-medium text-green-500 text-[13px]"}>{book.read}</p>
-                <BiChevronRight className="text-blue-400"/>
+                <p
+                  className={
+                    book.status === "Reading"
+                      ? "text-xs font-medium text-blue-500"
+                      : book.status === "Unread"
+                      ? "text-xs font-medium text-red-500 text-[13px]"
+                      : "text-xs font-medium text-green-500 text-[13px]"
+                  }
+                >
+                  {book.status}
+                </p>
+                <BiChevronRight className="text-blue-400" />
               </div>
             </div>
-              <p className="text-sm font-medium text-slate-900">{book.author}</p>
-              <p className="text-xs font-medium text-slate-900">${book.price}</p>
+            <p className="text-xs font-medium text-slate-900">{book.author}</p>
+            <p className="text-xs font-medium text-slate-900">{book.genre}</p>
+            <p className="text-xs font-medium text-slate-900">{getDate(book.createdAt)}</p>
+            <p className="text-xs font-medium text-slate-900">${book.price}</p>
           </div>
         ))}
       </div>
