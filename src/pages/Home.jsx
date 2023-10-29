@@ -76,7 +76,7 @@ export default function Home() {
       </div>
       <div className="bg-white mt-1 p-4">
         {books?.map((book) => (
-          <div key={book._id} className="my-2 border-b pb-1">
+          <div key={book._id} className="my-2 border-b pb-1 shadow-sm">
             <div className="flex justify-between items-center">
               <p className="text-sm font-bold text-slate-800">{book.title}</p>
               <div className="flex items-center gap-2">
