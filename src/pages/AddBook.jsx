@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import useCreateTodo from "../hooks/useCreateTodo";
+import useCreateBook from "../hooks/useCreateBook";
 
 export default function AddTodo() {
   const [title, setTitle] = useState("");
@@ -10,11 +10,11 @@ export default function AddTodo() {
 
   const navigate = useNavigate();
 
-  const { createTodoMutate, isSubmitting } = useCreateTodo();
+  const { createBookMutate, isSubmitting } = useCreateBook();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    createTodoMutate({ title });
+    createBookMutate({ title });
   };
   
 
@@ -34,7 +34,7 @@ export default function AddTodo() {
         />
 
         <button className="border w-20 border-black rounded hover:bg-slate-300">
-          {isSubmitting ? 'Submitting...' : 'Add todo'}
+          {isSubmitting ? 'Submitting...' : 'Add Book'}
         </button>
       </form>
     </div>

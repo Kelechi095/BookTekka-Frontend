@@ -1,15 +1,15 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
-import AddTodo from "./pages/AddTodo";
-import EditTodo from "./pages/EditTodo";
+import AddBook from "./pages/AddBook";
+import EditBook from "./pages/EditBook";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/add-todo" element={<AddTodo />} />
-        <Route path="/edit-todo/:id" element={<EditTodo />} />
+        <Route path="/add-todo" element={<AddBook />} />
+        <Route path="/edit-todo/:id" element={<EditBook />} />
       </Routes>
     </BrowserRouter>
   );

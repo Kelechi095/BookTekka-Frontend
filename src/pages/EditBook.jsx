@@ -12,34 +12,34 @@ export default function EditTodo() {
 
   const queryClient = useQueryClient();
 
-  const setTodo = async () => {
+  const setBook = async () => {
     const response = await axios.get(`${import.meta.env.VITE_BASE_ENDPOINT}/api/books/${id}`);
     setTitle(response.data.title);
   };
   useEffect(() => {
-    setTodo();
+    setBook();
   }, [id]);
 
-  const editTodo = async () => {
+  const editBook = async () => {
     await axios.patch(`${import.meta.env.VITE_BASE_ENDPOINT}/api/books/${id}`, { title });
   };
 
-  const { mutate: editMutate, isLoading } = useMutation(editTodo, {
+  const { mutate: editMutate, isLoading } = useMutation(editBook, {
     onSuccess: () => {
-      queryClient.invalidateQueries("todos");
+      queryClient.invalidateQueries("books");
       navigate("/");
     },
   });
 
-  const handleEditTodo = async (e) => {
+  const handleEditBook = async (e) => {
     e.preventDefault();
     editMutate();
   };
 
   return (
     <div className="p-3 max-w-lg mx-auto">
-      <h1 className="text-3xl text-center font-semibold my-7">Edit Todo</h1>
-      <form className="flex flex-col gap-4" onSubmit={handleEditTodo}>
+      <h1 className="text-3xl text-center font-semibold my-7">Edit Book</h1>
+      <form className="flex flex-col gap-4" onSubmit={handleEditBook}>
         <input
           type="text"
           placeholder="Todo..."
@@ -49,7 +49,7 @@ export default function EditTodo() {
         />
 
         <button className="border w-20 border-black rounded hover:bg-slate-300">
-          {isLoading ? "Editing..." : "Edit Todo"}
+          {isLoading ? "Editing..." : "Edit Book"}
         </button>
       </form>
     </div>

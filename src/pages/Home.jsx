@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import useGetTodos from "../hooks/useGetTodos";
-import useDeleteTodos from "../hooks/useDeleteTodos";
+import useGetBooks from "../hooks/useGetBooks";
+import useDeleteBook from "../hooks/useDeleteBook";
 import Loader from "../components/Loader";
 import { BsFillBellFill } from "react-icons/bs";
 import { AiOutlineSearch } from "react-icons/ai";
@@ -9,13 +9,13 @@ import { sortButtonsArr } from "../utils/buttons";
 import { filterButtonsArr } from "../utils/buttons";
 
 export default function Home() {
-  const { books, isLoading } = useGetTodos();
+  const { books, isLoading } = useGetBooks();
   const [sortButtons, setSortButtons] = useState(sortButtonsArr)
   const [filterButtons, setFilterButtons] = useState(filterButtonsArr)
 
   const navigate = useNavigate()
 
-  const { deleteTodoMutate } = useDeleteTodos();
+  const { deleteBookMutate } = useDeleteBook();
 
 
   const handleSort = (arg) => {
