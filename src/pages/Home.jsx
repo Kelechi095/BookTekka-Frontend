@@ -4,8 +4,9 @@ import useGetBooks from "../hooks/useGetBooks";
 import useDeleteBook from "../hooks/useDeleteBook";
 import Loader from "../components/Loader";
 import { BsFillBellFill } from "react-icons/bs";
-import { BiSolidEditAlt, BiChevronRight } from "react-icons/bi";
+import { BiSolidEditAlt, BiChevronRight, BiSolidBookReader, BiSolidBookAlt } from "react-icons/bi";
 import { AiOutlineSearch } from "react-icons/ai";
+import {FaBook} from "react-icons/fa"
 import { sortButtonsArr } from "../utils/buttons";
 import { filterButtonsArr } from "../utils/buttons";
 import { getDate } from "../utils/dateMaker";
@@ -82,13 +83,13 @@ export default function Home() {
                 <p
                   className={
                     book.status === "Reading"
-                      ? "text-xs font-medium text-blue-500"
+                      ? "text-md font-medium text-blue-500"
                       : book.status === "Unread"
-                      ? "text-xs font-medium text-red-500 text-[13px]"
-                      : "text-xs font-medium text-green-500 text-[13px]"
+                      ? "text-md font-medium text-red-500"
+                      : "text-md font-medium text-green-500"
                   }
                 >
-                  {book.status}
+                  {book.status === 'Reading' ? <BiSolidBookReader /> : book.status === 'Unread' ? <BiSolidBookAlt /> : <FaBook />}
                 </p>
                 <BiChevronRight className="text-blue-400" />
               </div>
