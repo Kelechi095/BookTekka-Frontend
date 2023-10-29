@@ -1,4 +1,3 @@
-import React from "react";
 import { useMutation } from "react-query";
 import { deleteBook } from "../utils/deleteBook";
 import { useQueryClient } from "react-query";
