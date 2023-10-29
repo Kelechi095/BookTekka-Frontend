@@ -41,7 +41,7 @@ export default function Home() {
     navigate('/add-todo')
   }
   
-  if (isLoading) return <Loader />;
+  //if (isLoading) return <Loader />;
 
   return (
     <div className="mx-auto bg-zinc-100 text-slate-900">

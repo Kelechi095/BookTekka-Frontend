@@ -4,8 +4,7 @@ import { useEffect, useState } from "react";
 
 export default function useGetTodos() {
   const todosQuery = useQuery("todos", fetchTodos, {
-    staleTime: 10 * (60 * 1000), // 10 mins
-    cacheTime: 15 * (60 * 1000), // 15 mins
+    keepPreviousData: true,
   });
 
   const { data: todos, isLoading, error } = todosQuery;
