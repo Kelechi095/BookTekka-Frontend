@@ -9,7 +9,7 @@ import { sortButtonsArr } from "../utils/buttons";
 import { filterButtonsArr } from "../utils/buttons";
 
 export default function Home() {
-  const { todos, isLoading } = useGetTodos();
+  const { books, isLoading } = useGetTodos();
   const [sortButtons, setSortButtons] = useState(sortButtonsArr)
   const [filterButtons, setFilterButtons] = useState(filterButtonsArr)
 
@@ -40,8 +40,10 @@ export default function Home() {
   const handleAddBook = () => {
     navigate('/add-todo')
   }
+
+  console.log(books)
   
-  //if (isLoading) return <Loader />;
+  if (isLoading) return <Loader />;
 
   return (
     <div className="mx-auto bg-zinc-100 text-slate-900">
@@ -73,6 +75,12 @@ export default function Home() {
           ))}
         </div>
       </div>
+      {books.map(book => (
+        <div key={book._id}>
+          <p>{book.title}</p>
+          <p>{book.author}</p>
+        </div>
+      ))}
     </div>
   );
 }

@@ -1,13 +1,13 @@
 import { useQuery } from "react-query";
-import { fetchTodos } from "../utils/fetchTodos";
+import { fetchBooks } from "../utils/fetchbooks";
 import { useEffect, useState } from "react";
 
 export default function useGetTodos() {
-  const todosQuery = useQuery("todos", fetchTodos, {
+  const booksQuery = useQuery("books", fetchBooks, {
     keepPreviousData: true,
   });
 
-  const { data: todos, isLoading, error } = todosQuery;
+  const { data: books, isLoading, error } = booksQuery;
 
-  return { todos, isLoading };
+  return { books, isLoading };
 }
