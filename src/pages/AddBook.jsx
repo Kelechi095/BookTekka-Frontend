@@ -33,8 +33,8 @@ export default function AddTodo() {
   console.log(formData)
 
   return (
-    <div className="p-3 max-w-lg mx-auto bg-zinc-100 h-screen">
-      <Link to="/" className="bg-blue-500 p-2 rounded text-sm text-white hover:text-blue-700 mt-4">
+    <div className="p-3 max-w-lg mx-auto py-8 bg-zinc-100 h-screen">
+      <Link to="/" className="bg-blue-500 p-2 rounded text-sm text-white hover:text-blue-700">
         Back to home
       </Link>
 
@@ -82,13 +82,13 @@ export default function AddTodo() {
             />
           </div>
 
-          <select name="genre" value={formData.genre} className="text-sm  text-slate-800 outline-none border-t p-1  bg-zinc-100 cursor-pointer" onChange={handleChange}>
+          <select name="genre" value={formData.genre} className="text-sm  text-slate-800 outline-none border-t px-1 py-2 bg-zinc-100 cursor-pointer" onChange={handleChange}>
             {genreOptions.map((genre, index) => (
               <option key={index}>{genre}</option>
             ))}
           </select>
 
-          <select name="status" value={formData.status} className="text-sm text-slate-800 bg-zinc-100 p-1 outline-none border-t cursor-pointer" onChange={handleChange}>
+          <select name="status" value={formData.status} className="text-sm text-slate-800 bg-zinc-100 px-1 py-2 outline-none border-t cursor-pointer" onChange={handleChange}>
             {statusOptions.map((status, index) => (
               <option  key={index}>{status}</option>
             ))}
