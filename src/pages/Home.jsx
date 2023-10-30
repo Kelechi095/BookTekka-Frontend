@@ -15,6 +15,7 @@ import { LiaTimesSolid } from "react-icons/lia";
 import { HiOutlineMenuAlt2 } from "react-icons/hi";
 import { FaBook } from "react-icons/fa";
 import { getDate } from "../utils/dateMaker";
+import Sidebar from "../components/Sidebar";
 
 export default function Home() {
   const { books, isLoading } = useGetBooks();
@@ -32,26 +33,25 @@ export default function Home() {
   if (isLoading) return <Loader />;
 
   return (
-    <div className="mx-auto text-slate-900 py-6 px-4">
+    <div
+      className={
+        isOpen
+          ? "mx-auto text-slate-900 py-6 px-4 bg-zinc-100"
+          : "mx-auto text-slate-900 py-6 px-4"
+      }
+    >
+      {isOpen && <Sidebar toggleSidebar={toggleSidebar} />}
       <div>
         <div className="flex justify-between">
-          <div className="flex gap-2">
-            {isOpen ? (
-              <LiaTimesSolid
-                size={30}
-                className="cursor-pointer"
-                onClick={toggleSidebar}
-              />
-            ) : (
-              <HiOutlineMenuAlt2
-                size={30}
-                className="cursor-pointer"
-                onClick={toggleSidebar}
-              />
-            )}
-            <h1 className="font-bold text-xl font-mono mb-2">Booktekka</h1>
+          <div className="flex gap-2 items-center mb-2">
+            <HiOutlineMenuAlt2
+              size={20}
+              className="cursor-pointer"
+              onClick={toggleSidebar}
+            />
+            <h1 className="font-bold text-xl font-mono">Booktekka</h1>
           </div>
-          <BsFillBellFill size={25} className="text-blue-700 cursor-pointer" />
+          <BsFillBellFill size={20} className="text-blue-700 cursor-pointer" />
         </div>
         <div className="rounded-xl bg-zinc-100 px-2 my-2 flex items-center">
           <AiOutlineSearch />
@@ -70,7 +70,10 @@ export default function Home() {
       </div>
       <div>
         {books?.map((book) => (
-          <div key={book._id} className=" border-t py-2 shadow-sm flex items-center justify-between">
+          <div
+            key={book._id}
+            className=" border-t py-2 shadow-sm flex items-center justify-between"
+          >
             <div>
               <p className="text-sm font-bold text-slate-800">{book.title}</p>
               <p className="text-xs font-medium text-slate-900">
@@ -95,14 +98,14 @@ export default function Home() {
                 }
               >
                 {book.status === "Reading" ? (
-                  <BiSolidBookReader size={20}/>
+                  <BiSolidBookReader size={20} />
                 ) : book.status === "Unread" ? (
-                  <BiSolidBookAlt  size={20}/>
+                  <BiSolidBookAlt size={20} />
                 ) : (
-                  <FaBook size={20}/>
+                  <FaBook size={20} />
                 )}
               </p>
-              <BiChevronRight className="text-blue-400" size={20}/>
+              <BiChevronRight className="text-blue-400" size={20} />
             </div>
           </div>
         ))}
