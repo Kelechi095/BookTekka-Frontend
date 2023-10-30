@@ -4,57 +4,53 @@ import useGetBooks from "../hooks/useGetBooks";
 import useDeleteBook from "../hooks/useDeleteBook";
 import Loader from "../components/Loader";
 import { BsFillBellFill } from "react-icons/bs";
-import { BiSolidEditAlt, BiChevronRight, BiSolidBookReader, BiSolidBookAlt } from "react-icons/bi";
+import {
+  BiSolidEditAlt,
+  BiChevronRight,
+  BiSolidBookReader,
+  BiSolidBookAlt,
+} from "react-icons/bi";
 import { AiOutlineSearch } from "react-icons/ai";
-import {FaBook} from "react-icons/fa"
-import { sortButtonsArr } from "../utils/buttons";
-import { filterButtonsArr } from "../utils/buttons";
+import { LiaTimesSolid } from "react-icons/lia";
+import { HiOutlineMenuAlt2 } from "react-icons/hi";
+import { FaBook } from "react-icons/fa";
 import { getDate } from "../utils/dateMaker";
 
 export default function Home() {
   const { books, isLoading } = useGetBooks();
-  const [sortButtons, setSortButtons] = useState(sortButtonsArr);
-  const [filterButtons, setFilterButtons] = useState(filterButtonsArr);
-
+  const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
-
-  const { deleteBookMutate } = useDeleteBook();
-
-  const handleSort = (arg) => {
-    setSortButtons(
-      sortButtonsArr.map((button) => {
-        if (button.name === arg) {
-          return { ...button, isClicked: true };
-        }
-        return { ...button, isClicked: false };
-      })
-    );
-  };
-  const handleFilter = (arg) => {
-    setFilterButtons(
-      filterButtonsArr.map((button) => {
-        if (button.name === arg) {
-          return { ...button, isClicked: true };
-        }
-        return { ...button, isClicked: false };
-      })
-    );
-  };
 
   const handleAddBook = () => {
     navigate("/add-todo");
   };
 
-  console.log(books);
+  const toggleSidebar = () => {
+    setIsOpen(!isOpen);
+  };
 
-  
   if (isLoading) return <Loader />;
 
   return (
-    <div className="mx-auto text-slate-900 max-w-md">
-      <div className="bg-white p-4">
+    <div className="mx-auto text-slate-900 py-2 px-4">
+      <div className="bg-white">
         <div className="flex justify-between">
-          <h1 className="font-bold text-xl font-mono mb-2">Booktekka</h1>
+          <div className="flex gap-2">
+            {isOpen ? (
+              <LiaTimesSolid
+                size={30}
+                className="cursor-pointer lg:hidden dark:text-white"
+                onClick={toggleSidebar}
+              />
+            ) : (
+              <HiOutlineMenuAlt2
+                size={30}
+                className="cursor-pointer lg:hidden dark:text-slate-100"
+                onClick={toggleSidebar}
+              />
+            )}
+            <h1 className="font-bold text-xl font-mono mb-2">Booktekka</h1>
+          </div>
           <BsFillBellFill size={25} className="text-blue-700 cursor-pointer" />
         </div>
         <div className="rounded-xl bg-zinc-100 px-2 flex items-center">
@@ -66,60 +62,56 @@ export default function Home() {
           />
         </div>
         <button
-          className="border p-1 px-2 mt-3 rounded text-xs bg-blue-500 text-white"
+          className="border p-1 px-2 my-3 rounded text-xs bg-blue-500 text-white"
           onClick={handleAddBook}
         >
           Add Book
         </button>
-
-      <div className="mt-2 border-t border-b py-2">
-        <div className="flex items-center text-xs justify-between">
-          <p className="font-semibold">Sort:</p>
-          <div className="flex gap-4">
-            <button className="border rounded border-slate-800 p-1 px-2">Date</button>
-            <button className="border rounded border-slate-800 p-1 px-2">Title</button>
-            <button className="border rounded border-slate-800 p-1 px-2">Price</button>
-          </div>
-        </div>
-        <div className="flex items-center text-xs justify-between mt-4">
-          <p className="font-semibold">Filter:</p>
-          <div className="flex gap-4">
-            <button className="border rounded border-slate-800 p-1 px-2">Genre</button>
-            <button className="border rounded border-slate-800 p-1 px-2">Status</button>
-            
-          </div>
-        </div>
-        
       </div>
-        
-      </div>
-      <div className="bg-white p-4">
+      <div>
         {books?.map((book) => (
-          <div key={book._id} className=" border-b pb-1 shadow-sm">
-            <div className="flex justify-between items-center">
+          <div key={book._id} className=" border-t py-2 shadow-sm flex items-center justify-between">
+            <div>
               <p className="text-sm font-bold text-slate-800">{book.title}</p>
-              <div className="flex items-center gap-2">
-                <p
-                  className={
-                    book.status === "Reading"
-                      ? "text-md font-medium text-blue-500"
-                      : book.status === "Unread"
-                      ? "text-md font-medium text-red-500"
-                      : "text-md font-medium text-green-500"
-                  }
-                >
-                  {book.status === 'Reading' ? <BiSolidBookReader /> : book.status === 'Unread' ? <BiSolidBookAlt /> : <FaBook />}
-                </p>
-                <BiChevronRight className="text-blue-400" />
-              </div>
+              <p className="text-xs font-medium text-slate-900">
+                {book.author}
+              </p>
+              <p className="text-xs font-medium text-slate-900">{book.genre}</p>
+              <p className="text-xs font-medium text-slate-900">
+                {getDate(book.createdAt)}
+              </p>
+              <p className="text-xs font-medium text-slate-900">
+                ${book.price}
+              </p>
             </div>
-            <p className="text-xs font-medium text-slate-900">{book.author}</p>
-            <p className="text-xs font-medium text-slate-900">{book.genre}</p>
-            <p className="text-xs font-medium text-slate-900">{getDate(book.createdAt)}</p>
-            <p className="text-xs font-medium text-slate-900">${book.price}</p>
+            <div className="flex items-center gap-2">
+              <p
+                className={
+                  book.status === "Reading"
+                    ? " text-blue-500"
+                    : book.status === "Unread"
+                    ? " text-red-500"
+                    : " text-green-500"
+                }
+              >
+                {book.status === "Reading" ? (
+                  <BiSolidBookReader size={25}/>
+                ) : book.status === "Unread" ? (
+                  <BiSolidBookAlt  size={25}/>
+                ) : (
+                  <FaBook size={25}/>
+                )}
+              </p>
+              <BiChevronRight className="text-blue-400" size={25}/>
+            </div>
           </div>
         ))}
       </div>
     </div>
   );
+}
+
+{
+  /* ;
+   */
 }
