@@ -51,7 +51,7 @@ export default function Home() {
   if (isLoading) return <Loader />;
 
   return (
-    <div className="mx-auto bg-zinc-100 text-slate-900 max-w-md">
+    <div className="mx-auto text-slate-900 max-w-md">
       <div className="bg-white p-4">
         <div className="flex justify-between">
           <h1 className="font-bold text-xl font-mono mb-2">Booktekka</h1>
@@ -71,12 +71,31 @@ export default function Home() {
         >
           Add Book
         </button>
-        <p className="font-semibold text-sm mt-4">Sort by</p>
+
+      <div className="mt-2 border-t border-b py-2">
+        <div className="flex items-center text-xs justify-between">
+          <p className="font-semibold">Sort:</p>
+          <div className="flex gap-4">
+            <button className="border rounded border-slate-800 p-1 px-2">Date</button>
+            <button className="border rounded border-slate-800 p-1 px-2">Title</button>
+            <button className="border rounded border-slate-800 p-1 px-2">Price</button>
+          </div>
+        </div>
+        <div className="flex items-center text-xs justify-between mt-4">
+          <p className="font-semibold">Filter:</p>
+          <div className="flex gap-4">
+            <button className="border rounded border-slate-800 p-1 px-2">Genre</button>
+            <button className="border rounded border-slate-800 p-1 px-2">Status</button>
+            
+          </div>
+        </div>
         
       </div>
-      <div className="bg-white mt-1 p-4">
+        
+      </div>
+      <div className="bg-white p-4">
         {books?.map((book) => (
-          <div key={book._id} className="my-2 border-b pb-1 shadow-sm">
+          <div key={book._id} className=" border-b pb-1 shadow-sm">
             <div className="flex justify-between items-center">
               <p className="text-sm font-bold text-slate-800">{book.title}</p>
               <div className="flex items-center gap-2">

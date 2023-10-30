@@ -44,3 +44,7 @@ export const sortButtonsArr = [
       isClicked: false,
     },
   ];
+
+
+  const sortButtons = ['Date', 'Title', 'Price']
+  const filterButtons = ['Size']
