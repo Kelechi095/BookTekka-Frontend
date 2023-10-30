@@ -88,7 +88,7 @@ export default function AddTodo() {
             ))}
           </select>
 
-          <select name="status" value={formData.status} className="text-sm text-slate-800 outline-none border-t pt-2 cursor-pointer" onChange={handleChange}>
+          <select name="status" value={formData.status} className="text-sm text-slate-800 bg-zinc-100 p-1 px-2 outline-none border-t pt-2 cursor-pointer" onChange={handleChange}>
             {statusOptions.map((status, index) => (
               <option  key={index}>{status}</option>
             ))}
