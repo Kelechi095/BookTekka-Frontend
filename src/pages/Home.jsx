@@ -37,13 +37,13 @@ export default function Home() {
       {isOpen && <Sidebar toggleSidebar={toggleSidebar} />}
       <div>
         <div className="flex justify-between">
-          <div className="flex gap-2 items-center mb-2">
+          <div className="flex gap-4 items-center mb-2">
             <HiOutlineMenuAlt2
-              size={20}
+              size={25}
               className="cursor-pointer"
               onClick={toggleSidebar}
             />
-            <h1 className="font-bold text-xl font-mono">Booktekka</h1>
+            <h1 className="font-bold text-xl font-mono">Library</h1>
           </div>
           <BsFillBellFill size={20} className="text-blue-700 cursor-pointer" />
         </div>
