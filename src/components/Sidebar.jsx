@@ -4,7 +4,7 @@ import { filterGenres, filterStatus, sortButtons } from "../utils/buttons";
 export default function Sidebar({ toggleSidebar }) {
   return (
     <div className="absolute inset-0 bg-black bg-opacity-10" onClick={toggleSidebar}>
-      <nav className="w-80 bg-white py-6 px-4 text-[13px] h-screen shadow-md" onClick={(e) => e.stopPropagation()}>
+      <nav className="w-[300px] bg-white py-6 px-4 text-[13px] h-screen shadow-md" onClick={(e) => e.stopPropagation()}>
         <div className="flex gap-4 items-center mb-2">
           {
             <LiaTimesSolid
