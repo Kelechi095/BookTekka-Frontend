@@ -33,7 +33,7 @@ export default function Home() {
   if (isLoading) return <Loader />;
 
   return (
-    <div className={"mx-auto text-slate-900 m-3 px-4"}>
+    <div className={"mx-auto text-slate-900 m-4 px-4"}>
       {isOpen && <Sidebar toggleSidebar={toggleSidebar} />}
       <div>
         <div className="flex justify-between">
