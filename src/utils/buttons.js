@@ -3,4 +3,8 @@
 
   export const filterGenres = ['African Literature', 'Fantasy', 'Horror', 'Mystery', 'Non Fiction', 'Romance',  'Science Fiction', 'Thriller', 'Young Adult']
 
+  export const genreOptions = ["Genre", 'African Literature', 'Fantasy', 'Horror', 'Mystery', 'Non Fiction', 'Romance',  'Science Fiction', 'Thriller', 'Young Adult']
+
   export const filterStatus = ["Unread", "Reading", "Finished"]
+
+  export const statusOptions = ["Status", "Unread", "Reading", "Finished"]

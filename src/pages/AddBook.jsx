@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import useCreateBook from "../hooks/useCreateBook";
+import { filterGenres, genreOptions, statusOptions } from "../utils/buttons";
 
 export default function AddTodo() {
   const [formData, setFormData] = useState({
@@ -11,6 +12,7 @@ export default function AddTodo() {
     genre: "",
     status: "",
   });
+  
   const navigate = useNavigate();
 
   const { createBookMutate, isSubmitting } = useCreateBook();
@@ -27,11 +29,12 @@ export default function AddTodo() {
     createBookMutate({ formData });
   };
 
+
   console.log(formData)
 
   return (
     <div className="p-3 max-w-lg mx-auto bg-zinc-100 h-screen">
-      <Link to="/" className="underline text-blue-500 hover:text-blue-700">
+      <Link to="/" className="border p-1 border-blue-500 rounded text-sm text-blue-500 hover:text-blue-700">
         Back to home
       </Link>
 
@@ -44,11 +47,11 @@ export default function AddTodo() {
         </h1>
         <div className="grid gap-4 p-4">
           <div>
-            <label className="text-sm">Title</label>
+            <label className="text-sm text-slate-800">Title</label>
             <input
               type="text"
               placeholder="Title"
-              className="bg-zinc-100 p-2 mt-2 w-full outline-none text-sm"
+              className="bg-zinc-100 px-2 py-[6px] w-full outline-none text-sm"
               name="title"
               value={formData.title}
               onChange={handleChange}
@@ -56,11 +59,11 @@ export default function AddTodo() {
             />
           </div>
           <div>
-            <label className="text-sm">Author</label>
+            <label className="text-sm text-slate-800">Author</label>
             <input
               type="text"
               placeholder="Author"
-              className="bg-zinc-100 p-2 mt-2 w-full outline-none text-sm"
+              className="bg-zinc-100 px-2 py-[6px] w-full outline-none text-sm"
               name="author"
               value={formData.author}
               onChange={handleChange}
@@ -68,18 +71,30 @@ export default function AddTodo() {
             />
           </div>
           <div>
-            <label className="text-sm mb-12">Price</label>
+            <label className="text-sm text-slate-800">Price</label>
             <input
               type="text"
               placeholder="Price"
-              className="bg-zinc-100 p-2 mt-2 w-full outline-none text-sm"
+              className="bg-zinc-100 py-[6px] px-2 w-full outline-none text-sm"
               name="price"
               value={formData.price}
               onChange={handleChange}
             />
           </div>
 
-          <button className="border w-full px-4 rounded text-white p-2 bg-blue-500">
+          <select name="genre" value={formData.genre} className="text-sm outline-none border-t pt-2 cursor-pointer" onChange={handleChange}>
+            {genreOptions.map((genre, index) => (
+              <option  key={index}>{genre}</option>
+            ))}
+          </select>
+
+          <select name="status" value={formData.status} className="text-sm text-slate-800 outline-none border-t pt-2 cursor-pointer" onChange={handleChange}>
+            {statusOptions.map((status, index) => (
+              <option  key={index}>{status}</option>
+            ))}
+          </select>
+
+          <button className="border w-full px-4 rounded text-white p-1 bg-blue-500">
             {isSubmitting ? "Submitting..." : "Submit"}
           </button>
         </div>
