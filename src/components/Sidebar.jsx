@@ -4,7 +4,7 @@ import { filterGenres, filterStatus, sortButtons } from "../utils/buttons";
 export default function Sidebar({ toggleSidebar }) {
   return (
     <div className=" inset-0 absolute  bg-black bg-opacity-10" onClick={toggleSidebar}>
-      <nav className="w-60 bg-white overflow-y-scroll py-4 px-4 text-[13px] h-screen shadow-md" onClick={(e) => e.stopPropagation()}>
+      <nav className="w-60 bg-white py-4 px-4 text-[13px] h-screen shadow-md" onClick={(e) => e.stopPropagation()}>
         <div className="flex gap-4 items-center mb-2">
           {
             <LiaTimesSolid
@@ -15,7 +15,7 @@ export default function Sidebar({ toggleSidebar }) {
           }
           <h1 className="font-bold text-xl font-mono">Library</h1>
         </div>
-        <button>Home</button>
+        <button className="font-semibold text-base mt-2">Home</button>
         <div className="mt-2 py-1 border-t">
           <p className="font-semibold">Sort by</p>
           {sortButtons.map((button, index) => (
@@ -24,7 +24,24 @@ export default function Sidebar({ toggleSidebar }) {
             </div>
           ))}
         </div>
+
         <div className="mt-2 py-1 border-t">
+          <p className="font-semibold">Filter by status</p>
+          {filterStatus.map((button, index) => (
+            <div key={index}>
+              <button className="mt-1">{button}</button>
+            </div>
+          ))}
+        </div>
+        
+      </nav>
+    </div>
+  );
+}
+
+
+
+{/* <div className="mt-2 py-1 border-t">
           <p className="font-semibold">Filter by genre</p>
           {filterGenres.map((button, index) => (
             <div key={index}>
@@ -39,8 +56,4 @@ export default function Sidebar({ toggleSidebar }) {
               <button className="mt-1">{button}</button>
             </div>
           ))}
-        </div>
-      </nav>
-    </div>
-  );
-}
+        </div> */}
