@@ -56,10 +56,10 @@ export default function Home() {
           />
         </div>
         <button
-          className="border p-1 px-2 my-3 rounded text-xs bg-blue-500 text-white"
+          className="border p-2 px-2 my-3 rounded text-xs bg-blue-500 text-white"
           onClick={handleAddBook}
         >
-          Add Book
+          Add To Library
         </button>
       </div>
       <div>
