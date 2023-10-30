@@ -82,13 +82,13 @@ export default function AddTodo() {
             />
           </div>
 
-          <select name="genre" value={formData.genre} className="text-sm  text-zinc-200 outline-none border-t pt-2  bg-zinc-100 px-1 cursor-pointer" onChange={handleChange}>
+          <select name="genre" value={formData.genre} className="text-sm  text-slate-800 outline-none border-t p-1  bg-white cursor-pointer" onChange={handleChange}>
             {genreOptions.map((genre, index) => (
               <option key={index}>{genre}</option>
             ))}
           </select>
 
-          <select name="status" value={formData.status} className="text-sm text-zinc-200 bg-zinc-100 px-1 outline-none border-t pt-2 cursor-pointer" onChange={handleChange}>
+          <select name="status" value={formData.status} className="text-sm text-slate-800 bg-white p-1 outline-none border-t cursor-pointer" onChange={handleChange}>
             {statusOptions.map((status, index) => (
               <option  key={index}>{status}</option>
             ))}
