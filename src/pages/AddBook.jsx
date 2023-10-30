@@ -34,7 +34,7 @@ export default function AddTodo() {
 
   return (
     <div className="p-3 max-w-lg mx-auto bg-zinc-100 h-screen">
-      <Link to="/" className="border p-1 border-blue-500 rounded text-sm text-blue-500 hover:text-blue-700">
+      <Link to="/" className="bg-blue-500 rounded text-sm text-white hover:text-blue-700">
         Back to home
       </Link>
 
@@ -82,13 +82,13 @@ export default function AddTodo() {
             />
           </div>
 
-          <select name="genre" value={formData.genre} className="text-sm  text-slate-800 outline-none border-t p-1  bg-white cursor-pointer" onChange={handleChange}>
+          <select name="genre" value={formData.genre} className="text-sm  text-slate-800 outline-none border-t p-1  bg-zinc-100 cursor-pointer" onChange={handleChange}>
             {genreOptions.map((genre, index) => (
               <option key={index}>{genre}</option>
             ))}
           </select>
 
-          <select name="status" value={formData.status} className="text-sm text-slate-800 bg-white p-1 outline-none border-t cursor-pointer" onChange={handleChange}>
+          <select name="status" value={formData.status} className="text-sm text-slate-800 bg-zinc-100 p-1 outline-none border-t cursor-pointer" onChange={handleChange}>
             {statusOptions.map((status, index) => (
               <option  key={index}>{status}</option>
             ))}
