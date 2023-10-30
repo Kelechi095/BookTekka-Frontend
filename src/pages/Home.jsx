@@ -56,7 +56,7 @@ export default function Home() {
           />
         </div>
         <button
-          className="border p-2 my-3 rounded text-xs bg-blue-500 text-white"
+          className="border p-2 my-3 rounded text-sm bg-blue-500 text-white"
           onClick={handleAddBook}
         >
           Add To Library
