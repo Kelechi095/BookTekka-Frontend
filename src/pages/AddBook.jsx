@@ -28,7 +28,7 @@ export default function AddTodo() {
     e.preventDefault();
     formData.price = Number(formData.price)
     console.log(formData)
-    createBookMutation({ formData });
+    createBookMutation(formData);
     navigate('/')
   };
 
