@@ -8,12 +8,12 @@ export default function useCreateTodo() {
     const navigate = useNavigate()
 
     const queryClient = useQueryClient()
-  const {mutate: createTodoMutate, isLoading: isSubmitting} = useMutation((todo) => createBook(todo), {
+  const {mutate: createBookMutation, isLoading: isSubmitting} = useMutation((todo) => createBook(todo), {
     onSuccess: () => {
       queryClient.invalidateQueries("todos");
       navigate("/")
     },
   });
 
-  return {createTodoMutate, isSubmitting}
+  return {createBookMutation, isSubmitting}
 }

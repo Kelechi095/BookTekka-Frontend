@@ -15,7 +15,7 @@ export default function Sidebar({ toggleSidebar }) {
           }
           <h1 className="font-bold text-xl font-mono">Library</h1>
         </div>
-        <button className="font-semibold text-base mt-2">Home</button>
+        <button className="font-semibold text-base mt-2 text-blue-500">Home</button>
         <div className="mt-2 py-1 border-t">
           <p className="font-semibold">Sort by</p>
           {sortButtons.map((button, index) => (

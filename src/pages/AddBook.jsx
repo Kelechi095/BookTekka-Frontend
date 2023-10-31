@@ -15,7 +15,7 @@ export default function AddTodo() {
   
   const navigate = useNavigate();
 
-  const { createBookMutate, isSubmitting } = useCreateBook();
+  const { createBookMutation, isSubmitting } = useCreateBook();
 
   const handleChange = (e) => {
     setFormData({
@@ -26,11 +26,12 @@ export default function AddTodo() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    createBookMutate({ formData });
+    formData.price = Number(formData.price)
+    console.log(formData)
+    createBookMutation({ formData });
+    navigate('/')
   };
 
-
-  console.log(formData)
 
   return (
     <div className="p-3 max-w-lg mx-auto py-8 bg-zinc-100 h-screen">
