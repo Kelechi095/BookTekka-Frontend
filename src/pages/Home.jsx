@@ -37,7 +37,7 @@ export default function Home() {
       {isOpen && <Sidebar toggleSidebar={toggleSidebar} />}
       <div>
         <div className="flex justify-between">
-          <div className="flex gap-4 items-center mb-2">
+          <div className="flex gap-2 items-center mb-2">
             <HiOutlineMenuAlt2
               size={25}
               className="cursor-pointer"
@@ -56,7 +56,7 @@ export default function Home() {
           />
         </div>
         <button
-          className="border p-2 my-3 rounded text-sm bg-blue-500 text-white"
+          className="border p-2 my-3 rounded text-xs bg-blue-500 text-white"
           onClick={handleAddBook}
         >
           Add To Library
