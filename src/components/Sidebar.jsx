@@ -22,17 +22,13 @@ export default function Sidebar({ toggleSidebar }) {
           }
           <h1 className="font-bold text-xl font-mono">Library</h1>
         </div>
-        <div className="flex gap-1 items-center cursor-pointer border-t" >
-          {/* <AiOutlineHome size={18} color="blue"/> */}
-          <button className="font-semibold text-base text-blue-500">
-            Home
-          </button>
-        </div>
-        <div className="mt-1 py-1 border-t">
-          <p className="font-semibold">Sort by</p>
+
+        <button className="font-semibold text-base text-blue-500 my-2">Home</button>
+        <div className="mt-1 py-1">
+          <p className="font-semibold my-2">Sort by</p>
           {sortButtons.map((button, index) => (
             <div key={index}>
-              <button className="mt-1" onClick={toggleSidebar}>
+              <button className="my-2" onClick={toggleSidebar}>
                 {button}
               </button>
             </div>
@@ -40,10 +36,10 @@ export default function Sidebar({ toggleSidebar }) {
         </div>
 
         <div className="mt-2 py-1 border-t">
-          <p className="font-semibold">Filter by status</p>
+          <p className="font-semibold my-2">Filter by status</p>
           {filterStatus.map((button, index) => (
             <div key={index}>
-              <button className="mt-1">{button}</button>
+              <button className="my-2">{button}</button>
             </div>
           ))}
         </div>
