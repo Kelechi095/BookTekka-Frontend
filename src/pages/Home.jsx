@@ -71,46 +71,51 @@ export default function Home() {
           </div>
         ) : (
           books?.map((book) => (
-            <div
-              key={book._id}
-              className=" border-t py-2 shadow-sm flex items-center justify-between"
-            >
-              <div>
-                <p className="text-sm font-bold text-slate-800">{book.title}</p>
-                <p className="text-xs font-medium text-slate-900">
-                  {book.author}
-                </p>
-                <p className="text-xs font-medium text-slate-900">
-                  {book.genre}
-                </p>
-                <p className="text-xs font-medium text-slate-900">
-                  {getDate(book.createdAt)}
-                </p>
-                <p className="text-xs font-medium text-slate-900">
-                  ${book.price}
-                </p>
+            <Link to={`/${book._id}`} key={book._id}>
+              {" "}
+              <div
+                
+                className=" border-t py-2 shadow-sm flex items-center justify-between"
+              >
+                <div>
+                  <p className="text-sm font-bold text-slate-800">
+                    {book.title}
+                  </p>
+                  <p className="text-xs font-medium text-slate-900">
+                    {book.author}
+                  </p>
+                  <p className="text-xs font-medium text-slate-900">
+                    {book.genre}
+                  </p>
+                  <p className="text-xs font-medium text-slate-900">
+                    {getDate(book.createdAt)}
+                  </p>
+                  <p className="text-xs font-medium text-slate-900">
+                    ${book.price}
+                  </p>
+                </div>
+                <div className="flex items-center gap-2">
+                  <p
+                    className={
+                      book.status === "Reading"
+                        ? " text-blue-500"
+                        : book.status === "Unread"
+                        ? " text-red-500"
+                        : " text-green-500"
+                    }
+                  >
+                    {book.status === "Reading" ? (
+                      <BiSolidBookReader size={20} />
+                    ) : book.status === "Unread" ? (
+                      <BiSolidBookAlt size={20} />
+                    ) : (
+                      <FaBook size={20} />
+                    )}
+                  </p>
+                  <BiChevronRight className="text-blue-400" size={20} />
+                </div>
               </div>
-              <div className="flex items-center gap-2">
-                <p
-                  className={
-                    book.status === "Reading"
-                      ? " text-blue-500"
-                      : book.status === "Unread"
-                      ? " text-red-500"
-                      : " text-green-500"
-                  }
-                >
-                  {book.status === "Reading" ? (
-                    <BiSolidBookReader size={20} />
-                  ) : book.status === "Unread" ? (
-                    <BiSolidBookAlt size={20} />
-                  ) : (
-                    <FaBook size={20} />
-                  )}
-                </p>
-                <BiChevronRight className="text-blue-400" size={20} />
-              </div>
-            </div>
+            </Link>
           ))
         )}
       </div>

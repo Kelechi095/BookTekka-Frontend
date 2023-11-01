@@ -6,7 +6,7 @@ export default function useGetTodos() {
   const booksQuery = useQuery("books", fetchBooks, {
   });
 
-  const { data: books, isLoading, error } = booksQuery;
+  const { data: books, isLoading } = booksQuery;
 
-  return { books, isLoading };
+  return { books, isLoading};
 }
