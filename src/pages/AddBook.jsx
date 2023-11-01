@@ -29,13 +29,13 @@ export default function AddTodo() {
     formData.price = Number(formData.price)
     console.log(formData)
     createBookMutation(formData);
-    navigate('/')
+    if(!isSubmitting) navigate('/')
   };
 
 
   return (
     <div className="p-3 max-w-lg mx-auto py-8 bg-zinc-100 h-screen">
-      <Link to="/" className="bg-blue-500 p-2 rounded text-xs text-white hover:text-blue-700">
+      <Link to="/" className="bg-blue-500 p-2 rounded text-xs text-white">
         Back to library
       </Link>
 

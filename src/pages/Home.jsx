@@ -59,7 +59,7 @@ export default function Home() {
           className="border p-2 my-3 rounded text-xs bg-blue-500 text-white"
           onClick={handleAddBook}
         >
-          Add To Library
+          Add to library
         </button>
       </div>
       <div>
