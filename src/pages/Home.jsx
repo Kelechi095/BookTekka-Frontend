@@ -23,7 +23,7 @@ export default function Home() {
   const navigate = useNavigate();
 
   const handleAddBook = () => {
-    navigate("/add-todo");
+    navigate("/add-book");
   };
 
   const toggleSidebar = () => {
