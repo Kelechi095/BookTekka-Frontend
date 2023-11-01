@@ -29,7 +29,6 @@ export default function AddTodo() {
     formData.price = Number(formData.price)
     console.log(formData)
     createBookMutation(formData);
-    if(!isSubmitting) navigate('/')
   };
 
 

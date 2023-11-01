@@ -67,7 +67,7 @@ export default function Home() {
       <div>
         {books.length === 0 ? (
           <div className="h-60 flex items-center justify-center">
-            <h2 className="text-slate-800 text-2xl uppercase">Your library is Empty</h2>
+            <h2 className="text-slate-800 text-2xl">Your library is Empty</h2>
           </div>
         ) : (
           books?.map((book) => (
