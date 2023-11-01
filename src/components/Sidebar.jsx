@@ -1,6 +1,5 @@
 import { LiaTimesSolid } from "react-icons/lia";
-import { AiOutlineHome } from "react-icons/ai";
-import { filterGenres, filterStatus, sortButtons } from "../utils/buttons";
+import {filterStatus, sortButtons } from "../utils/buttons";
 
 export default function Sidebar({ toggleSidebar }) {
   return (

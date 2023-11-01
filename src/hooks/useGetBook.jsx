@@ -8,10 +8,6 @@ export default function useGetBook(id) {
 
     const {data: book, isLoading} = useQuery("book", () => setBook(id), {
         cacheTime: 0,
-        onSuccess: () => {
-           queryClient.invalidateQueries({ queryKey: "book" })
-
-        }
     })
 
   return {book, isLoading}

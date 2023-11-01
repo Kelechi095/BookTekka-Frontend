@@ -11,7 +11,6 @@ import {
   BiSolidBookAlt,
 } from "react-icons/bi";
 import { AiOutlineSearch } from "react-icons/ai";
-import { LiaTimesSolid } from "react-icons/lia";
 import { HiOutlineMenuAlt2 } from "react-icons/hi";
 import { FaBook } from "react-icons/fa";
 import { getDate } from "../utils/dateMaker";
@@ -29,6 +28,8 @@ export default function Home() {
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
   };
+
+
 
   if (isLoading) return <Loader />;
 
