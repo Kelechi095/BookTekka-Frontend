@@ -1,10 +1,33 @@
 import React, { useState } from "react";
+import { useQueryClient, useMutation } from "react-query";
+import axios from "axios";
 
-export default function UpdateProgressModal({ handleCloseProgressModal }) {
+export default function UpdateProgressModal({
+  handleCloseProgressModal,
+  bookID,
+}) {
   const [pageData, setPageData] = useState({
-    totalPage: "",
+    totalPages: "",
     currentPage: "",
   });
+
+  const updateProgress = async () => {
+    const response = await axios.patch(
+      `${import.meta.env.VITE_BASE_ENDPOINT}/api/books/progress/${bookID}`, pageData
+    );
+    return response.data;
+  };
+
+  const queryClient = useQueryClient();
+
+  const { mutate: updateProgressMutation, isLoading } = useMutation(
+    updateProgress,
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries("book");
+      },
+    }
+  );
 
   const handleChange = (e) => {
     setPageData({
@@ -15,13 +38,9 @@ export default function UpdateProgressModal({ handleCloseProgressModal }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    pageData.currentPage = Number(pageData.currentPage);
-    pageData.totalPage = Number(pageData.totalPage);
-    handleCloseProgressModal()
-    console.log(pageData);
+    updateProgressMutation();
+    handleCloseProgressModal();
   };
-
-  console.log(pageData);
 
   return (
     <div className=" inset-0 fixed  bg-black bg-opacity-30 min-h-screen z-10 flex items-center justify-center">
@@ -46,11 +65,13 @@ export default function UpdateProgressModal({ handleCloseProgressModal }) {
           <input
             type="text"
             className="border p-1 outline-none"
-            value={pageData.totalPage}
-            name="totalPage"
+            value={pageData.totalPages}
+            name="totalPages"
             onChange={handleChange}
           />
-          <button className="w-fit p-1 border mt-2 bg-blue-500 text-white rounded">Submit</button>
+          <button className="w-fit p-1 border mt-2 bg-blue-500 text-white rounded">
+            {isLoading ? "Submitting" : "Submit"}
+          </button>
         </form>
       </div>
     </div>

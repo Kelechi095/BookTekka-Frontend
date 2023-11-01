@@ -40,7 +40,7 @@ export default function Book() {
     <div className="mx-auto text-slate-900 m-4 px-4">
       {showLearnModal && <LearnmoreModal handleCloseLearnModal={handleCloseLearnModal} />}
 
-      {showProgressModal && <UpdateProgressModal handleCloseProgressModal={handleCloseProgressModal} />}
+      {showProgressModal && <UpdateProgressModal handleCloseProgressModal={handleCloseProgressModal} bookID={id}/>}
       <button
         className="border-blue border p-2 rounded mb-2 bg-slate-700 text-white text-sm"
         onClick={handleBackToLibrary}

@@ -18,11 +18,11 @@ export default function CircularProgressbarComponent({progress}) {
                 pathColor: `${
                   progress <= 20
                     ? "red"
-                    : progress > 20 && tester <= 40
+                    : progress > 20 && progress <= 40
                     ? "violet"
-                    : progress > 40 && tester <= 60
+                    : progress > 40 && progress <= 60
                     ? "blue"
-                    : progress > 60 && tester <= 80
+                    : progress > 60 && progress <= 80
                     ? "yellow"
                     : "green"
                 }`,
