@@ -2,13 +2,13 @@ import { useState } from "react";
 import useGetBook from "../hooks/useGetBook";
 import Loader from "../components/Loader";
 import { useNavigate, useParams } from "react-router-dom";
-
-import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
-import "react-circular-progressbar/dist/styles.css";
 import LearnmoreModal from "../components/LearnmoreModal";
+import CircularProgressbarComponent from "../components/CircularProgressbarComponent";
+import UpdateProgressModal from "../components/UpdateProgressModal";
 
 export default function Book() {
-  const [showModal, setShowModal] = useState(true);
+  const [showLearnModal, setShowLearnModal] = useState(false);
+  const [showProgressModal, setShowProgressModal] = useState(false);
   const { id } = useParams();
   const { book, isLoading } = useGetBook(id);
 
@@ -18,21 +18,29 @@ export default function Book() {
     navigate("/");
   };
 
-  const handleShowModal = () => {
-    setShowModal(true);
+  const handleShowLearnModal = () => {
+    setShowLearnModal(true);
   };
 
-  const handleCloseModal = () => {
-    setShowModal(false);
+  const handleCloseLearnModal = () => {
+    setShowLearnModal(false);
+  };
+  const handleShowProgressModal = () => {
+    setShowProgressModal(true);
   };
 
-  console.log(showModal);
+  const handleCloseProgressModal = () => {
+    setShowProgressModal(false);
+  };
+
 
   if (isLoading) return <Loader />;
 
   return (
     <div className="mx-auto text-slate-900 m-4 px-4">
-      {showModal && <LearnmoreModal handleCloseModal={handleCloseModal} />}
+      {showLearnModal && <LearnmoreModal handleCloseLearnModal={handleCloseLearnModal} />}
+
+      {showProgressModal && <UpdateProgressModal handleCloseProgressModal={handleCloseProgressModal} />}
       <button
         className="border-blue border p-2 rounded mb-2 bg-slate-700 text-white text-sm"
         onClick={handleBackToLibrary}
@@ -68,48 +76,24 @@ export default function Book() {
       </div>
 
       {book.status === "Reading" && (
-        <div className="mt-8">
+        
+            <div className="mt-8">
+          
           <p className="text-sm font-semibold mb-4 text-center">
-            Reading Progress
+            {book.progress > 0 ? "Your Reading Progress so far" : "No reading progress"} 
           </p>
-          <div className="max-w-sm mx-auto w-36">
-            <CircularProgressbar
-              value={book.progress}
-              text={`${book.progress}%`}
-              styles={buildStyles({
-                // Text size
-                textSize: "20px",
 
-                // How long animation takes to go from one percentage to another, in seconds
-                pathTransitionDuration: 0.5,
+          {book.progress > 0 && <CircularProgressbarComponent progress={book.progress}/>}
 
-                // Colors
-                pathColor: `${
-                  book.progress <= 20
-                    ? "red"
-                    : book.progress > 20 && tester <= 40
-                    ? "violet"
-                    : book.progress > 40 && tester <= 60
-                    ? "blue"
-                    : book.progress > 60 && tester <= 80
-                    ? "yellow"
-                    : "green"
-                }`,
-                textColor: "rgb(14 116 144)",
-                trailColor: "#d6d6d6",
-                backgroundColor: "cyan",
-              })}
-            />
-          </div>
-          ;
+          
           <div className="mt-6 flex justify-around">
-            <button className="text-sm bg-blue-500 text-white rounded p-1 px-2">
-              Update progress
+            <button className="text-sm bg-blue-500 text-white rounded p-1 px-2" onClick={handleShowProgressModal}>
+              {book.progress > 0 ? "Update progress" : "Start progress"} 
             </button>
 
             <button
               className="text-sm bg-blue-500 text-white rounded p-1 px-2"
-              onClick={handleShowModal}
+              onClick={handleShowLearnModal}
             >
               Learn more
             </button>

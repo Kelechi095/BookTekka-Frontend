@@ -1,10 +1,10 @@
 import React from "react";
 
-export default function LearnmoreModal({handleCloseModal}) {
+export default function LearnmoreModal({handleCloseLearnModal}) {
   return (
-    <div className=" inset-0 fixed  bg-black bg-opacity-30 min-h-screen z-10 flex items-center justify-center" onClick={handleCloseModal}>
+    <div className=" inset-0 fixed  bg-black bg-opacity-30 min-h-screen z-10 flex items-center justify-center" onClick={handleCloseLearnModal}>
       <div className="h-40 w-96 border bg-white mb-24 p-2 rounded shadow-sm text-sm" onClick={(e) => e.stopPropagation()}>
-        <button className="border px-4 text-red-500 border-red-500 mb-2" onClick={handleCloseModal}>
+        <button className="border px-4 text-red-500 border-red-500 mb-2" onClick={handleCloseLearnModal}>
           X
         </button>
         <p className="">Monitor your reading progress</p>
