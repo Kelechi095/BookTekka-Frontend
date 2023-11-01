@@ -5,7 +5,7 @@ import { filterGenres, filterStatus, sortButtons } from "../utils/buttons";
 export default function Sidebar({ toggleSidebar }) {
   return (
     <div
-      className=" inset-0 fixed  bg-black bg-opacity-10 min-h-screen"
+      className=" inset-0 fixed  bg-black bg-opacity-10 min-h-screen z-10"
       onClick={toggleSidebar}
     >
       <nav
