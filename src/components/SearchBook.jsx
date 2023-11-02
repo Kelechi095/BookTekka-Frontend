@@ -16,14 +16,15 @@ export default function SearchBook({
     <div className="mt-4">
       <input
         type="text"
-        className="border-2 outline-none px-2"
+        placeholder="Search for book..."
+        className="border-1 outline-none px-2 py-1 w-96 shadow-sm rounded"
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
       />
       {bookData?.items?.map((book) => (
         <div
           key={book?.id}
-          className="mt-4"
+          className="mt-4 cursor-pointer"
           onClick={() =>
             handleAddBookInfo({
               thumbnail: book?.volumeInfo?.imageLinks?.thumbnail,

@@ -3,6 +3,8 @@ import useGetBook from "../hooks/useGetBook";
 import Loader from "../components/Loader";
 import { useNavigate, useParams } from "react-router-dom";
 import LearnmoreModal from "../components/LearnmoreModal";
+import { BiSolidEditAlt } from "react-icons/bi";
+import { BsFillTrashFill } from "react-icons/bs";
 import CircularProgressbarComponent from "../components/CircularProgressbarComponent";
 import UpdateProgressModal from "../components/UpdateProgressModal";
 
@@ -33,75 +35,67 @@ export default function Book() {
     setShowProgressModal(false);
   };
 
-
   if (isLoading) return <Loader />;
 
   return (
-    <div className="mx-auto text-slate-900 m-4 px-4">
-      {showLearnModal && <LearnmoreModal handleCloseLearnModal={handleCloseLearnModal} />}
+    <div className="mx-auto text-slate-900 p-4 bg-violet-50">
+      {showLearnModal && (
+        <LearnmoreModal handleCloseLearnModal={handleCloseLearnModal} />
+      )}
 
-      {showProgressModal && <UpdateProgressModal handleCloseProgressModal={handleCloseProgressModal} bookID={id}/>}
-      <button
-        className="border-blue border p-2 rounded mb-2 bg-slate-700 text-white text-sm"
-        onClick={handleBackToLibrary}
-      >
-        Back to Library
-      </button>
-      <img src={book.thumbnail} alt={book.title} className="w-40 mx-auto" />
-      <h2 className="text-xs font-base">
-        <span className="text-sm font-semibold">Book Name: </span>
-        {book.title}
-      </h2>
-      <h2 className="text-xs font-base">
-        <span className="text-sm font-semibold">Book Author: </span>
-        {book.author}
-      </h2>
-      <h2 className="text-xs font-base">
-        <span className="text-md font-semibold">Book Description: </span>
-        {book.description}
-      </h2>
-      <h2 className="text-md font-base">
-        <span className="text-xs font-semibold">Book Genre: </span>
-        {book.genre}
-      </h2>
+      {showProgressModal && (
+        <UpdateProgressModal
+          handleCloseProgressModal={handleCloseProgressModal}
+          bookID={id}
+        />
+      )}
 
-      <div className="mt-2 flex gap-2">
-        <button className="text-sm bg-blue-500 text-white rounded p-1 px-2">
-          Edit book
-        </button>
-        <button className="text-sm bg-red-500 text-white rounded p-1 px-2">
-          Delete book
-        </button>
+      <div className="flex justify-between items-center">
+        <BiSolidEditAlt
+          size={25}
+          className="text-blue-500 m-2 cursor-pointer"
+        />
+        <BsFillTrashFill
+          size={25}
+          className="text-red-500 m-2 cursor-pointer"
+        />
+      </div>
+      <div className="p-4 border-2 bg-white rounded mt-4">
+        <img
+          src={book.thumbnail}
+          alt={book.title}
+          className="w-40 mx-auto rounded"
+          mb-4
+        />
+        <h2 className="text-lg font-bold mt-8">{book.title}</h2>
+        <h2 className="text-sm font-semibold">{book.author}</h2>
+        <h2 className="text-xs font-semibold">{book.genre}</h2>
+        <h2 className="text-xs font-base mt-1"><span className="font-bold">Description: </span> {book.description}</h2>
       </div>
 
       <div className="mt-6 flex gap-2">
-        <button className="text-sm bg-green-500 text-white rounded p-1 px-2">
+        <button className="text-sm bg-green-500 text-white rounded p-2 px-2 w-full hover:bg-green-600">
           Recommend
         </button>
       </div>
 
       {book.status === "Reading" && (
-        
-            <div className="mt-8">
+        <div className="p-4 border-2 bg-white rounded mt-4">
           
-          <p className="text-sm font-semibold mb-4 text-center">
-            {book.progress > 0 ? "Your Reading Progress so far" : "No reading progress"} 
-          </p>
 
-          {book.progress > 0 && <CircularProgressbarComponent progress={book.progress}/>}
+          {book.progress > 0 && (
+            <CircularProgressbarComponent progress={book.progress} />
+          )}
 
-          
           <div className="mt-6 flex justify-around">
-            <button className="text-sm bg-blue-500 text-white rounded p-1 px-2" onClick={handleShowProgressModal}>
-              {book.progress > 0 ? "Update progress" : "Start progress"} 
+            <button
+              className="text-sm border border-slate-800 text-base-800 rounded p-1 px-2"
+              onClick={handleShowProgressModal}
+            >
+              {book.progress > 0 ? "Update progress" : "Start progress"}
             </button>
 
-            <button
-              className="text-sm bg-blue-500 text-white rounded p-1 px-2"
-              onClick={handleShowLearnModal}
-            >
-              Learn more
-            </button>
+            
           </div>
         </div>
       )}

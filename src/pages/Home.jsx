@@ -5,12 +5,12 @@ import useDeleteBook from "../hooks/useDeleteBook";
 import Loader from "../components/Loader";
 import { BsFillBellFill } from "react-icons/bs";
 import {
-  BiSolidEditAlt,
+  
   BiChevronRight,
   BiSolidBookReader,
   BiSolidBookAlt,
 } from "react-icons/bi";
-import { AiOutlineSearch } from "react-icons/ai";
+import { AiOutlineSearch, AiOutlinePlus } from "react-icons/ai";
 import { HiOutlineMenuAlt2 } from "react-icons/hi";
 import { FaBook } from "react-icons/fa";
 import { getDate } from "../utils/dateMaker";
@@ -30,8 +30,6 @@ export default function Home() {
     setIsOpen(!isOpen);
   };
 
-  console.log(books)
-
 
   if (isLoading) return <Loader />;
 
@@ -48,7 +46,9 @@ export default function Home() {
             />
             <h1 className="font-bold text-xl font-mono">Library</h1>
           </div>
-          <BsFillBellFill size={20} className="text-blue-700 cursor-pointer" />
+          <div className="w-10 h-10 bg-gray-400 rounded-full cursor-pointer">
+
+          </div>
         </div>
         {books.length > 0 && (
           <div className="rounded-xl bg-zinc-100 px-2 my-2 flex items-center">
@@ -60,12 +60,7 @@ export default function Home() {
             />
           </div>
         )}
-        <button
-          className="border p-2 my-3 rounded text-xs bg-blue-500 text-white"
-          onClick={handleAddBook}
-        >
-          Add to library
-        </button>
+        <AiOutlinePlus size={32} className="my-2 cursor-pointer hover:text-blue-500" onClick={handleAddBook}/>
       </div>
       <div>
         {books.length === 0 ? (

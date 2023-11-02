@@ -36,15 +36,13 @@ export default function BookBoarding({bookInfo}) {
     createBookMutation(formData);
   };
 
-  console.log(bookInfo)
-
   return (
-    <div>
+    <div className="my-4">
       <img src={bookInfo?.thumbnail} alt={bookInfo?.title} className="mx-auto mb-4" />
-      <p className="text-sm font-semibold text-center">{bookInfo?.title}</p>
+      <p className="text-md font-semibold text-center">{bookInfo?.title}</p>
       <p className="text-sm font-semibold text-center">{bookInfo?.author}</p>
       <form
-        className=" bg-white py-4 mt-6 shadow-sm rounded"
+        className=" bg-white py-8 my-6 shadow-sm rounded"
         onSubmit={handleSubmit}
       >
         <h1 className="text-lg text-center font-semibold text-slate-800">
