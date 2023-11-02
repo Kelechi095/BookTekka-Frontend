@@ -47,16 +47,21 @@ export default function Book() {
       >
         Back to Library
       </button>
-      <h2 className="text-md font-base">
-        <span className="text-md font-semibold">Book Name: </span>
+      <img src={book.thumbnail} alt={book.title} className="w-40 mx-auto" />
+      <h2 className="text-xs font-base">
+        <span className="text-sm font-semibold">Book Name: </span>
         {book.title}
       </h2>
-      <h2 className="text-md font-base">
-        <span className="text-md font-semibold">Book Author: </span>
+      <h2 className="text-xs font-base">
+        <span className="text-sm font-semibold">Book Author: </span>
         {book.author}
       </h2>
+      <h2 className="text-xs font-base">
+        <span className="text-md font-semibold">Book Description: </span>
+        {book.description}
+      </h2>
       <h2 className="text-md font-base">
-        <span className="text-md font-semibold">Book Genre: </span>
+        <span className="text-xs font-semibold">Book Genre: </span>
         {book.genre}
       </h2>
 

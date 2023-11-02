@@ -3,7 +3,7 @@ import { createBook } from "../utils/createBook";
 import { useQueryClient } from "react-query";
 import { useNavigate } from "react-router-dom";
 
-export default function useCreateTodo() {
+export default function useCreateBook() {
 
     const navigate = useNavigate()
 

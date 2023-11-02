@@ -15,15 +15,12 @@ import { HiOutlineMenuAlt2 } from "react-icons/hi";
 import { FaBook } from "react-icons/fa";
 import { getDate } from "../utils/dateMaker";
 import Sidebar from "../components/Sidebar";
-import useGetBookData from "../hooks/useGetBookData";
 
 export default function Home() {
   const { books, isLoading } = useGetBooks();
   const [isOpen, setIsOpen] = useState(false);
-  const [searchTerm, setSearchTerm] = useState("")
-  const navigate = useNavigate();
 
-  const {bookData} = useGetBookData(searchTerm)
+  const navigate = useNavigate();
 
   const handleAddBook = () => {
     navigate("/add-book");
@@ -33,19 +30,13 @@ export default function Home() {
     setIsOpen(!isOpen);
   };
 
+  console.log(books)
+
 
   if (isLoading) return <Loader />;
 
   return (
     <div className="mx-auto text-slate-900 m-4 px-4">
-      <input type="text" className="border-2 outline-none" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)}/>
-      {bookData?.items?.map(book => (
-        <div key={book?.id} className="mt-4">
-          <img src={book?.volumeInfo?.imageLinks?.smallThumbnail} alt="" className="w-20"/>
-          <p className="text-sm">{book?.volumeInfo?.title}</p>
-          <p className="text-sm">{book?.volumeInfo?.authors?.[0]}</p>
-        </div>
-      ))}
       {isOpen && <Sidebar toggleSidebar={toggleSidebar} />}
       <div>
         <div className="flex justify-between">
@@ -84,27 +75,26 @@ export default function Home() {
         ) : (
           books?.map((book) => (
             <Link to={`/${book._id}`} key={book._id}>
-              {" "}
-              <div
-                
-                className=" border-t py-2 shadow-sm flex items-center justify-between"
-              >
-                <div>
-                  <p className="text-sm font-bold text-slate-800">
-                    {book.title}
-                  </p>
-                  <p className="text-xs font-medium text-slate-900">
-                    {book.author}
-                  </p>
-                  <p className="text-xs font-medium text-slate-900">
-                    {book.genre}
-                  </p>
-                  <p className="text-xs font-medium text-slate-900">
-                    {getDate(book.createdAt)}
-                  </p>
-                  <p className="text-xs font-medium text-slate-900">
-                    ${book.price}
-                  </p>
+              <div className=" border-t py-2 shadow-sm flex items-center justify-between">
+                <div className="flex gap-2 items-center">
+                  <img src={book.smallThumbnail} alt={book.title} className="w-16"/>
+                  <div>
+                    <p className="text-sm font-bold text-slate-800">
+                      {book.title}
+                    </p>
+                    <p className="text-xs font-medium text-slate-900">
+                      {book.author}
+                    </p>
+                    <p className="text-xs font-medium text-slate-900">
+                      {book.genre}
+                    </p>
+                    <p className="text-xs font-medium text-slate-900">
+                      {getDate(book.createdAt)}
+                    </p>
+                    <p className="text-xs font-medium text-slate-900">
+                      ${book.price}
+                    </p>
+                  </div>
                 </div>
                 <div className="flex items-center gap-2">
                   <p
