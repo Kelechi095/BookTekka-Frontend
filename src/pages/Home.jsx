@@ -15,11 +15,15 @@ import { HiOutlineMenuAlt2 } from "react-icons/hi";
 import { FaBook } from "react-icons/fa";
 import { getDate } from "../utils/dateMaker";
 import Sidebar from "../components/Sidebar";
+import useGetBookData from "../hooks/useGetBookData";
 
 export default function Home() {
   const { books, isLoading } = useGetBooks();
   const [isOpen, setIsOpen] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("")
   const navigate = useNavigate();
+
+  const {bookData} = useGetBookData(searchTerm)
 
   const handleAddBook = () => {
     navigate("/add-book");
@@ -30,11 +34,18 @@ export default function Home() {
   };
 
 
-
   if (isLoading) return <Loader />;
 
   return (
     <div className="mx-auto text-slate-900 m-4 px-4">
+      <input type="text" className="border-2 outline-none" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)}/>
+      {bookData?.items?.map(book => (
+        <div key={book?.id} className="mt-4">
+          <img src={book?.volumeInfo?.imageLinks?.smallThumbnail} alt="" className="w-20"/>
+          <p className="text-sm">{book?.volumeInfo?.title}</p>
+          <p className="text-sm">{book?.volumeInfo?.authors?.[0]}</p>
+        </div>
+      ))}
       {isOpen && <Sidebar toggleSidebar={toggleSidebar} />}
       <div>
         <div className="flex justify-between">
