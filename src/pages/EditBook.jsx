@@ -2,56 +2,118 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
 import { useParams, useNavigate } from "react-router-dom";
+import { genreOptions } from "../utils/buttons";
+import { statusOptions } from "../utils/buttons";
+import useGetBook from "../hooks/useGetBook";
+import Loader from "../components/Loader";
 
 
 export default function EditTodo() {
-  const [title, setTitle] = useState("");
+  const [formData, setFormData] = useState({
+    price: "",
+    genre: "",
+    status: "",
+  });
+
   const params = useParams();
   const navigate = useNavigate();
   const { id } = params;
 
+  const { book, isLoading } = useGetBook(id);
+
+
   const queryClient = useQueryClient();
 
   const setBook = async () => {
-    const response = await axios.get(`${import.meta.env.VITE_BASE_ENDPOINT}/api/books/${id}`);
-    setTitle(response.data.title);
+    formData.price = book?.price
+    formData.genre = book?.genre
+    formData.status = book?.status
   };
+
   useEffect(() => {
     setBook();
   }, [id]);
 
   const editBook = async () => {
-    await axios.patch(`${import.meta.env.VITE_BASE_ENDPOINT}/api/books/${id}`, { title });
+    await axios.patch(`${import.meta.env.VITE_BASE_ENDPOINT}/api/books/${id}`, formData);
   };
 
-  const { mutate: editMutate, isLoading } = useMutation(editBook, {
+  const { mutate: editMutate} = useMutation(editBook, {
     onSuccess: () => {
       queryClient.invalidateQueries("books");
       navigate("/");
     },
   });
 
-  const handleEditBook = async (e) => {
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    formData.price = Number(formData.price);
     editMutate();
   };
 
-  return (
-    <div className="p-3 max-w-lg mx-auto">
-      <h1 className="text-3xl text-center font-semibold my-7">Edit Book</h1>
-      <form className="flex flex-col gap-4" onSubmit={handleEditBook}>
-        <input
-          type="text"
-          placeholder="Todo..."
-          className="bg-slate-200 p-3 rounded-lg"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
+  if(isLoading) return <Loader />
 
-        <button className="border w-20 border-black rounded hover:bg-slate-300">
-          {isLoading ? "Editing..." : "Edit Book"}
-        </button>
-      </form>
+
+  return (
+    <div className="my-4 mt-12">
+      <img src={book?.thumbnail} alt={book?.title} className="mx-auto mb-4" />
+      <p className="text-md font-semibold text-center">{book?.title}</p>
+      <p className="text-sm font-semibold text-center">{book?.author}</p>
+      { book && <form
+        className=" bg-white py-8 my-6 shadow-sm rounded"
+        onSubmit={handleSubmit}
+      >
+        <h1 className="text-lg text-center font-semibold text-slate-800">
+          Edit Book Details
+        </h1>
+        <div className="grid gap-4 p-4">
+          <div>
+            <label className="text-sm text-slate-800">Price</label>
+            <input
+              type="text"
+              placeholder="Price"
+              className="bg-zinc-100 py-[6px] px-2 w-full outline-none text-sm"
+              name="price"
+              value={formData.price}
+              onChange={handleChange}
+            />
+          </div>
+
+          <select
+            name="genre"
+            value={formData.genre}
+            className="text-sm  text-slate-800 outline-none border-t px-1 py-2 bg-zinc-100 cursor-pointer"
+            onChange={handleChange}
+          >
+            {genreOptions.map((genre, index) => (
+              <option key={index}>{genre}</option>
+            ))}
+          </select>
+
+          <select
+            name="status"
+            value={formData.status}
+            className="text-sm text-slate-800 bg-zinc-100 px-1 py-2 outline-none border-t cursor-pointer"
+            onChange={handleChange}
+          >
+            {statusOptions.map((status, index) => (
+              <option key={index}>{status}</option>
+            ))}
+          </select>
+
+          <button className="border w-full px-4 rounded text-white p-1 bg-blue-500">
+            {isLoading ? "Submitting..." : "Submit"}
+          </button>
+        </div>
+      </form>}
     </div>
   );
 }
