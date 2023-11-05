@@ -5,7 +5,6 @@ import useDeleteBook from "../hooks/useDeleteBook";
 import Loader from "../components/Loader";
 import { BsFillBellFill } from "react-icons/bs";
 import {
-  
   BiChevronRight,
   BiSolidBookReader,
   BiSolidBookAlt,
@@ -17,7 +16,8 @@ import { getDate } from "../utils/dateMaker";
 import Sidebar from "../components/Sidebar";
 
 export default function Home() {
-  const { books, isLoading } = useGetBooks();
+  const [searchQuery, setSearchQuery] = useState("")
+  const { books, isLoading } = useGetBooks(searchQuery);
   const [isOpen, setIsOpen] = useState(false);
 
   const navigate = useNavigate();
@@ -30,12 +30,16 @@ export default function Home() {
     setIsOpen(!isOpen);
   };
 
-
   if (isLoading) return <Loader />;
 
   return (
     <div className="mx-auto text-slate-900 m-4 px-4">
-      {isOpen && <Sidebar toggleSidebar={toggleSidebar} />}
+      <Sidebar
+        toggleSidebar={toggleSidebar}
+        isOpen={isOpen}
+        searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
+      />
       <div>
         <div className="flex justify-between">
           <div className="flex gap-2 items-center mb-2">
@@ -46,9 +50,7 @@ export default function Home() {
             />
             <h1 className="font-bold text-xl font-mono">Library</h1>
           </div>
-          <div className="w-10 h-10 bg-gray-400 rounded-full cursor-pointer">
-
-          </div>
+          <div className="w-10 h-10 bg-gray-400 rounded-full cursor-pointer"></div>
         </div>
         {books.length > 0 && (
           <div className="rounded-xl bg-zinc-100 px-2 my-2 flex items-center">
@@ -60,7 +62,11 @@ export default function Home() {
             />
           </div>
         )}
-        <AiOutlinePlus size={32} className="my-2 cursor-pointer hover:text-blue-500" onClick={handleAddBook}/>
+        <AiOutlinePlus
+          size={32}
+          className="my-2 cursor-pointer hover:text-blue-500"
+          onClick={handleAddBook}
+        />
       </div>
       <div>
         {books.length === 0 ? (
@@ -72,7 +78,11 @@ export default function Home() {
             <Link to={`/${book._id}`} key={book._id}>
               <div className=" border-t py-2 shadow-sm flex items-center justify-between">
                 <div className="flex gap-2 items-center">
-                  <img src={book.smallThumbnail} alt={book.title} className="w-16"/>
+                  <img
+                    src={book.smallThumbnail}
+                    alt={book.title}
+                    className="w-16"
+                  />
                   <div>
                     <p className="text-sm font-bold text-slate-800">
                       {book.title}
