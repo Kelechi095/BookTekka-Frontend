@@ -17,7 +17,7 @@ import Sidebar from "../components/Sidebar";
 
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState("")
-  const { books, isLoading } = useGetBooks(searchQuery);
+  const { books, isLoading } = useGetBooks();
   const [isOpen, setIsOpen] = useState(false);
 
   const navigate = useNavigate();
@@ -31,6 +31,7 @@ export default function Home() {
   };
 
   if (isLoading) return <Loader />;
+
 
   return (
     <div className="mx-auto text-slate-900 m-4 px-4">

@@ -1,6 +1,7 @@
 import { LiaTimesSolid } from "react-icons/lia";
 import { filterStatus, sortButtons } from "../utils/buttons";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export default function Sidebar({
   toggleSidebar,
@@ -9,31 +10,23 @@ export default function Sidebar({
   setSearchQuery,
 }) {
   const [searchTerm, setSearchTerm] = useState("");
-  const [sortTerm, setSortTerm] = useState("");
-  const [statusTerm, setStatusTerm] = useState("");
+  const [sortTerm, setSortTerm] = useState("Latest");
+  const [statusTerm, setStatusTerm] = useState("All");
 
+  const navigate = useNavigate();
+  const { search } = useLocation();
+
+  const urlParams = useMemo(() => new URLSearchParams(search), [search]);
+  urlParams.set("sort", sortTerm);
+  urlParams.set("status", statusTerm);
+  
   useEffect(() => {
-    const urlParams = new URLSearchParams(location.search);
-
-    if (!sortTerm) {
-      urlParams.set("sort", "All");
-    } else {
-      urlParams.set("sort", sortTerm);
-    }
-
-    if (!statusTerm) {
-      urlParams.set("status", "All");
-    } else {
-      urlParams.set("status", statusTerm);
-    }
-
-    console.log(statusTerm)
-
     setSearchQuery(urlParams.toString());
-  }, [sortTerm, statusTerm]);
+    navigate(`/?${searchQuery}`);
 
-  console.log(searchQuery);
+  }, [sortTerm, statusTerm])
 
+  
   return (
     <div
       className={
