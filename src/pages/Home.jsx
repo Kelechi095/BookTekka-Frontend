@@ -57,7 +57,7 @@ export default function Home() {
 
   useEffect(() => {
     setCurrentPage(1)
-  }, [statusTerm])
+  }, [statusTerm, searchTerm])
 
   if (isLoading && !debouncedValue) return <Loader />;
 
