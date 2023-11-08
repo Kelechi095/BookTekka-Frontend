@@ -10,8 +10,6 @@ export default function SearchBook({
     setBookInfo(bookInfo);
   };
 
-  console.log(bookData)
-
   return (
     <div className="mt-4">
       <input

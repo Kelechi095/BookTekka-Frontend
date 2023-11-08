@@ -1,4 +1,4 @@
-import React, {useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Loader from "../components/Loader";
 import {
@@ -13,23 +13,24 @@ import { getDate } from "../utils/dateMaker";
 import Sidebar from "../components/Sidebar";
 import { useQuery } from "react-query";
 import { fetchBooks } from "../utils/fetchbooks";
+import useDebounce from "../hooks/useDebounce";
 
 export default function Home() {
   const [isOpen, setIsOpen] = useState(false);
-  const [sortTerm, setSortTerm] = useState('Newest');
+  const [sortTerm, setSortTerm] = useState("Newest");
   const [statusTerm, setStatusTerm] = useState("All");
-  const [searchTerm, setSearchTerm] = useState('')
+  const [searchTerm, setSearchTerm] = useState("");
 
-  const navigate = useNavigate()
+  
+  const navigate = useNavigate();
 
-  const searchQuery = `sort=${sortTerm}&status=${statusTerm}&search=${searchTerm}`
+  const debouncedValue = useDebounce(searchTerm, 500);
 
+  const searchQuery = `sort=${sortTerm}&status=${statusTerm}&search=${debouncedValue}`;
 
-  const { data: books, isLoading } = useQuery(
-    ["books", searchQuery],
-    () => fetchBooks(searchQuery)
+  const { data: books, isLoading } = useQuery([searchQuery], () =>
+    fetchBooks(searchQuery)
   );
-
 
   const handleAddBook = () => {
     navigate("/add-book");
@@ -39,9 +40,7 @@ export default function Home() {
     setIsOpen(!isOpen);
   };
 
-  console.log(searchQuery)
-
-  if (isLoading) return <Loader />;
+  if (isLoading && !debouncedValue) return <Loader />;
 
   return (
     <div className="mx-auto text-slate-900 m-4 px-4">
@@ -65,16 +64,18 @@ export default function Home() {
           </div>
           <div className="w-10 h-10 bg-gray-400 rounded-full cursor-pointer"></div>
         </div>
-        {books?.length > 0 && (
-          <div className="rounded-xl bg-zinc-100 px-2 my-2 flex items-center">
-            <AiOutlineSearch />
-            <input
-              type="text"
-              className="bg-zinc-100 outline-none p-2 w-full text-sm"
-              placeholder="search..."
-            />
-          </div>
-        )}
+
+        <div className="rounded-xl bg-zinc-100 px-2 my-2 flex items-center">
+          <AiOutlineSearch />
+          <input
+            type="text"
+            className="bg-zinc-100 outline-none p-2 w-full text-sm"
+            placeholder="search..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+        </div>
+
         <AiOutlinePlus
           size={32}
           className="my-2 cursor-pointer hover:text-blue-500"
@@ -82,7 +83,7 @@ export default function Home() {
         />
       </div>
       <div>
-        {books.length === 0 ? (
+        {books?.length === 0 ? (
           <div className="h-60 flex items-center justify-center">
             <h2 className="text-slate-800 text-2xl">Your library is Empty</h2>
           </div>
