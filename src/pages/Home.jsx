@@ -17,10 +17,11 @@ import Sidebar from "../components/Sidebar";
 
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState("")
-  const { books, isLoading } = useGetBooks();
   const [isOpen, setIsOpen] = useState(false);
-
+  
   const navigate = useNavigate();
+  
+  const { books, isLoading } = useGetBooks(searchQuery);
 
   const handleAddBook = () => {
     navigate("/add-book");

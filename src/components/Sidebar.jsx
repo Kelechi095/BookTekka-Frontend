@@ -10,23 +10,21 @@ export default function Sidebar({
   setSearchQuery,
 }) {
   const [searchTerm, setSearchTerm] = useState("");
-  const [sortTerm, setSortTerm] = useState("Latest");
-  const [statusTerm, setStatusTerm] = useState("All");
+  const [sortTerm, setSortTerm] = useState("All");
+  const [statusTerm, setStatusTerm] = useState("Unread");
 
   const navigate = useNavigate();
   const { search } = useLocation();
 
-  const urlParams = useMemo(() => new URLSearchParams(search), [search]);
-  urlParams.set("sort", sortTerm);
-  urlParams.set("status", statusTerm);
   
-  useEffect(() => {
-    setSearchQuery(urlParams.toString());
-    navigate(`/?${searchQuery}`);
+  const handleSubmit = (arg) => {
+    const urlParams =  new URLSearchParams(search)
+    urlParams.set("status", arg);
+    setSearchQuery(`?${urlParams.toString()}`);
+  }
+    
 
-  }, [sortTerm, statusTerm])
 
-  
   return (
     <div
       className={
@@ -74,8 +72,9 @@ export default function Sidebar({
               <button
                 className="my-2"
                 onClick={() => {
-                  setStatusTerm(button);
+                  //setStatusTerm(button)
                   toggleSidebar();
+                  handleSubmit(button)
                 }}
               >
                 {button}
