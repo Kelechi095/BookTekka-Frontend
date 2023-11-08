@@ -1,10 +1,8 @@
 
-  export const sortButtons = ['Date (Latest first)', 'Date (Earliest first)', 'Title (A-Z)', 'Title (Z-A)', 'Price (Highest first)', 'Price (Lowest first)']
+  export const sortButtons = ['Newest', 'Oldest', 'A-Z', 'Z-A']
 
-  export const filterGenres = ['African Literature', 'Fantasy', 'Horror', 'Literary Fiction', 'Mystery', 'Non Fiction', 'Romance',  'Science Fiction', 'Thriller', 'Young Adult', 'Others']
+  export const filterGenres = ['Genre', 'African Literature', 'Fantasy', 'Horror', 'Literary Fiction', 'Mystery', 'Non Fiction', 'Romance',  'Science Fiction', 'Thriller', 'Young Adult', 'Others']  
 
-  export const genreOptions = ["Genre", 'African Literature', 'Fantasy', 'Horror', 'Literary Fiction', 'Mystery', 'Non Fiction', 'Romance',  'Science Fiction', 'Thriller', 'Young Adult', 'Others']
+  export const statusOptions = ["All", "Unread", "Reading", "Finished"]
 
-  export const filterStatus = ["Unread", "Reading", "Finished"]
-
-  export const statusOptions = ["Status", "Unread", "Reading", "Finished"]
+  export const statusOptions2 = ["Status", "Unread", "Reading", "Finished"]

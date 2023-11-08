@@ -1,9 +1,9 @@
 import { useState } from "react";
 import useCreateBook from "../hooks/useCreateBook";
-import { genreOptions } from "../utils/buttons";
+import { filterGenres, statusOptions2 } from "../utils/buttons";
 import { statusOptions } from "../utils/buttons";
 
-export default function BookBoarding({bookInfo}) {
+export default function BookBoarding({ bookInfo }) {
   const [formData, setFormData] = useState({
     title: "",
     author: "",
@@ -27,18 +27,22 @@ export default function BookBoarding({bookInfo}) {
   const handleSubmit = (e) => {
     e.preventDefault();
     formData.price = Number(formData.price);
-    formData.title = bookInfo.title
-    formData.author = bookInfo.author
-    formData.description = bookInfo.description
-    formData.thumbnail = bookInfo.thumbnail
-    formData.smallThumbnail = bookInfo.smallThumbnail
+    formData.title = bookInfo.title;
+    formData.author = bookInfo.author;
+    formData.description = bookInfo.description;
+    formData.thumbnail = bookInfo.thumbnail;
+    formData.smallThumbnail = bookInfo.smallThumbnail;
     console.log(formData);
     createBookMutation(formData);
   };
 
   return (
     <div className="my-4">
-      <img src={bookInfo?.thumbnail} alt={bookInfo?.title} className="mx-auto mb-4" />
+      <img
+        src={bookInfo?.thumbnail}
+        alt={bookInfo?.title}
+        className="mx-auto mb-4"
+      />
       <p className="text-md font-semibold text-center">{bookInfo?.title}</p>
       <p className="text-sm font-semibold text-center">{bookInfo?.author}</p>
       <form
@@ -49,25 +53,13 @@ export default function BookBoarding({bookInfo}) {
           Complete Book Details
         </h1>
         <div className="grid gap-4 p-4">
-          <div>
-            <label className="text-sm text-slate-800">Price</label>
-            <input
-              type="text"
-              placeholder="Price"
-              className="bg-zinc-100 py-[6px] px-2 w-full outline-none text-sm"
-              name="price"
-              value={formData.price}
-              onChange={handleChange}
-            />
-          </div>
-
           <select
             name="genre"
             value={formData.genre}
             className="text-sm  text-slate-800 outline-none border-t px-1 py-2 bg-zinc-100 cursor-pointer"
             onChange={handleChange}
           >
-            {genreOptions.map((genre, index) => (
+            {filterGenres.map((genre, index) => (
               <option key={index}>{genre}</option>
             ))}
           </select>
@@ -78,7 +70,7 @@ export default function BookBoarding({bookInfo}) {
             className="text-sm text-slate-800 bg-zinc-100 px-1 py-2 outline-none border-t cursor-pointer"
             onChange={handleChange}
           >
-            {statusOptions.map((status, index) => (
+            {statusOptions2.map((status, index) => (
               <option key={index}>{status}</option>
             ))}
           </select>

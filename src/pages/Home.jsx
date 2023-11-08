@@ -1,9 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, {useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import useGetBooks from "../hooks/useGetBooks";
-import useDeleteBook from "../hooks/useDeleteBook";
 import Loader from "../components/Loader";
-import { BsFillBellFill } from "react-icons/bs";
 import {
   BiChevronRight,
   BiSolidBookReader,
@@ -14,14 +11,25 @@ import { HiOutlineMenuAlt2 } from "react-icons/hi";
 import { FaBook } from "react-icons/fa";
 import { getDate } from "../utils/dateMaker";
 import Sidebar from "../components/Sidebar";
+import { useQuery } from "react-query";
+import { fetchBooks } from "../utils/fetchbooks";
 
 export default function Home() {
-  const [searchQuery, setSearchQuery] = useState("")
   const [isOpen, setIsOpen] = useState(false);
-  
-  const navigate = useNavigate();
-  
-  const { books, isLoading } = useGetBooks(searchQuery);
+  const [sortTerm, setSortTerm] = useState('Newest');
+  const [statusTerm, setStatusTerm] = useState("All");
+  const [searchTerm, setSearchTerm] = useState('')
+
+  const navigate = useNavigate()
+
+  const searchQuery = `sort=${sortTerm}&status=${statusTerm}&search=${searchTerm}`
+
+
+  const { data: books, isLoading } = useQuery(
+    ["books", searchQuery],
+    () => fetchBooks(searchQuery)
+  );
+
 
   const handleAddBook = () => {
     navigate("/add-book");
@@ -31,16 +39,19 @@ export default function Home() {
     setIsOpen(!isOpen);
   };
 
-  if (isLoading) return <Loader />;
+  console.log(searchQuery)
 
+  if (isLoading) return <Loader />;
 
   return (
     <div className="mx-auto text-slate-900 m-4 px-4">
       <Sidebar
         toggleSidebar={toggleSidebar}
         isOpen={isOpen}
-        searchQuery={searchQuery}
-        setSearchQuery={setSearchQuery}
+        setStatusTerm={setStatusTerm}
+        setSortTerm={setSortTerm}
+        statusTerm={statusTerm}
+        sortTerm={sortTerm}
       />
       <div>
         <div className="flex justify-between">
@@ -54,7 +65,7 @@ export default function Home() {
           </div>
           <div className="w-10 h-10 bg-gray-400 rounded-full cursor-pointer"></div>
         </div>
-        {books.length > 0 && (
+        {books?.length > 0 && (
           <div className="rounded-xl bg-zinc-100 px-2 my-2 flex items-center">
             <AiOutlineSearch />
             <input
@@ -97,9 +108,6 @@ export default function Home() {
                     </p>
                     <p className="text-xs font-medium text-slate-900">
                       {getDate(book.createdAt)}
-                    </p>
-                    <p className="text-xs font-medium text-slate-900">
-                      ${book.price}
                     </p>
                   </div>
                 </div>

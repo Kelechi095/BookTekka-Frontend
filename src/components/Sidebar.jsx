@@ -1,30 +1,7 @@
 import { LiaTimesSolid } from "react-icons/lia";
-import { filterStatus, sortButtons } from "../utils/buttons";
-import { useEffect, useState, useMemo } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { statusOptions, sortButtons } from "../utils/buttons";
 
-export default function Sidebar({
-  toggleSidebar,
-  isOpen,
-  searchQuery,
-  setSearchQuery,
-}) {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [sortTerm, setSortTerm] = useState("All");
-  const [statusTerm, setStatusTerm] = useState("Unread");
-
-  const navigate = useNavigate();
-  const { search } = useLocation();
-
-  
-  const handleSubmit = (arg) => {
-    const urlParams =  new URLSearchParams(search)
-    urlParams.set("status", arg);
-    setSearchQuery(`?${urlParams.toString()}`);
-  }
-    
-
-
+export default function Sidebar({ toggleSidebar, isOpen, sortTerm, statusTerm, setSortTerm, setStatusTerm }) {
   return (
     <div
       className={
@@ -58,7 +35,11 @@ export default function Sidebar({
           <p className="font-semibold my-2">Sort by</p>
           {sortButtons.map((button, index) => (
             <div key={index}>
-              <button className="my-2" onClick={toggleSidebar}>
+              <button className={sortTerm === button ?" font-bold my-2": "my-2"} onClick={() => {
+                  setSortTerm(button)
+                  toggleSidebar();
+                }}
+>
                 {button}
               </button>
             </div>
@@ -67,14 +48,13 @@ export default function Sidebar({
 
         <div className="mt-2 py-1 border-t">
           <p className="font-semibold my-2">Filter by status</p>
-          {filterStatus.map((button, index) => (
+          {statusOptions.map((button, index) => (
             <div key={index}>
               <button
-                className="my-2"
+                className={statusTerm === button ? "font-bold my-2" : "my-2"}
                 onClick={() => {
-                  //setStatusTerm(button)
+                  setStatusTerm(button)
                   toggleSidebar();
-                  handleSubmit(button)
                 }}
               >
                 {button}

@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
 import { useParams, useNavigate } from "react-router-dom";
-import { genreOptions } from "../utils/buttons";
+import { filterGenres, statusOptions2 } from "../utils/buttons";
 import { statusOptions } from "../utils/buttons";
 import useGetBook from "../hooks/useGetBook";
 import Loader from "../components/Loader";
@@ -10,7 +10,6 @@ import Loader from "../components/Loader";
 
 export default function EditTodo() {
   const [formData, setFormData] = useState({
-    price: "",
     genre: "",
     status: "",
   });
@@ -38,7 +37,7 @@ export default function EditTodo() {
     await axios.patch(`${import.meta.env.VITE_BASE_ENDPOINT}/api/books/${id}`, formData);
   };
 
-  const { mutate: editMutate} = useMutation(editBook, {
+  const { mutate: editMutate, isLoading: isSubmitting} = useMutation(editBook, {
     onSuccess: () => {
       queryClient.invalidateQueries("books");
       navigate("/");
@@ -75,17 +74,6 @@ export default function EditTodo() {
           Edit Book Details
         </h1>
         <div className="grid gap-4 p-4">
-          <div>
-            <label className="text-sm text-slate-800">Price</label>
-            <input
-              type="text"
-              placeholder="Price"
-              className="bg-zinc-100 py-[6px] px-2 w-full outline-none text-sm"
-              name="price"
-              value={formData.price}
-              onChange={handleChange}
-            />
-          </div>
 
           <select
             name="genre"
@@ -93,7 +81,7 @@ export default function EditTodo() {
             className="text-sm  text-slate-800 outline-none border-t px-1 py-2 bg-zinc-100 cursor-pointer"
             onChange={handleChange}
           >
-            {genreOptions.map((genre, index) => (
+            {filterGenres.slice(1).map((genre, index) => (
               <option key={index}>{genre}</option>
             ))}
           </select>
@@ -104,13 +92,13 @@ export default function EditTodo() {
             className="text-sm text-slate-800 bg-zinc-100 px-1 py-2 outline-none border-t cursor-pointer"
             onChange={handleChange}
           >
-            {statusOptions.map((status, index) => (
+            {statusOptions2.map((status, index) => (
               <option key={index}>{status}</option>
             ))}
           </select>
 
           <button className="border w-full px-4 rounded text-white p-1 bg-blue-500">
-            {isLoading ? "Submitting..." : "Submit"}
+            {isSubmitting ? "Submitting..." : "Submit"}
           </button>
         </div>
       </form>}
