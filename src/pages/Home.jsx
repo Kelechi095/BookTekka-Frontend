@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import ReactPaginate from "react-paginate";
 import Loader from "../components/Loader";
 import {
   BiChevronRight,
@@ -20,17 +21,19 @@ export default function Home() {
   const [sortTerm, setSortTerm] = useState("Newest");
   const [statusTerm, setStatusTerm] = useState("All");
   const [searchTerm, setSearchTerm] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
 
-  
   const navigate = useNavigate();
 
   const debouncedValue = useDebounce(searchTerm, 500);
 
-  const searchQuery = `sort=${sortTerm}&status=${statusTerm}&search=${debouncedValue}`;
+  const searchQuery = `sort=${sortTerm}&status=${statusTerm}&search=${debouncedValue}&limit=5&page=${currentPage}`;
 
-  const { data: books, isLoading } = useQuery([searchQuery], () =>
+  const { data, isLoading } = useQuery([searchQuery], () =>
     fetchBooks(searchQuery)
   );
+
+  console.log(currentPage);
 
   const handleAddBook = () => {
     navigate("/add-book");
@@ -39,6 +42,22 @@ export default function Home() {
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
   };
+
+  const handlePageNext = () => {
+    if (currentPage < data?.numOfPages) {
+      setCurrentPage((prev) => prev + 1);
+    }
+  };
+
+  const handlePagePrev = () => {
+    if (currentPage > 1) {
+      setCurrentPage((prev) => prev - 1);
+    }
+  };
+
+  useEffect(() => {
+    setCurrentPage(1)
+  }, [statusTerm])
 
   if (isLoading && !debouncedValue) return <Loader />;
 
@@ -83,12 +102,12 @@ export default function Home() {
         />
       </div>
       <div>
-        {books?.length === 0 ? (
+        {data?.books?.length === 0 ? (
           <div className="h-60 flex items-center justify-center">
             <h2 className="text-slate-800 text-2xl">Your library is Empty</h2>
           </div>
         ) : (
-          books?.map((book) => (
+          data?.books?.map((book) => (
             <Link to={`/${book._id}`} key={book._id}>
               <div className=" border-t py-2 shadow-sm flex items-center justify-between">
                 <div className="flex gap-2 items-center">
@@ -137,11 +156,14 @@ export default function Home() {
           ))
         )}
       </div>
+      <div className="flex justify-center items-center gap-8 my-8">
+        <button className="border text-white bg-cyan-600 rounded py-[3px] px-4 disabled:bg-gray-400" onClick={handlePagePrev} disabled={currentPage === 1}>
+          Prev
+        </button>
+        <button className="border py-[3px] px-4 text-white bg-cyan-600 rounded  disabled:bg-gray-400" onClick={handlePageNext} disabled={currentPage === data?.numOfPages}>
+          Next
+        </button>
+      </div>
     </div>
   );
-}
-
-{
-  /* ;
-   */
 }
