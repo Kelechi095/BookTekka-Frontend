@@ -22,7 +22,7 @@ export default function Sidebar() {
         }
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="flex gap-2 items-center my-2 mb-9">
+        <div className="flex gap-2 items-center my-2">
           {
             <LiaTimesSolid
               size={25}
@@ -33,25 +33,25 @@ export default function Sidebar() {
           
         </div>
 
-        <ul className='py-1 bg-white h-48 flex justify-around flex-col'>
-            <li className='cursor-pointer flex gap-4 items-center text-gray-700 mt-4'>
-                <MdMenuBook size={30}/>
+        <ul className='py-1 bg-white flex justify-around flex-col'>
+            <li className='cursor-pointer flex gap-4 items-center text-gray-700 mt-8'>
+                <MdMenuBook size={28}/>
                 <span className={'font-semibold text-base'}>Library</span>
             </li>
-            <li className='cursor-pointer flex gap-4 items-center text-gray-700 mt-4'>
-                <BsPeopleFill size={30} />
+            <li className='cursor-pointer flex gap-4 items-center text-gray-700 mt-8'>
+                <BsPeopleFill size={28} />
                 <span className='font-semibold text-base '>Recommendation</span>
             </li>
-            <li className='cursor-pointer flex gap-4 items-center text-gray-700 mt-4'>
-                <BsFillBarChartFill size={30} />
+            <li className='cursor-pointer flex gap-4 items-center text-gray-700 mt-8'>
+                <BsFillBarChartFill size={28} />
                 <span className='font-semibold text-base '>Stats</span>
             </li>
-            <li className='cursor-pointer flex gap-4 items-center text-gray-700 mt-4'>
-                <CgProfile size={30}/>
+            <li className='cursor-pointer flex gap-4 items-center text-gray-700 mt-8'>
+                <CgProfile size={28}/>
                 <span className='font-semibold text-base'>Profile</span>
             </li>
-            <li className='cursor-pointer flex gap-4 items-center text-gray-700 mt-4'>
-                <IoMdSettings size={30}/>
+            <li className='cursor-pointer flex gap-4 items-center text-gray-700 mt-8'>
+                <IoMdSettings size={28}/>
                 <span className='font-semibold text-base'>Setting</span>
             </li>
             
