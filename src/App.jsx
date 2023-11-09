@@ -3,16 +3,26 @@ import Home from "./pages/Home";
 import AddBook from "./pages/AddBook";
 import EditBook from "./pages/EditBook";
 import Book from "./pages/Book";
+import Profile from "./pages/Profile";
+import Overview from "./pages/Overview";
+import Settings from "./pages/Settings";
+import Layout from "./pages/Layout";
+import Recommendation from "./pages/Recommendation";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/add-book" element={<AddBook />} />
-        <Route path="/edit-book/:id" element={<EditBook />} />
-        <Route path="/:id" element={<Book />} />
-      
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="/add-book" element={<AddBook />} />
+          <Route path="/edit-book/:id" element={<EditBook />} />
+          <Route path="/:id" element={<Book />} />
+          <Route path="/recommedation" element={<Recommendation />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/overview" element={<Overview />} />
+          <Route path="/settings" element={<Settings />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );
