@@ -1,17 +1,25 @@
 import { LiaTimesSolid } from "react-icons/lia";
-import {FaTimes} from "react-icons/fa"
+import { FaTimes } from "react-icons/fa";
 import useGetContext from "../hooks/useGetContext";
-import {MdMenuBook} from 'react-icons/md'
-import {CgProfile} from 'react-icons/cg'
-import {IoMdSettings} from 'react-icons/io'
-import {BsPeopleFill, BsFillBarChartFill} from 'react-icons/bs'
+import { MdMenuBook } from "react-icons/md";
+import { CgProfile } from "react-icons/cg";
+import { IoMdSettings } from "react-icons/io";
+import { BsPeopleFill, BsFillBarChartFill } from "react-icons/bs";
+import { NavLink } from "react-router-dom";
 
 export default function Sidebar() {
-  const {isSidebarOpen, handleSidebar} = useGetContext()
+  const { isSidebarOpen, handleSidebar, setIsSidebarOpen } = useGetContext();
+
+  const closeSidebar = () => {
+    setIsSidebarOpen(false);
+  };
+
   return (
     <div
       className={
-        isSidebarOpen ? "inset-0 fixed  bg-black bg-opacity-10 min-h-screen z-10" : ""
+        isSidebarOpen
+          ? "inset-0 fixed  bg-black bg-opacity-10 min-h-screen z-10"
+          : ""
       }
       onClick={handleSidebar}
     >
@@ -31,35 +39,71 @@ export default function Sidebar() {
               onClick={handleSidebar}
             />
           }
-          
         </div>
 
-        <ul className='py-1 bg-white flex justify-around flex-col'>
-            <li className='cursor-pointer flex gap-4 items-center text-gray-700 mt-8'>
-                <MdMenuBook size={28}/>
-                <span className={'font-semibold text-base'}>Library</span>
+        <ul className="py-1 bg-white flex justify-around flex-col">
+          <NavLink
+            to="/"
+            onClick={closeSidebar}
+            className={({ isActive }) =>
+              isActive ? "text-cyan-600" : "text-gray-700"
+            }
+          >
+            <li className="cursor-pointer flex gap-4 items-center mt-8">
+              <MdMenuBook size={28} />
+              <span className={"font-semibold text-base"}>Library</span>
             </li>
-            <li className='cursor-pointer flex gap-4 items-center text-gray-700 mt-8'>
-                <BsPeopleFill size={28} />
-                <span className='font-semibold text-base '>Recommendation</span>
+          </NavLink>
+          <NavLink
+            to="/recommendations"
+            onClick={closeSidebar}
+            className={({ isActive }) =>
+              isActive ? "text-cyan-600" : "text-gray-700"
+            }
+          >
+            <li className="cursor-pointer flex gap-4 items-center mt-8">
+              <BsPeopleFill size={28} />
+              <span className="font-semibold text-base ">Recommendations</span>
             </li>
-            <li className='cursor-pointer flex gap-4 items-center text-gray-700 mt-8'>
-                <BsFillBarChartFill size={28} />
-                <span className='font-semibold text-base '>Stats</span>
+          </NavLink>
+          <NavLink
+            to="/overview"
+            onClick={closeSidebar}
+            className={({ isActive }) =>
+              isActive ? "text-cyan-600" : "text-gray-700"
+            }
+          >
+            <li className="cursor-pointer flex gap-4 items-center mt-8">
+              <BsFillBarChartFill size={28} />
+              <span className="font-semibold text-base ">Stats</span>
             </li>
-            <li className='cursor-pointer flex gap-4 items-center text-gray-700 mt-8'>
-                <CgProfile size={28}/>
-                <span className='font-semibold text-base'>Profile</span>
+          </NavLink>
+          <NavLink
+            to="/profile"
+            onClick={closeSidebar}
+            className={({ isActive }) =>
+              isActive ? "text-cyan-600" : "text-gray-700"
+            }
+          >
+            <li className="cursor-pointer flex gap-4 items-center mt-8">
+              <CgProfile size={28} />
+              <span className="font-semibold text-base">Profile</span>
             </li>
-            <li className='cursor-pointer flex gap-4 items-center text-gray-700 mt-8'>
-                <IoMdSettings size={28}/>
-                <span className='font-semibold text-base'>Setting</span>
+          </NavLink>
+          <NavLink
+            to="/settings"
+            onClick={closeSidebar}
+            className={({ isActive }) =>
+              isActive ? "text-cyan-600" : "text-gray-700"
+            }
+          >
+            <li className="cursor-pointer flex gap-4 items-center mt-8">
+              <IoMdSettings size={28} />
+              <span className="font-semibold text-base">Settings</span>
             </li>
-            
+          </NavLink>
         </ul>
       </nav>
     </div>
   );
 }
-
-

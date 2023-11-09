@@ -85,7 +85,7 @@ export default function Book() {
         </button>
       </div>
 
-      {book.status === "Reading" && (
+      {book?.status === "Reading" && (
         <div className="p-4 border-2 bg-white rounded mt-4">
           {book.progress > 0 && (
             <CircularProgressbarComponent progress={book.progress} />
@@ -96,7 +96,7 @@ export default function Book() {
               className="text-sm border border-slate-800 text-base-800 rounded p-1 px-2"
               onClick={handleShowProgressModal}
             >
-              {book.progress > 0 ? "Update progress" : "Start progress"}
+              {book?.progress > 0 ? "Update progress" : "Start progress"}
             </button>
           </div>
         </div>

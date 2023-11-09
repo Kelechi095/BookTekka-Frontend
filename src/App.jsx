@@ -20,7 +20,7 @@ function App() {
             <Route path="/add-book" element={<AddBook />} />
             <Route path="/edit-book/:id" element={<EditBook />} />
             <Route path="/:id" element={<Book />} />
-            <Route path="/recommedation" element={<Recommendation />} />
+            <Route path="/recommendations" element={<Recommendation />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/overview" element={<Overview />} />
             <Route path="/settings" element={<Settings />} />
