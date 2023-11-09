@@ -12,11 +12,8 @@ export default function AddTodo() {
   const { bookData } = useGetBookData(searchTerm);
 
   return (
-    <div className="p-3 max-w-lg mx-auto py-8 bg-zinc-100 h-screen">
-      <Link to="/" className="bg-blue-500 p-2 rounded text-xs text-white">
-        Back to library
-      </Link>
-
+    <div className="p-3 max-w-lg mx-auto py-8 bg-zinc-100 min-h-screen">
+      
       {bookInfo ? (
         <BookBoarding bookInfo={bookInfo}/>
       ) : (

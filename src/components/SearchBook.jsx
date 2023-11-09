@@ -12,13 +12,15 @@ export default function SearchBook({
 
   return (
     <div className="mt-4">
-      <input
-        type="text"
-        placeholder="Search for book..."
-        className="border-1 outline-none px-2 py-1 w-96 shadow-sm rounded"
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-      />
+      <div className="mx-auto max-w-sm">
+        <input
+          type="text"
+          placeholder="Search for book..."
+          className="border-1 outline-none px-2 py-1 w-full shadow-sm rounded mx-auto"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+      </div>
       {bookData?.items?.map((book) => (
         <div
           key={book?.id}

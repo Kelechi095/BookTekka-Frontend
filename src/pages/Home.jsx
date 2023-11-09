@@ -1,6 +1,5 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import ReactPaginate from "react-paginate";
 import Loader from "../components/Loader";
 import {
   BiChevronRight,
@@ -10,17 +9,16 @@ import {
   BiSolidChevronRight,
 } from "react-icons/bi";
 import { AiOutlineSearch, AiOutlinePlus } from "react-icons/ai";
-import { HiOutlineMenuAlt2 } from "react-icons/hi";
 import { FaBook } from "react-icons/fa";
 import { getDate } from "../utils/dateMaker";
-import Sidebar from "../components/Sidebar";
 import { useQuery } from "react-query";
 import { fetchBooks } from "../utils/fetchbooks";
 import useDebounce from "../hooks/useDebounce";
 import { sortButtons, statusOptions } from "../utils/buttons";
+import useGetContext from "../hooks/useGetContext";
+import Header from "../components/Header";
 
 export default function Home() {
-  const [isOpen, setIsOpen] = useState(false);
   const [isFilter, setIsFilter] = useState(false);
   const [isSort, setIsSort] = useState(false);
 
@@ -28,6 +26,7 @@ export default function Home() {
   const [statusTerm, setStatusTerm] = useState("All");
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
+
 
   const navigate = useNavigate();
 
@@ -39,15 +38,10 @@ export default function Home() {
     fetchBooks(searchQuery)
   );
 
-  console.log(currentPage);
-
   const handleAddBook = () => {
     navigate("/add-book");
   };
 
-  const toggleSidebar = () => {
-    setIsOpen(!isOpen);
-  };
   const toggleFilterBar = () => {
     setIsFilter(!isFilter);
   };
@@ -74,96 +68,85 @@ export default function Home() {
   if (isLoading && !debouncedValue) return <Loader />;
 
   return (
-    <div className="mx-auto text-slate-900 m-4 px-4 ">
-      <Sidebar
-        toggleSidebar={toggleSidebar}
-        isOpen={isOpen}
-        setStatusTerm={setStatusTerm}
-        setSortTerm={setSortTerm}
-        statusTerm={statusTerm}
-        sortTerm={sortTerm}
-      />
-      <div>
-        <div className="flex justify-between">
-          <div className="flex gap-2 items-center mb-2">
-            <HiOutlineMenuAlt2
-              size={25}
-              className="cursor-pointer"
-              onClick={toggleSidebar}
-            />
-            <h1 className="font-bold text-xl font-mono">Library</h1>
-          </div>
+    <div className="mx-auto text-slate-900 m-4 px-4 mb-4">
+      <Header
+        title={"Library"}
+        rightSide={
           <AiOutlinePlus
             size={32}
             className="my-2 cursor-pointer hover:text-blue-500"
             onClick={handleAddBook}
           />
-        </div>
+        }
+      />
 
-        <div className="rounded-xl bg-zinc-100 px-2 my-2 flex items-center">
-          <AiOutlineSearch />
-          <input
-            type="text"
-            className="bg-zinc-100 outline-none p-2 w-full text-sm"
-            placeholder="search..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
+      <div className="rounded-xl bg-zinc-100 px-2 my-2 flex items-center">
+        <AiOutlineSearch />
+        <input
+          type="text"
+          className="bg-zinc-100 outline-none p-2 w-full text-sm"
+          placeholder="search..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+      </div>
+      <div className="sort_filter relative flex justify-between mb-2">
+        <div
+          className="border py-1 px-4 cursor-pointer w-36  rounded flex items-center justify-between"
+          onClick={toggleSortBar}
+        >
+          <p className="text-sm">Sort</p>
+          {isSort ? <BiSolidChevronRight /> : <BiSolidChevronDown size={16} />}
         </div>
-        <div className="sort_filter relative flex justify-between mb-2">
-          <div
-            className="border py-1 px-4 cursor-pointer w-36  rounded flex items-center justify-between"
-            onClick={toggleSortBar}
-          >
-            <p className="text-sm">Sort</p>
-            {isSort ? (
-              <BiSolidChevronRight />
-            ) : (
-              <BiSolidChevronDown size={16} />
-            )}
-          </div>
-          {isSort && (
-            <ul className="absolute top-12 bg-white w-36 px-2 py-1 rounded shadow-sm border z-10 text-sm">
-              {sortButtons.map((button) => (
-                <li
-                className={sortTerm === button ? "list-none my-2 cursor-pointer hover:text-blue-500 w-fit font-bold" : "list-none my-2 cursor-pointer hover:text-blue-500 w-fit"}
-                  onClick={() => {
-                    setSortTerm(button);
-                    toggleSortBar();
-                  }}
-                >
-                  {button}
-                </li>
-              ))}
-            </ul>
-          )}
-          <div
-            className="border py-1 px-4 cursor-pointer w-36  rounded flex items-center justify-between"
-            onClick={toggleFilterBar}
-          >
-            <p className="text-sm">Filter</p>
-            {isFilter ? (
-              <BiSolidChevronRight />
-            ) : (
-              <BiSolidChevronDown size={16} />
-            )}
-          </div>
-          {isFilter && (
-            <ul className="absolute top-12 right-0 bg-white w-36 px-2 py-1 rounded shadow-sm border z-10 text-sm">
-              {statusOptions.map((button) => (
-                <li
-                  className={statusTerm === button ? "list-none my-2 cursor-pointer hover:text-blue-500 w-fit font-bold" : "list-none my-2 cursor-pointer hover:text-blue-500 w-fit"}
-                  onClick={() => {
-                    setStatusTerm(button);
-                    toggleFilterBar();
-                  }}
-                >
-                  {button}
-                </li>
-              ))}
-            </ul>
+        {isSort && (
+          <ul className="absolute top-12 bg-white w-36 px-2 py-1 rounded shadow-sm border z-10 text-sm">
+            {sortButtons.map((button) => (
+              <li
+                className={
+                  sortTerm === button
+                    ? "list-none my-2 cursor-pointer hover:text-blue-500 w-fit font-bold"
+                    : "list-none my-2 cursor-pointer hover:text-blue-500 w-fit"
+                }
+                onClick={() => {
+                  setSortTerm(button);
+                  toggleSortBar();
+                }}
+              >
+                {button}
+              </li>
+            ))}
+          </ul>
+        )}
+        <div
+          className="border py-1 px-4 cursor-pointer w-36  rounded flex items-center justify-between"
+          onClick={toggleFilterBar}
+        >
+          <p className="text-sm">Filter</p>
+          {isFilter ? (
+            <BiSolidChevronRight />
+          ) : (
+            <BiSolidChevronDown size={16} />
           )}
         </div>
+        {isFilter && (
+          <ul className="absolute top-12 right-0 bg-white w-36 px-2 py-1 rounded shadow-sm border z-10 text-sm">
+            {statusOptions.map((button) => (
+              <li
+                className={
+                  statusTerm === button
+                    ? "list-none my-2 cursor-pointer hover:text-blue-500 w-fit font-bold"
+                    : "list-none my-2 cursor-pointer hover:text-blue-500 w-fit"
+                }
+                onClick={() => {
+                  setStatusTerm(button);
+                  toggleFilterBar();
+                }}
+              >
+                {button}
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
       <div>
         {data?.books?.length === 0 ? (
@@ -220,7 +203,7 @@ export default function Home() {
           ))
         )}
       </div>
-      <div className="flex justify-center items-center gap-8 my-8">
+      <div className="flex justify-center items-center gap-8 my-2">
         <button
           className="border text-white bg-cyan-600 rounded py-[3px] px-4 disabled:bg-gray-400"
           onClick={handlePagePrev}
