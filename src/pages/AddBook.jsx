@@ -3,19 +3,19 @@ import { Link } from "react-router-dom";
 import useGetBookData from "../hooks/useGetBookData";
 import BookBoarding from "../components/BookBoarding";
 import SearchBook from "../components/SearchBook";
+import Header from "../components/Header";
 
 export default function AddTodo() {
   const [searchTerm, setSearchTerm] = useState("");
   const [bookInfo, setBookInfo] = useState(null);
 
-
   const { bookData } = useGetBookData(searchTerm);
 
   return (
-    <div className="p-3 max-w-lg mx-auto py-8 bg-zinc-100 min-h-screen">
-      
+    <div className="mx-auto text-slate-900 m-4 mt-6 px-4 mb-8">
+      <Header title={"Add book to library"} />
       {bookInfo ? (
-        <BookBoarding bookInfo={bookInfo}/>
+        <BookBoarding bookInfo={bookInfo} />
       ) : (
         <SearchBook
           setBookInfo={setBookInfo}

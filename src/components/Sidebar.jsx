@@ -1,4 +1,5 @@
 import { LiaTimesSolid } from "react-icons/lia";
+import {FaTimes} from "react-icons/fa"
 import useGetContext from "../hooks/useGetContext";
 import {MdMenuBook} from 'react-icons/md'
 import {CgProfile} from 'react-icons/cg'
@@ -24,9 +25,9 @@ export default function Sidebar() {
       >
         <div className="flex gap-2 items-center my-2">
           {
-            <LiaTimesSolid
+            <FaTimes
               size={25}
-              className="cursor-pointer"
+              className="cursor-pointer text-gray-700"
               onClick={handleSidebar}
             />
           }
