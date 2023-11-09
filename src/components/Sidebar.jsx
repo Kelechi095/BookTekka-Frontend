@@ -1,7 +1,7 @@
 import { LiaTimesSolid } from "react-icons/lia";
 import { statusOptions, sortButtons } from "../utils/buttons";
 
-export default function Sidebar({ toggleSidebar, isOpen, sortTerm, statusTerm, setSortTerm, setStatusTerm }) {
+export default function Sidebar({ isOpen, toggleSidebar }) {
   return (
     <div
       className={
@@ -28,60 +28,13 @@ export default function Sidebar({ toggleSidebar, isOpen, sortTerm, statusTerm, s
           <h1 className="font-bold text-xl font-mono">Library</h1>
         </div>
 
-        <button className="font-semibold text-base text-blue-500 my-2">
-          Home
-        </button>
-        <div className="mt-1 py-1">
-          <p className="font-semibold my-2">Sort by</p>
-          {sortButtons.map((button, index) => (
-            <div key={index}>
-              <button className={sortTerm === button ?" font-bold my-2": "my-2"} onClick={() => {
-                  setSortTerm(button)
-                  toggleSidebar();
-                }}
->
-                {button}
-              </button>
-            </div>
-          ))}
-        </div>
-
-        <div className="mt-2 py-1 border-t">
-          <p className="font-semibold my-2">Filter by status</p>
-          {statusOptions.map((button, index) => (
-            <div key={index}>
-              <button
-                className={statusTerm === button ? "font-bold my-2" : "my-2"}
-                onClick={() => {
-                  setStatusTerm(button)
-                  toggleSidebar();
-                }}
-              >
-                {button}
-              </button>
-            </div>
-          ))}
-        </div>
+        <ul>
+          <li className="text-sm font-semibold my-4">Home</li>
+          <li className="text-sm font-semibold my-4">Library</li>
+          <li className="text-sm font-semibold my-4">Profile</li>
+          <li className="text-sm font-semibold my-4">Settings</li>
+        </ul>
       </nav>
     </div>
   );
-}
-
-{
-  /* <div className="mt-2 py-1 border-t">
-          <p className="font-semibold">Filter by genre</p>
-          {filterGenres.map((button, index) => (
-            <div key={index}>
-              <button className="mt-1">{button}</button>
-            </div>
-          ))}
-        </div>
-        <div className="mt-2 py-1 border-t">
-          <p className="font-semibold">Filter by status</p>
-          {filterStatus.map((button, index) => (
-            <div key={index}>
-              <button className="mt-1">{button}</button>
-            </div>
-          ))}
-        </div> */
 }
