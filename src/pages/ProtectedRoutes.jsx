@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import useLogoutUser from "../hooks/user/useLogOutUser";
+import useLogoutUser from "../hooks/user/useLogoutUser";
 import { customFetch } from "../utils/customFetch";
 import useRefresh from "../hooks/user/useRefresh";
 import Loader from "../components/Loader";
