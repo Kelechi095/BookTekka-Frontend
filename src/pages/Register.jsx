@@ -93,6 +93,9 @@ export default function Register() {
         </Link>
       </div>
       {error && <p className="text-red-700 mt-5">{customError}</p>}
+      <div className="">
+        <img src="https://res.cloudinary.com/djpyctzcq/image/upload/v1699638991/undraw_reading_re_29f8_h1cq6c.svg" alt="" />
+      </div>
     </div>
   );
 }

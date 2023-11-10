@@ -21,6 +21,7 @@ export default function Sidebar() {
     setIsSidebarOpen(false)
   }
 
+
   const { logoutMutation } = useLogoutUser();
 
   return (
