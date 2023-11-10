@@ -1,20 +1,13 @@
 import React from "react";
 import useDeletebooks from "../hooks/useDeleteBook";
-import Book from "../pages/Book";
-import { useNavigate } from "react-router-dom";
 
 export default function DeleteBookModal({ handleCloseDeleteModal, bookID }) {
+  const { deleteBookMutate } = useDeletebooks();
 
-    const {deleteBookMutate} = useDeletebooks()
-
-    const navigate = useNavigate()
-
-    const handleDelete = () => {
-        deleteBookMutate(bookID)
-        handleCloseDeleteModal()
-        navigate('/')
-    }
-
+  const handleDelete = () => {
+    deleteBookMutate(bookID);
+    handleCloseDeleteModal();
+  };
 
   return (
     <div
@@ -35,9 +28,18 @@ export default function DeleteBookModal({ handleCloseDeleteModal, bookID }) {
           Are you sure you want to delete this book from your library?
         </p>
         <div className="flex justify-around mt-3">
-        <button className="border border-green-500 py-[3px] px-4" onClick={handleDelete}>Yes</button>
-        <button className="border border-red-500 py-[3px] p-1 px-4" onClick={handleCloseDeleteModal}>No</button>
-
+          <button
+            className="border border-green-500 py-[3px] px-4"
+            onClick={handleDelete}
+          >
+            Yes
+          </button>
+          <button
+            className="border border-red-500 py-[3px] p-1 px-4"
+            onClick={handleCloseDeleteModal}
+          >
+            No
+          </button>
         </div>
       </div>
     </div>
