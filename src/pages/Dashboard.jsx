@@ -14,7 +14,7 @@ export default function Dashboard() {
           alt=""
           className="w-48 mx-auto"
         />
-        <h4 className='text-md mt-4 font-sans max-w-md md:max-w-lg text-green-800 lg:max-w-3xl lg:text-xl text-center mx-auto p-3'>Keep track of your favorite books and meet fellow book lovers</h4>
+        <h4 className='text-lg mt-4 font-mono max-w-md md:max-w-lg text-green-800 lg:max-w-3xl lg:text-xl text-center mx-auto p-3'>Keep track of your favorite books and meet fellow book lovers</h4>
 
       </div>
       <div className="mx-auto max-w-sm flex flex-col justify-center gap-4 mt-2">
