@@ -7,7 +7,7 @@ import { IoMdSettings } from "react-icons/io";
 import { BiLogOut } from "react-icons/bi";
 import { BsPeopleFill, BsFillBarChartFill } from "react-icons/bs";
 import { NavLink } from "react-router-dom";
-import useLogoutUser from "../hooks/user/useLogOutUser";
+import useLogoutUser from "../hooks/user/useLogoutUser";
 
 export default function Sidebar() {
   const { isSidebarOpen, handleSidebar, setIsSidebarOpen } = useGetContext();
