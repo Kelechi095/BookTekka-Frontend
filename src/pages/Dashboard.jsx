@@ -14,12 +14,12 @@ export default function Dashboard() {
           alt=""
           className="w-48 mx-auto"
         />
-        <h4 className='text-md mt-4 font-mono max-w-md md:max-w-lg text-green-800 lg:max-w-3xl lg:text-xl text-center mx-auto p-3'>Keep track of your favorite books and meet fellow book lovers</h4>
+        <h4 className='text-md mt-4 font-sans max-w-md md:max-w-lg text-green-800 lg:max-w-3xl lg:text-xl text-center mx-auto p-3'>Keep track of your favorite books and meet fellow book lovers</h4>
 
       </div>
-      <div className="mx-auto flex justify-center gap-4 mt-4">
-        <button className="border-green-800 text-lg text-green-800 border  shadow-sm rounded py-[3px] px-4">Login</button>
-        <button className="border text-lg shadow-sm rounded px-4 border-green-800 text-green-800">Register</button>
+      <div className="mx-auto max-w-sm flex flex-col justify-center gap-4 mt-2">
+        <button className="border-green-800 text-md text-green-800 border  shadow-sm rounded-full py-[3px] px-2 w-full">Login</button>
+        <button className="border text-md shadow-sm rounded-full px-2 py-[3px] border-green-800 text-green-800 w-full">Register</button>
       </div>
     </div>
   );
