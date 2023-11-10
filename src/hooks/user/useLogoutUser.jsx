@@ -14,7 +14,7 @@ export default function useLogoutUser() {
     onSuccess: () => {
       localStorage.clear();
       queryClient.removeQueries();
-      navigate("/login");
+      navigate("/dashboard");
     },
   });
 
