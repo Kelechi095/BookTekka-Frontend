@@ -4,7 +4,7 @@ export default function Dashboard() {
   return (
     <div className="@apply py-4 px-4 lg:px-12 lg:py-6 bg-lighterCyan h-screen">
       <div>
-        <h2 className="mt-12 mx-auto max-w-md text-5xl md:text-6xl lg:text-7xl md:max-w-lg  lg:max-w-4xl text-center font-serif p-2 text-textColor">
+        <h2 className="mt-2 mx-auto max-w-md text-5xl md:text-6xl lg:text-7xl md:max-w-lg  lg:max-w-4xl text-center font-serif p-2 text-textColor">
           Welcome to BookTekka
         </h2>
       </div>
@@ -12,7 +12,7 @@ export default function Dashboard() {
         <img
           src="https://res.cloudinary.com/djpyctzcq/image/upload/v1699640951/reading_green_jyckxt.svg"
           alt=""
-          className="w-48 mx-auto"
+          className="w-40 mx-auto"
         />
         <h4 className='text-md mt-4 font-mono max-w-md md:max-w-lg text-green-800 lg:max-w-3xl lg:text-xl text-center mx-auto p-3'>Keep track of your favorite books and meet fellow book lovers</h4>
 
