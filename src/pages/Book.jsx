@@ -7,6 +7,7 @@ import { BsFillTrashFill } from "react-icons/bs";
 import CircularProgressbarComponent from "../components/CircularProgressbarComponent";
 import UpdateProgressModal from "../components/UpdateProgressModal";
 import DeleteBookModal from "../components/DeleteBookModal";
+import Header from "../components/Header";
 
 export default function Book() {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -37,6 +38,7 @@ export default function Book() {
 
   return (
     <div className="mx-auto text-slate-900 p-4 bg-violet-50">
+      <h1 className="font-bold text-xl font-mono">Book details</h1>
       {showDeleteModal && (
         <DeleteBookModal
           handleCloseDeleteModal={handleCloseDeleteModal}

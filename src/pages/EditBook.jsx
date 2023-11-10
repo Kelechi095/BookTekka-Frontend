@@ -62,7 +62,8 @@ export default function EditTodo() {
 
 
   return (
-    <div className="my-4 mt-12">
+    <div className="mt-2 p-4">
+      <h1 className="font-bold text-xl font-mono">Edit Book</h1>
       <img src={book?.thumbnail} alt={book?.title} className="mx-auto mb-4" />
       <p className="text-md font-semibold text-center">{book?.title}</p>
       <p className="text-sm font-semibold text-center">{book?.author}</p>

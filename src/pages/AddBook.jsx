@@ -13,7 +13,7 @@ export default function AddTodo() {
 
   return (
     <div className="mx-auto text-slate-900 m-4 mt-6 px-4 mb-8">
-      <Header title={"Add book to library"} />
+      <h1 className="font-bold text-xl font-mono">Add book to library</h1>
       {bookInfo ? (
         <BookBoarding bookInfo={bookInfo} />
       ) : (

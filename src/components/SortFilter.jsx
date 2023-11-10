@@ -1,0 +1,71 @@
+import { statusOptions, sortButtons } from "../utils/buttons";
+
+import { BiSolidChevronDown, BiSolidChevronRight } from "react-icons/bi";
+
+export default function SortFilter({
+  isSort,
+  isFilter,
+  sortTerm,
+  statusTerm,
+  toggleSortBar,
+  toggleFilterBar,
+  setSortTerm,
+  setStatusTerm,
+}) {
+  return (
+    <div className="sort_filter relative flex justify-between my-6">
+      <div
+        className="border py-1 px-4 cursor-pointer w-36  rounded flex items-center justify-between"
+        onClick={toggleSortBar}
+      >
+        <p className="text-sm">Sort</p>
+        {isSort ? <BiSolidChevronRight /> : <BiSolidChevronDown size={16} />}
+      </div>
+      {isSort && (
+        <ul className="absolute top-12 bg-white w-36 px-2 py-1 rounded shadow-sm border z-10 text-sm">
+          {sortButtons.map((button) => (
+            <li
+              className={
+                sortTerm === button
+                  ? "list-none my-2 cursor-pointer hover:text-blue-500 w-fit font-bold"
+                  : "list-none my-2 cursor-pointer hover:text-blue-500 w-fit"
+              }
+              onClick={() => {
+                setSortTerm(button);
+                toggleSortBar();
+              }}
+            >
+              {button}
+            </li>
+          ))}
+        </ul>
+      )}
+      <div
+        className="border py-1 px-4 cursor-pointer w-36  rounded flex items-center justify-between"
+        onClick={toggleFilterBar}
+      >
+        <p className="text-sm">Filter</p>
+        {isFilter ? <BiSolidChevronRight /> : <BiSolidChevronDown size={16} />}
+      </div>
+      {isFilter && (
+        <ul className="absolute top-12 right-0 bg-white w-36 px-2 py-1 rounded shadow-sm border z-10 text-sm">
+          {statusOptions.map((button) => (
+            <li
+              className={
+                statusTerm === button
+                  ? "list-none my-2 cursor-pointer hover:text-blue-500 w-fit font-bold"
+                  : "list-none my-2 cursor-pointer hover:text-blue-500 w-fit"
+              }
+              onClick={() => {
+                setStatusTerm(button);
+                toggleFilterBar();
+              }}
+            >
+              {button}
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+}
