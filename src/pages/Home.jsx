@@ -57,8 +57,7 @@ export default function Home() {
     setCurrentPage(1);
   }, [statusTerm, searchTerm]);
 
-  if (isLoading && !debouncedValue && statusTerm === 'All' && sortTerm === 'Newest') return <Loader />;
-
+  
   return (
     <div className="mx-auto text-slate-900 m-4 px-4 mb-4">
       <Header
@@ -74,23 +73,19 @@ export default function Home() {
 
       <Search setSearchTerm={setSearchTerm} searchTerm={searchTerm} />
 
-      {isLoading ||
-      data?.books?.length < 1 ||
-      (searchTerm && data?.books?.length < 1) ? null : (
-        <SortFilter
-          isSort={isSort}
-          isFilter={isFilter}
-          sortTerm={sortTerm}
-          setSortTerm={setSortTerm}
-          setStatusTerm={setStatusTerm}
-          statusTerm={statusTerm}
-          toggleFilterBar={toggleFilterBar}
-          toggleSortBar={toggleSortBar}
-        />
-      )}
+      <SortFilter
+        isSort={isSort}
+        isFilter={isFilter}
+        sortTerm={sortTerm}
+        setSortTerm={setSortTerm}
+        setStatusTerm={setStatusTerm}
+        statusTerm={statusTerm}
+        toggleFilterBar={toggleFilterBar}
+        toggleSortBar={toggleSortBar}
+      />
 
       {isLoading && debouncedValue ? (
-        <h1>Loading... </h1>
+        <Loader />
       ) : debouncedValue && data?.books?.length < 1 ? (
         <div className="h-60 flex items-center justify-center">
           <h2 className="text-slate-800 text-2xl">Search result not found</h2>
@@ -99,7 +94,7 @@ export default function Home() {
         <div className="h-60 flex items-center justify-center">
           <h2 className="text-slate-800 text-2xl">Your library is Empty</h2>
         </div>
-      ) : (
+      ) : isLoading ? <Loader /> :(
         <Books data={data} />
       )}
 
