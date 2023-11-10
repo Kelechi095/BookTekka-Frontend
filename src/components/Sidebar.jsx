@@ -4,8 +4,10 @@ import useGetContext from "../hooks/useGetContext";
 import { MdMenuBook } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
 import { IoMdSettings } from "react-icons/io";
+import { BiLogOut } from "react-icons/bi";
 import { BsPeopleFill, BsFillBarChartFill } from "react-icons/bs";
 import { NavLink } from "react-router-dom";
+import useLogoutUser from "../hooks/user/useLogOutUser";
 
 export default function Sidebar() {
   const { isSidebarOpen, handleSidebar, setIsSidebarOpen } = useGetContext();
@@ -13,6 +15,13 @@ export default function Sidebar() {
   const closeSidebar = () => {
     setIsSidebarOpen(false);
   };
+
+  const handleLogout = () => {
+    logoutMutation()
+    setIsSidebarOpen(false)
+  }
+
+  const { logoutMutation } = useLogoutUser();
 
   return (
     <div
@@ -102,6 +111,10 @@ export default function Sidebar() {
               <span className="font-semibold text-base">Settings</span>
             </li>
           </NavLink>
+          <li className="cursor-pointer flex gap-4 items-center mt-8 text-red-800" onClick={handleLogout}>
+            <BiLogOut size={28} />
+            <span className="font-semibold text-base">Logout</span>
+          </li>
         </ul>
       </nav>
     </div>
