@@ -9,6 +9,7 @@ import Settings from "./pages/Settings";
 import Layout from "./pages/Layout";
 import Recommendation from "./pages/Recommendation";
 import { GlobalProvider } from "./context/GlobalContext";
+import NotFound from "./pages/NotFound";
 
 function App() {
   return (
@@ -19,12 +20,13 @@ function App() {
             <Route index element={<Home />} />
             <Route path="/add-book" element={<AddBook />} />
             <Route path="/edit-book/:id" element={<EditBook />} />
-            <Route path="/:id" element={<Book />} />
+            <Route path="/book/:id" element={<Book />} />
             <Route path="/recommendations" element={<Recommendation />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/overview" element={<Overview />} />
             <Route path="/settings" element={<Settings />} />
           </Route>
+          <Route path="*" element={<NotFound />}/>
         </Routes>
       </BrowserRouter>
     </GlobalProvider>

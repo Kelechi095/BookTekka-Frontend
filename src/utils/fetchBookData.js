@@ -7,4 +7,3 @@ export const fetchBookData = async (search) => {
   return response.data
 };
 
-//AIzaSyCyS-37b5ei8tlT1cfnxsUC55DJts93yKM

@@ -1,6 +1,6 @@
-import axios from 'axios'
+import { customFetch } from './customFetch'
 
 export const setBook = async(id) => {
-    const response = await axios.get(`${import.meta.env.VITE_BASE_ENDPOINT}/api/books/${id}`)
+    const response = await customFetch.get(`/books/${id}`)
     return response.data
 }

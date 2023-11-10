@@ -11,7 +11,7 @@ export default function Books({ data }) {
   return (
     <div>
       {data?.books?.map((book) => (
-        <Link to={`/${book._id}`} key={book._id}>
+        <Link to={`/book/${book._id}`} key={book._id}>
           <div className=" border-t py-2 shadow-sm flex items-center justify-between">
             <div className="flex gap-2 items-center">
               <img
