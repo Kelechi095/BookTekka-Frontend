@@ -10,13 +10,23 @@ import Layout from "./pages/Layout";
 import Recommendation from "./pages/Recommendation";
 import { GlobalProvider } from "./context/GlobalContext";
 import NotFound from "./pages/NotFound";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import ProtectedRoute from "./pages/ProtectedRoutes";
 
 function App() {
   return (
     <GlobalProvider>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Layout />}>
+          <Route
+            path="/"
+            element={
+              <ProtectedRoute>
+                <Layout />
+              </ProtectedRoute>
+            }
+          >
             <Route index element={<Home />} />
             <Route path="/add-book" element={<AddBook />} />
             <Route path="/edit-book/:id" element={<EditBook />} />
@@ -26,7 +36,9 @@ function App() {
             <Route path="/overview" element={<Overview />} />
             <Route path="/settings" element={<Settings />} />
           </Route>
-          <Route path="*" element={<NotFound />}/>
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
     </GlobalProvider>
