@@ -28,7 +28,7 @@ export default function Dashboard() {
         <img src={dItems[currentIndex].image} alt="" className="w-40 mx-auto" />
         <h4
           className={
-            "text-md mt-4 font-mono max-w-md md:max-w-lg text-slate-800 lg:max-w-3xl lg:text-xl text-center mx-auto p-3"
+            "text-md mt-4 max-w-md md:max-w-lg text-slate-800 lg:max-w-3xl lg:text-xl text-center mx-auto p-3"
           }
         >
           {dItems[currentIndex].text}
