@@ -50,7 +50,7 @@ export default function Register() {
 
   return (
     <div className="p-3 max-w-xs mx-auto">
-      <h1 className="text-3xl font-bold my-8 ">Hello</h1>
+      <h1 className="text-3xl font-bold my-8 mt-16 ">Hello</h1>
       <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
         <div className="flex flex-col gap-2">
           <label className="text-xs text-gray-600">Username</label>
@@ -87,12 +87,10 @@ export default function Register() {
         </button>
         {/* <Oauth /> */}
       </form>
-      <div className="flex gap-2 mt-5 text-sm">
+      <div className="flex gap-2 mt-5 text-[15px]">
         <p>Have an account?</p>
-        <Link to="/login">
-          <span className="text-purple-700">
-            {isLoading ? "Submitting..." : "Login"}
-          </span>
+        <Link to="/login" className="text-purple-700">
+          Login
         </Link>
       </div>
       {error && <p className="text-red-700 mt-5">{customError}</p>}
