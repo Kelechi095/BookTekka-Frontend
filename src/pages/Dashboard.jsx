@@ -28,11 +28,15 @@ export default function Dashboard() {
       <div className="mt-8">
         <img src={dItems[currentIndex].image} alt="" className="w-40 mx-auto" />
         <ul className="my-4 max-w-md md:max-w-lg mx-auto">
-          <li className="flex items-center justify-center gap-4 text-sm font-mono  text-slate-800 lg:max-w-3xl lg:text-xl max-w-sm mx-auto">
+          <li className="flex items-center justify-center gap-4 text-sm font-mono  text-slate-800 lg:max-w-3xl lg:text-xl text-center">
             Create a personal library
           </li>
-          <li className="flex items-center justify-center gap-4 text-sm font-mono  text-slate-800 lg:max-w-3xl lg:text-xl max-w-sm mx-auto">Recommend your favorite books to other users</li>
-          <li className="flex items-center justify-center gap-4 text-sm font-mono  text-slate-800 lg:max-w-3xl lg:text-xl max-w-sm mx-auto">Monitor your reading progress</li>
+          <li className="flex items-center justify-center gap-4 text-sm font-mono  text-slate-800 lg:max-w-3xl lg:text-xl text-center">
+            Recommend your favorite books to other users
+          </li>
+          <li className="flex items-center justify-center gap-4 text-sm font-mono  text-slate-800 lg:max-w-3xl lg:text-xl text-center">
+            Monitor your reading progress
+          </li>
         </ul>
       </div>
 
