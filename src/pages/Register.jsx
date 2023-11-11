@@ -49,7 +49,7 @@ export default function Register() {
   }, [isLoggedIn]);
 
   return (
-    <div className="p-3 max-w-sm mx-auto">
+    <div className="p-3 max-w-xs mx-auto">
       <h1 className="text-3xl font-bold my-8 ">Hello</h1>
       <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
         <div className="flex flex-col gap-2">
