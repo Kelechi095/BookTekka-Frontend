@@ -52,32 +52,32 @@ export default function Register() {
 
 
   return (
-    <div className="p-3 max-w-lg mx-auto">
+    <div className="p-3 max-w-sm mx-auto">
       <h1 className="text-3xl text-center font-semibold my-7">Register</h1>
       <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
         <input
           type="text"
           placeholder="Username"
           id="username"
-          className="bg-slate-200 p-3 rounded-lg"
+          className="bg-slate-200 p-3 rounded"
           onChange={handleChange}
         />
         <input
           type="email"
           placeholder="Email"
           id="email"
-          className="bg-slate-200 p-3 rounded-lg"
+          className="bg-slate-200 p-3 rounded"
           onChange={handleChange}
         />
         <input
           type="password"
           placeholder="Password"
           id="password"
-          className="bg-slate-200 p-3 rounded-lg"
+          className="bg-slate-200 p-3 rounded"
           onChange={handleChange}
         />
         <button
-          className="bg-slate-700 text-white p-3 rounded-lg hover:opacity-95 disabled:opacity-80"
+          className="bg-slate-700 text-white p-3 rounded-full hover:opacity-95 disabled:opacity-80"
           disabled={isLoading}
         >
           {isLoading ? "Submitting..." : "REGISTER"}
@@ -94,7 +94,7 @@ export default function Register() {
       </div>
       {error && <p className="text-red-700 mt-5">{customError}</p>}
       <div className="">
-        <img src="https://res.cloudinary.com/djpyctzcq/image/upload/v1699638991/undraw_reading_re_29f8_h1cq6c.svg" alt="" />
+        <img src="https://res.cloudinary.com/djpyctzcq/image/upload/v1699638991/undraw_reading_re_29f8_h1cq6c.svg" alt="" className="w-48 mx-auto"/>
       </div>
     </div>
   );
