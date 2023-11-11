@@ -32,7 +32,7 @@ export default function Dashboard() {
             Create a personal library
           </li>
           <li className="flex items-center justify-center gap-4 text-sm font-mono  text-slate-800 lg:max-w-3xl lg:text-xl text-center">
-            Recommend your favorite books to other users
+            Recommend books to other users
           </li>
           <li className="flex items-center justify-center gap-4 text-sm font-mono  text-slate-800 lg:max-w-3xl lg:text-xl text-center">
             Monitor your reading progress
