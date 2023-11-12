@@ -6,15 +6,13 @@ import { Ring } from "@uiball/loaders";
 import { useMutation, useQueryClient } from "react-query";
 import { saveUserToLocalStorage } from "../utils/localstorage/saveUser";
 import useIsLoggedIn from "../hooks/user/useIsLoggedIn";
-import useSetError from "../hooks/user/useSetError";
+import {toast} from 'react-toastify'
 
 export default function Login() {
-  const [error, setError] = useState(null);
   const [formData, setFormData] = useState({});
   const navigate = useNavigate();
 
   const { isLoggedIn } = useIsLoggedIn();
-  const {customError} = useSetError(error)
 
   const handleChange = (e) => {
     setFormData({
@@ -36,11 +34,21 @@ export default function Login() {
       saveUserToLocalStorage(user, data.username);
       saveUserToLocalStorage(token, data.accessToken);
       navigate("/");
+      toast.success("Login Successful", {
+        position: toast.POSITION.TOP_CENTER,
+        className: "text-xs"
+      });
     },
     onError: (error) => {
       error?.response?.data?.error?.split(" ")[0] === "E11000"
-        ? setError("Email already used")
-        : setError(error.response.data.error);
+        ? toast.success("Email already in use", {
+          position: toast.POSITION.TOP_CENTER,
+          className: "text-xs"
+        })
+        : toast.error(error?.response?.data?.error, {
+          position: toast.POSITION.TOP_CENTER,
+          className: "text-xs "
+        });
     },
   });
 
@@ -67,7 +75,7 @@ export default function Login() {
           />
         </div>
         <div className="flex flex-col gap-2">
-          <label className="text-xs text-gray-600">Username</label>
+          <label className="text-xs text-gray-600">Password</label>
           <input
             type="password"
             id="password"
@@ -86,10 +94,9 @@ export default function Login() {
       <div className="flex gap-2 mt-5 text-[15px]">
         <p>Have an account?</p>
         <Link to="/register" className="text-purple-700">
-          Register
+          Login
         </Link>
       </div>
-      {error && <p className="text-red-500 mt-2 text-xs">{customError}</p>}
     </div>
   );
 }

@@ -4,10 +4,10 @@ import { customFetch } from "../utils/customFetch";
 //import Oauth from "../components/Oauth";
 import { useMutation } from "react-query";
 import useIsLoggedIn from "../hooks/user/useIsLoggedIn";
+import {toast} from "react-toastify"
 
 export default function Register() {
   const [formData, setFormData] = useState({});
-  const [error, setError] = useState(null);
 
   const { isLoggedIn } = useIsLoggedIn();
 
@@ -30,11 +30,21 @@ export default function Register() {
     {
       onSuccess: () => {
         navigate("/login");
+        toast.success("Registration Successful", {
+          position: toast.POSITION.TOP_CENTER,
+          className: "text-xs"
+        });
       },
       onError: (error) => {
         error?.response?.data?.error?.split(" ")[0] === "E11000"
-          ? setError("Email already used")
-          : setError(error.response.data.error);
+        ? toast.success("Email already in use", {
+          position: toast.POSITION.TOP_CENTER,
+          className: "text-xs"
+        })
+        : toast.error(error?.response?.data?.error, {
+          position: toast.POSITION.TOP_CENTER,
+          className: "text-xs "
+        })
       },
     }
   );
@@ -93,7 +103,6 @@ export default function Register() {
           Login
         </Link>
       </div>
-      {error && <p className="text-red-700 mt-5">{customError}</p>}
     </div>
   );
 }

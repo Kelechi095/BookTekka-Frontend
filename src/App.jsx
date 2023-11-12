@@ -15,11 +15,14 @@ import Register from "./pages/Register";
 import ProtectedRoute from "./pages/ProtectedRoutes";
 import Dashboard from "./pages/Dashboard";
 import EditProfile from "./pages/EditProfile";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
     <GlobalProvider>
       <BrowserRouter>
+        <ToastContainer />
         <Routes>
           <Route
             path="/"

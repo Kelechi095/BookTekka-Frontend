@@ -4,13 +4,14 @@ import { customFetch } from "../utils/customFetch";
 import { useQuery, useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { BiCamera } from "react-icons/bi";
+import {toast} from "react-toastify"
 
 export default function EditProfile() {
   const [newUsername, setNewUsername] = useState("");
 
   const [file, setFile] = useState("");
   const [previewFile, setPreviewFile] = useState("");
-  const [bio, setBio] = useState("")
+  const [bio, setBio] = useState("");
   const fileRef = useRef(null);
   const navigate = useNavigate();
 
@@ -50,11 +51,21 @@ export default function EditProfile() {
       onSuccess: (data) => {
         localStorage.setItem("user", data.username);
         navigate("/profile");
+        toast.success("Profile updated", {
+          position: toast.POSITION.TOP_CENTER,
+          className: "text-xs"
+        });
       },
       onError: (error) => {
         error?.response?.data?.error?.split(" ")[0] === "E11000"
-          ? setError("Email already used")
-          : setError(error.response.data.error);
+          ? toast.error("Already used", {
+              position: toast.POSITION.TOP_CENTER,
+              className: "text-xs",
+            })
+          : toast.error(error?.response?.data?.msg, {
+              position: toast.POSITION.TOP_CENTER,
+              className: "text-xs",
+            });
       },
     }
   );
@@ -70,20 +81,22 @@ export default function EditProfile() {
 
       <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
         <div className="flex flex-col gap-2 mt-8">
-          <div className="rounded-full w-32 h-32 bg-black self-center relative bg-opacity-30 cursor-pointer flex justify-center items-center" onClick={() => fileRef.current.click()}>
-            <BiCamera className="" size={60} color="white"/>
-          <input
-            type="file"
-            ref={fileRef}
-            hidden
-            accept="image/*"
-            onChange={handleImageChange}
-          />
+          <div
+            className="rounded-full w-32 h-32 bg-black self-center relative bg-opacity-30 cursor-pointer flex justify-center items-center"
+            onClick={() => fileRef.current.click()}
+          >
+            <BiCamera className="" size={60} color="white" />
+            <input
+              type="file"
+              ref={fileRef}
+              hidden
+              accept="image/*"
+              onChange={handleImageChange}
+            />
             <img
               src={previewFile ? previewFile : data?.profilePicture}
               className="h-32 w-32 self-center rounded-full object-cover cursor-pointer -z-10 absolute"
               alt=""
-              
             />
           </div>
           <label className="text-xs text-gray-600">Username</label>
