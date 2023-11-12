@@ -17,10 +17,9 @@ export default function Sidebar() {
   };
 
   const handleLogout = () => {
-    logoutMutation()
-    setIsSidebarOpen(false)
-  }
-
+    logoutMutation();
+    setIsSidebarOpen(false);
+  };
 
   const { logoutMutation } = useLogoutUser();
 
@@ -65,6 +64,18 @@ export default function Sidebar() {
             </li>
           </NavLink>
           <NavLink
+            to="/profile"
+            onClick={closeSidebar}
+            className={({ isActive }) =>
+              isActive ? "text-cyan-600" : "text-gray-700"
+            }
+          >
+            <li className="cursor-pointer flex gap-4 items-center mt-8">
+              <CgProfile size={28} />
+              <span className="font-semibold text-base">Profile</span>
+            </li>
+          </NavLink>
+          <NavLink
             to="/recommendations"
             onClick={closeSidebar}
             className={({ isActive }) =>
@@ -89,18 +100,6 @@ export default function Sidebar() {
             </li>
           </NavLink>
           <NavLink
-            to="/profile"
-            onClick={closeSidebar}
-            className={({ isActive }) =>
-              isActive ? "text-cyan-600" : "text-gray-700"
-            }
-          >
-            <li className="cursor-pointer flex gap-4 items-center mt-8">
-              <CgProfile size={28} />
-              <span className="font-semibold text-base">Profile</span>
-            </li>
-          </NavLink>
-          <NavLink
             to="/settings"
             onClick={closeSidebar}
             className={({ isActive }) =>
@@ -112,7 +111,10 @@ export default function Sidebar() {
               <span className="font-semibold text-base">Settings</span>
             </li>
           </NavLink>
-          <li className="cursor-pointer flex gap-4 items-center mt-8 text-red-800" onClick={handleLogout}>
+          <li
+            className="cursor-pointer flex gap-4 items-center mt-8 text-red-800"
+            onClick={handleLogout}
+          >
             <BiLogOut size={28} />
             <span className="font-semibold text-base">Logout</span>
           </li>

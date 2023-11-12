@@ -76,9 +76,9 @@ export default function Book() {
         <h2 className="text-lg font-bold mt-8">{book?.title}</h2>
         <h2 className="text-sm font-semibold">{book?.author}</h2>
         <h2 className="text-xs font-semibold">{book?.genre}</h2>
-        <h2 className="text-xs font-base mt-1">
+        {book?.description && <h2 className="text-xs font-base mt-1">
           <span className="font-bold">Description: </span> {book?.description}
-        </h2>
+        </h2>}
       </div>
 
       <div className="mt-6 flex gap-2">

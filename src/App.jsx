@@ -14,6 +14,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import ProtectedRoute from "./pages/ProtectedRoutes";
 import Dashboard from "./pages/Dashboard";
+import EditProfile from "./pages/EditProfile";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
             <Route path="/book/:id" element={<Book />} />
             <Route path="/recommendations" element={<Recommendation />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/edit-profile" element={<EditProfile />} />
             <Route path="/overview" element={<Overview />} />
             <Route path="/settings" element={<Settings />} />
           </Route>
