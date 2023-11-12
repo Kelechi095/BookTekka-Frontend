@@ -7,6 +7,7 @@ import { useMutation, useQueryClient } from "react-query";
 import { saveUserToLocalStorage } from "../utils/localstorage/saveUser";
 import useIsLoggedIn from "../hooks/user/useIsLoggedIn";
 import {toast} from 'react-toastify'
+import Oauth from "./Oauth";
 
 export default function Login() {
   const [formData, setFormData] = useState({});
@@ -89,7 +90,7 @@ export default function Login() {
         >
           {isLoading ? "Submitting..." : "Login"}
         </button>
-        {/* <Oauth /> */}
+        <Oauth />
       </form>
       <div className="flex gap-2 mt-5 text-[15px]">
         <p>Have an account?</p>
