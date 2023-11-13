@@ -95,7 +95,7 @@ export default function Login() {
       <div className="flex gap-2 mt-5 text-[15px]">
         <p>Have an account?</p>
         <Link to="/register" className="text-purple-700">
-          Login
+          Register
         </Link>
       </div>
     </div>

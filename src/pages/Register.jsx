@@ -81,7 +81,7 @@ export default function Register() {
           />
         </div>
         <div className="flex flex-col gap-2">
-          <label className="text-xs text-gray-600">Username</label>
+          <label className="text-xs text-gray-600">Password</label>
           <input
             type="password"
             id="password"
