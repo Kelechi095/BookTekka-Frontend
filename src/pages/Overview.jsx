@@ -8,11 +8,12 @@ import {
 import { useQuery } from "react-query";
 import axios from "axios";
 import Loader from "../components/Loader";
+import { customFetch } from "../utils/customFetch";
 
 export default function Overview() {
 
     const fetchStats = async() => {
-        const response = await axios.get(`${import.meta.env.VITE_BASE_ENDPOINT}/api/overview`)
+        const response = await customFetch.get(`/overview`)
         return response.data
     }
 

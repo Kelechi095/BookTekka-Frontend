@@ -6,6 +6,7 @@ import { filterGenres, statusOptions2 } from "../utils/buttons";
 import { statusOptions } from "../utils/buttons";
 import useGetBook from "../hooks/useGetBook";
 import Loader from "../components/Loader";
+import { customFetch } from "../utils/customFetch";
 
 
 export default function EditTodo() {
@@ -34,7 +35,7 @@ export default function EditTodo() {
   }, [id]);
 
   const editBook = async () => {
-    await axios.patch(`${import.meta.env.VITE_BASE_ENDPOINT}/api/books/${id}`, formData);
+    await customFetch.patch(`/books/${id}`, formData);
   };
 
   const { mutate: editMutate, isLoading: isSubmitting} = useMutation(editBook, {
