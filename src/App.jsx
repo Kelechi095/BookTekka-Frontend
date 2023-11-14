@@ -17,6 +17,7 @@ import Dashboard from "./pages/Dashboard";
 import EditProfile from "./pages/EditProfile";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import RecommendPage from "./pages/RecommendPage";
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
             <Route path="/add-book" element={<AddBook />} />
             <Route path="/edit-book/:id" element={<EditBook />} />
             <Route path="/book/:id" element={<Book />} />
+            <Route path="/recommendations/:id" element={<RecommendPage />} />
             <Route path="/recommendations" element={<Recommendation />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/edit-profile" element={<EditProfile />} />

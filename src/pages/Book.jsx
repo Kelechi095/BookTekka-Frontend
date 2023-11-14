@@ -8,6 +8,9 @@ import CircularProgressbarComponent from "../components/CircularProgressbarCompo
 import UpdateProgressModal from "../components/UpdateProgressModal";
 import DeleteBookModal from "../components/DeleteBookModal";
 import Header from "../components/Header";
+import { useMutation, useQueryClient, useQuery } from "react-query";
+import { customFetch } from "../utils/customFetch";
+import { toast } from "react-toastify";
 
 export default function Book() {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -15,8 +18,46 @@ export default function Book() {
   const { id } = useParams();
   const { book, isLoading } = useGetBook(id);
 
+  const queryClient = useQueryClient();
+
   const navigate = useNavigate();
 
+  const addBookRec = async () => {
+    const response = await customFetch.post(`/recommend`, {
+      title: book.title,
+      author: book.author,
+      description: book.description,
+      genre: book.genre,
+      thumbnail: book.thumbnail,
+      smallThumbnail: book.smallThumbnail,
+    });
+
+    return response.data;
+  };
+
+  const { isLoading: isRecommending, mutate: addBookRecMutation } = useMutation(
+    "recommendation",
+    () => addBookRec(),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries("recommendation");
+        toast.success("Book added to recommendation list", {
+          position: toast.POSITION.TOP_CENTER,
+          className: "text-xs",
+        }),
+          navigate("/recommendations");
+      },
+      onError: (error) => {
+        toast.error(
+          error?.response?.data?.msg || error?.response?.data?.error,
+          {
+            position: toast.POSITION.TOP_CENTER,
+            className: "text-xs",
+          }
+        );
+      },
+    }
+  );
 
   const handleShowDeleteModal = () => {
     setShowDeleteModal(true);
@@ -33,6 +74,9 @@ export default function Book() {
     setShowProgressModal(false);
   };
 
+  const handleSubmit = () => {
+    addBookRecMutation();
+  };
 
   if (isLoading) return <Loader />;
 
@@ -76,14 +120,19 @@ export default function Book() {
         <h2 className="text-lg font-bold mt-8">{book?.title}</h2>
         <h2 className="text-sm font-semibold">{book?.author}</h2>
         <h2 className="text-xs font-semibold">{book?.genre}</h2>
-        {book?.description && <h2 className="text-xs font-base mt-1">
-          <span className="font-bold">Description: </span> {book?.description}
-        </h2>}
+        {book?.description && (
+          <h2 className="text-xs font-base mt-1">
+            <span className="font-bold">Description: </span> {book?.description}
+          </h2>
+        )}
       </div>
 
       <div className="mt-6 flex gap-2">
-        <button className="text-sm bg-green-500 text-white rounded p-2 px-2 w-full hover:bg-green-600">
-          Recommend
+        <button
+          className="text-sm bg-green-500 text-white rounded p-2 px-2 w-full hover:bg-green-600"
+          onClick={handleSubmit}
+        >
+          {isRecommending ? "Submitting" : "Recommend"}
         </button>
       </div>
 
