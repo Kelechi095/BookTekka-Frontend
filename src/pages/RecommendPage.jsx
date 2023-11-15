@@ -100,10 +100,10 @@ export default function RecommendPage() {
       </form>
 
       <div>
-        <h2 className="mt-2 font-bold">Reviews</h2>
+        <h2 className="mt-4 font-bold">{book.reviews.length > 0 ? 'Reviews' : "No reviews"}</h2>
         {book.reviews.map((review) => (
-          <div key={review._id} className="text-sm my-2 w-96 p-1 max-w-xs">
-              <p className="font-semibold text-sm">By {review.reviewer}</p>
+          <div key={review._id} className="text-sm w-96 max-w-xs">
+              <p className="font-semibold text-sm">{review.reviewer}</p>
             <p className="text-xs">{review.review}</p>
           </div>
         ))}

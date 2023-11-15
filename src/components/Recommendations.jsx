@@ -7,6 +7,8 @@ export default function Recommendations({
   handleAddToLibrary,
   user,
 }) {
+
+  console.log(data)
   return (
     <div>
       {data?.recommendations?.map((book) => (

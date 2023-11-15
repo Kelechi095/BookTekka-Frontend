@@ -4,6 +4,7 @@ import {
     BiSolidBookReader,
     BiSolidBookAlt,
   } from "react-icons/bi";
+  import { IoEyeSharp } from "react-icons/io5";
   import { FaBook } from "react-icons/fa";
 import { useQuery } from "react-query";
 import axios from "axios";
@@ -27,24 +28,31 @@ export default function Overview() {
 
       <div className="border border-b-[6px] shadow-sm border-b-red-500 rounded-b-lg h-48 mt-8 p-8 flex flex-col justify-between">
         <div className="flex justify-between items-center">
-            <p className="font-bold text-5xl text-red-500">{data?.totalUnread}</p>
-            <BiSolidBookAlt size={48} className="text-red-500"/>
+            <p className="font-bold text-4xl text-red-500">{data?.totalUnread}</p>
+            <BiSolidBookAlt size={40} className="text-red-500"/>
         </div>
-        <p className="font-semibold text-gray-500 text-xl">Unread</p>
+        <p className="font-semibold text-gray-500 text-lg">Unread</p>
       </div>
       <div className="border border-b-[6px] shadow-sm border-b-blue-500 rounded-b-lg h-48 mt-8 p-8 flex flex-col justify-between">
         <div className="flex justify-between items-center">
-            <p className="font-bold text-5xl text-blue-500">{data?.totalReading}</p>
-            <BiSolidBookReader size={48} className="text-blue-500"/>
+            <p className="font-bold text-4xl text-blue-500">{data?.totalReading}</p>
+            <BiSolidBookReader size={40} className="text-blue-500"/>
         </div>
-        <p className="font-semibold text-gray-500 text-xl">Reading</p>
+        <p className="font-semibold text-gray-500 text-lg">Reading</p>
       </div>
       <div className="border border-b-[6px] shadow-sm border-b-green-500 rounded-b-lg h-48 mt-8 p-8 flex flex-col justify-between">
         <div className="flex justify-between items-center">
-            <p className="font-bold text-5xl text-green-500">{data?.totalFinished}</p>
-            <FaBook size={48} className="text-green-500"/>
+            <p className="font-bold text-4xl text-green-500">{data?.totalFinished}</p>
+            <FaBook size={40} className="text-green-500"/>
         </div>
-        <p className="font-semibold text-gray-500 text-xl">Finished</p>
+        <p className="font-semibold text-gray-500 text-lg">Finished</p>
+      </div>
+      <div className="border border-b-[6px] shadow-sm border-b-purple-500 rounded-b-lg h-48 mt-8 p-8 flex flex-col justify-between">
+        <div className="flex justify-between items-center">
+            <p className="font-bold text-4xl text-purple-500">{data?.totalRecommendations}</p>
+            <IoEyeSharp size={40} className="text-purple-500"/>
+        </div>
+        <p className="font-semibold text-gray-500 text-lg">Recommendations</p>
       </div>
     </div>
   );
