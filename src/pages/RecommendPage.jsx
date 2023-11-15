@@ -10,7 +10,7 @@ import useGetSingleRecommendation from "../hooks/recommendation/useGetSingleReco
 export default function RecommendPage() {
   const { id } = useParams();
   const { book, isLoading } = useGetSingleRecommendation(id);
-  const [userReview, setUserReview] = useState("")
+  const [userReview, setUserReview] = useState("");
 
   const queryClient = useQueryClient();
 
@@ -23,22 +23,26 @@ export default function RecommendPage() {
 
   const { data: user } = useQuery("user", fetchUser);
 
-
   const addReview = async () => {
-    await customFetch.post(`/recommend/review`, {review: userReview, reviewer: user.username, bookId: id});
+    await customFetch.post(`/recommend/review`, {
+      review: userReview,
+      reviewer: user.username,
+      bookId: id,
+    });
   };
 
   const { isLoading: isSubmitting, mutate: addReviewMutation } = useMutation(
-    "recommendation",
+    "singleRecommendation",
     () => addReview(),
     {
       onSuccess: () => {
-        queryClient.invalidateQueries("recommendations");
-        setUserReview('')
+        queryClient.invalidateQueries("singleRecommendation");
+        setUserReview("");
+
         toast.success("Review added", {
           position: toast.POSITION.TOP_CENTER,
           className: "text-xs",
-        })
+        });
       },
       onError: (error) => {
         toast.error(
@@ -53,7 +57,7 @@ export default function RecommendPage() {
   );
 
   const handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     addReviewMutation();
   };
 
@@ -81,19 +85,34 @@ export default function RecommendPage() {
       </div>
 
       <form onSubmit={handleSubmit}>
-        <textarea cols="30" rows="5" className="border w-full outline-none p-2 text-sm" value={userReview} onChange={(e) => setUserReview(e.target.value)}></textarea>
-        <button className="text-sm border p-1 bg-cyan-600 text-white">{isSubmitting ? 'Submitting' : 'Add review'}</button>
+        <textarea
+          cols="30"
+          rows="5"
+          className="border w-full outline-none p-2 text-sm"
+          value={userReview}
+          onChange={(e) => setUserReview(e.target.value)}
+        ></textarea>
+        <button className="text-sm border p-1 bg-cyan-600 text-white">
+          {isSubmitting ? "Submitting" : "Add review"}
+        </button>
       </form>
 
       <div>
-        {book.reviews.map(review => (
-            <div key={review._id} className="text-sm my-2">
-                <p>{review.review}</p>
-                <p className="font-semi-bold">by {review.reviewer}</p>
+        <h2 className="mt-2 font-bold">Reviews</h2>
+        {book.reviews.map((review) => (
+          <div key={review._id} className="text-sm my-2 w-96 p-1 max-w-xs shadow-sm border-2">
+            <div className="flex items-center gap-3 mb-4">
+              <img
+                src={review.reviewerImage}
+                className="w-10 h-10 object-cover rounded-full"
+              />
+              <p className="font-semibold text-sm">{review.reviewer}</p>
             </div>
+
+            <p className="text-xs">{review.review}</p>
+          </div>
         ))}
       </div>
-      
     </div>
   );
 }

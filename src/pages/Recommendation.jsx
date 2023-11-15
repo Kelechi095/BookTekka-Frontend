@@ -1,23 +1,52 @@
-import React from "react";
 import Header from "../components/Header";
 import useGetRecommendation from "../hooks/recommendation/useGetRecommendation";
-import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+
 import { customFetch } from "../utils/customFetch";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { toast } from "react-toastify";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import Loader from "../components/Loader";
+import useDebounce from "../hooks/useDebounce";
+import Pagination from "../components/Pagination";
+import Search from "../components/Search";
+import SortGenre from "../components/SortGenre";
+import Recommendations from "../components/Recommendations";
 
 export default function Recommendation() {
-  const { isLoading, data } = useGetRecommendation();
-
+  
+  const [isFilter, setIsFilter] = useState(false);
+  const [isSort, setIsSort] = useState(false);
+  
+  const [sortTerm, setSortTerm] = useState("Newest");
+  const [genreTerm, setGenreTerm] = useState("All");
+  const [searchTerm, setSearchTerm] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  
   const navigate = useNavigate();
-
+  
+  const debouncedValue = useDebounce(searchTerm, 500);
+  
+  const searchQuery = `sort=${sortTerm}&genre=${genreTerm}&search=${debouncedValue}&limit=10&page=${currentPage}`;
+  
   const queryClient = useQueryClient();
+
+  console.log(searchQuery)
 
   const fetchUser = async () => {
     const response = await customFetch.get("/auth/user");
     return response.data;
   };
+
+  const fetchRecs = async() => {
+    const response = await customFetch.get(`/recommend?${searchQuery}`)
+    return response.data
+}
+
+  const { data, isLoading } = useQuery(["singleRecommendation", searchQuery], () =>
+    fetchRecs(searchQuery)
+  );
+
 
   const likeBook = async (id) => {
     await customFetch.patch(`/recommend/likes/${id}`);
@@ -27,7 +56,7 @@ export default function Recommendation() {
 
   const { mutate: likeMutate } = useMutation((id) => likeBook(id), {
     onSuccess: () => {
-      queryClient.invalidateQueries("recommendation");
+      queryClient.invalidateQueries("singleRecommendation");
     },
     onError: (error) => {
       toast.error(error?.response?.data?.error, {
@@ -74,6 +103,29 @@ export default function Recommendation() {
     }
   );
 
+  const toggleFilterBar = () => {
+    setIsFilter(!isFilter);
+  };
+  const toggleSortBar = () => {
+    setIsSort(!isSort);
+  };
+
+  const handlePageNext = () => {
+    if (currentPage < data?.numOfPages) {
+      setCurrentPage((prev) => prev + 1);
+    }
+  };
+
+  const handlePagePrev = () => {
+    if (currentPage > 1) {
+      setCurrentPage((prev) => prev - 1);
+    }
+  };
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [genreTerm, searchTerm]);
+
   const handleLike = (id) => {
     likeMutate(id);
   };
@@ -82,25 +134,66 @@ export default function Recommendation() {
     addBookLibMutation(book);
   };
 
-  console.log(data?.recommendations);
+
   return (
     <div className="mx-auto text-slate-900 m-4 mt-6 px-4 mb-8">
       <Header title={"Book Recommendations"} />
+      <Search setSearchTerm={setSearchTerm} searchTerm={searchTerm} />
 
-      {data?.recommendations?.map((book) => (
-        <div className="border max-w-xs mt-4">
-          <Link key={book._id} to={`/recommendations/${book._id}`}>
-            <div className="mt-4 border-b border-b-gray-100 text-sm rounded max-w-xs p-2 mb-2">
-              <h1 className="font-semibold">{book.title}</h1>
-              <button
-                className="border text-xs p-1 bg-cyan-700 rounded mt-1 text-white"
-                onClick={() => handleAddToLibrary(book)}
-              >
-                Add to library
-              </button>
-            </div>
-          </Link>
-          <div className="flex items-center gap-2 text-sm px-2">
+      <SortGenre
+        isSort={isSort}
+        isFilter={isFilter}
+        sortTerm={sortTerm}
+        setSortTerm={setSortTerm}
+        setGenreTerm={setGenreTerm}
+        genreTerm={genreTerm}
+        toggleFilterBar={toggleFilterBar}
+        toggleSortBar={toggleSortBar}
+      />
+
+      {isLoading && debouncedValue ? (
+        <Loader />
+      ) : debouncedValue && data.recommendations?.length < 1 ? (
+        <div className="h-60 flex items-center justify-center">
+          <h2 className="text-slate-800 text-2xl">Search result not found</h2>
+        </div>
+      ) : !debouncedValue && data?.recommendations?.length < 1 ? (
+        <div className="h-60 flex items-center justify-center">
+          <h2 className="text-slate-800 text-2xl">No recommendations</h2>
+        </div>
+      ) : isLoading ? (
+        <Loader />
+      ) : (
+        <Recommendations 
+          data={data}
+          handleLike={handleLike}
+          handleAddToLibrary={handleAddToLibrary}
+          user={user}
+        />
+      )}
+
+      {isLoading ||
+      data?.recommendations?.length < 1 ||
+      (debouncedValue && data?.books?.length < 1) ? null : (
+        <Pagination
+          data={data}
+          currentPage={currentPage}
+          handlePageNext={handlePageNext}
+          handlePagePrev={handlePagePrev}
+        />
+      )}
+    </div>
+  );
+}
+
+/*   const { data, isLoading } = useQuery([searchQuery], () =>
+    fetchBooks(searchQuery)
+  );
+
+  
+*/
+
+/* <div className="flex items-center gap-2 text-sm px-2">
             {book?.likers.includes(user?.username) ? (
               <AiFillHeart
                 size={18}
@@ -118,16 +211,4 @@ export default function Recommendation() {
             <p>
               {book?.likes} {book?.likes !== 1 ? "Likes" : "Like"}
             </p>
-          </div>
-        </div>
-      ))}
-    </div>
-  );
-}
-
-/* 
-    
-    </div>
-
-
-))} */
+          </div> */

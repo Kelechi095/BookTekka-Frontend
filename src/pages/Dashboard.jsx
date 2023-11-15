@@ -43,10 +43,10 @@ export default function Dashboard() {
       </div>
 
       <div className="mx-auto max-w-sm flex flex-col justify-center gap-4 mt-2">
-        <button className=" border border-slate-800 text-md text-slate-800  shadow-sm rounded-full py-[3px] px-2 w-full" onClick={() => navigate('/login')}>
+        <button className=" border border-slate-800 text-md text-slate-800  shadow-sm rounded-full py-2 px-2 w-full" onClick={() => navigate('/login')}>
           Login
         </button>
-        <button className=" border border-slate-800 text-md text-slate-800  shadow-sm rounded-full py-[3px] px-2 w-full" onClick={() => navigate("/register")}>
+        <button className=" border border-slate-800 text-md text-slate-800  shadow-sm rounded-full py-2 px-2 w-full" onClick={() => navigate("/register")}>
           Register
         </button>
       </div>
