@@ -48,7 +48,7 @@ export default function Recommendations({
           </Link>
           <button className="text-xs border py-1 px-4 mt-2 rounded-full bg-slate-700 text-white" onClick={() => handleAddToLibrary(book)}>Add to library</button>
           <div className="flex items-center gap-2 text-sm mt-2">
-            {book?.likers.includes(user?.username) ? (
+            {book?.likers.includes(user?._id) ? (
               <AiFillHeart
                 size={18}
                 className="cursor-pointer text-red-500"
