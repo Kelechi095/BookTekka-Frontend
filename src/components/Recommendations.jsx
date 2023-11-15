@@ -10,7 +10,7 @@ export default function Recommendations({
   return (
     <div>
       {data?.recommendations?.map((book) => (
-        <div className="border rounded shadow-sm mb-4 py-4 px-2">
+        <div className="border rounded shadow-sm mb-4 py-4 px-2" key={book._id}>
           <div className="flex items-center gap-2 mb-2">
             <img
               src={book.posterPhoto}

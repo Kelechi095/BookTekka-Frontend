@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useQueryClient, useMutation } from "react-query";
-import axios from "axios";
+import { customFetch } from "../utils/customFetch";
+import { FaTimes } from "react-icons/fa";
 
 export default function UpdateProgressModal({
   handleCloseProgressModal,
@@ -12,8 +13,8 @@ export default function UpdateProgressModal({
   });
 
   const updateProgress = async () => {
-    const response = await axios.patch(
-      `${import.meta.env.VITE_BASE_ENDPOINT}/api/books/progress/${bookID}`, pageData
+    const response = await customFetch.patch(
+      `books/progress/${bookID}`, pageData
     );
     return response.data;
   };
@@ -45,11 +46,8 @@ export default function UpdateProgressModal({
   return (
     <div className=" inset-0 fixed  bg-black bg-opacity-30 min-h-screen z-10 flex items-center justify-center">
       <div className="h-50 w-96 border bg-white mb-24 p-3 rounded shadow-sm text-sm">
-        <button
-          className="border px-4 text-red-500 border-red-500 mb-2"
-          onClick={handleCloseProgressModal}
-        >
-          X
+      <button className="px-1 mb-2 text-red-500" onClick={handleCloseProgressModal}>
+          <FaTimes size={22}/>
         </button>
         <form className="grid" onSubmit={handleSubmit}>
           <label>Current Page</label>
@@ -69,7 +67,7 @@ export default function UpdateProgressModal({
             name="totalPages"
             onChange={handleChange}
           />
-          <button className="w-fit p-1 border mt-2 bg-blue-500 text-white rounded">
+          <button className="w-fit py-[3px] px-2 border mt-2 bg-blue-500 text-white rounded">
             {isLoading ? "Submitting" : "Submit"}
           </button>
         </form>

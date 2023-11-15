@@ -61,6 +61,8 @@ export default function RecommendPage() {
     addReviewMutation();
   };
 
+  console.log(book)
+
   if (isLoading) return <Loader />;
 
   return (
@@ -100,15 +102,8 @@ export default function RecommendPage() {
       <div>
         <h2 className="mt-2 font-bold">Reviews</h2>
         {book.reviews.map((review) => (
-          <div key={review._id} className="text-sm my-2 w-96 p-1 max-w-xs shadow-sm border-2">
-            <div className="flex items-center gap-3 mb-4">
-              <img
-                src={review.reviewerImage}
-                className="w-10 h-10 object-cover rounded-full"
-              />
-              <p className="font-semibold text-sm">{review.reviewer}</p>
-            </div>
-
+          <div key={review._id} className="text-sm my-2 w-96 p-1 max-w-xs">
+              <p className="font-semibold text-sm">By {review.reviewer}</p>
             <p className="text-xs">{review.review}</p>
           </div>
         ))}

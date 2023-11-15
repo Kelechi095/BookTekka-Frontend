@@ -20,7 +20,7 @@ export default function DeleteBookModal({ handleCloseDeleteModal, bookID }) {
         className="h-40 w-96 max-w-xs border bg-white mb-24 p-2 rounded shadow-sm text-sm"
         onClick={(e) => e.stopPropagation()}
       >
-        <button className="px-1 mb-2 text-red-400" onClick={handleCloseDeleteModal}>
+        <button className="px-1 mb-2 text-red-500" onClick={handleCloseDeleteModal}>
           <FaTimes size={22}/>
         </button>
         <p className="text-center text mt-2">
@@ -28,13 +28,13 @@ export default function DeleteBookModal({ handleCloseDeleteModal, bookID }) {
         </p>
         <div className="flex justify-around mt-3">
           <button
-            className="border rounded border-green-400 bg-green-400 text-white py-[3px] px-4"
+            className="border rounded bg-green-400 text-white py-[3px] px-6"
             onClick={handleDelete}
           >
             Yes
           </button>
           <button
-            className="border rounded bg-red-400 border-red-400 text-white py-[3px] p-1 px-4"
+            className="border rounded bg-red-500 text-white py-[3px] p-1 px-6"
             onClick={handleCloseDeleteModal}
           >
             No

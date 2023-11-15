@@ -4,6 +4,7 @@ import Loader from "../components/Loader";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { BiSolidEditAlt } from "react-icons/bi";
 import { BsFillTrashFill } from "react-icons/bs";
+import { IoEyeSharp } from "react-icons/io5";
 import CircularProgressbarComponent from "../components/CircularProgressbarComponent";
 import UpdateProgressModal from "../components/UpdateProgressModal";
 import DeleteBookModal from "../components/DeleteBookModal";
@@ -81,7 +82,7 @@ export default function Book() {
   if (isLoading) return <Loader />;
 
   return (
-    <div className="mx-auto text-slate-900 p-4 bg-violet-50">
+    <div className="mx-auto text-slate-900 p-4">
       <h1 className="font-bold text-xl font-mono">Book details</h1>
       {showDeleteModal && (
         <DeleteBookModal
@@ -97,20 +98,8 @@ export default function Book() {
         />
       )}
 
-      <div className="flex justify-between items-center">
-        <Link to={`/edit-book/${id}`}>
-          <BiSolidEditAlt
-            size={25}
-            className="text-blue-500 m-2 cursor-pointer"
-          />
-        </Link>
-        <BsFillTrashFill
-          size={25}
-          className="text-red-500 m-2 cursor-pointer"
-          onClick={handleShowDeleteModal}
-        />
-      </div>
-      <div className="p-4 border-2 bg-white rounded mt-4">
+      <div className="flex justify-between items-center"></div>
+      <div className="p-4 bg-white mt-4">
         <img
           src={book?.thumbnail}
           alt={book?.title}
@@ -127,29 +116,47 @@ export default function Book() {
         )}
       </div>
 
-      <div className="mt-6 flex gap-2">
+      <div className="mx-2 mb-4 flex gap-2">
+        <Link to={`/edit-book/${id}`}>
+          <button
+            size={20}
+            className="text-white flex items-center gap-1 bg-blue-500 rounded m-2 text-xs border py-[6px] px-2 cursor-pointer"
+          >
+            <BiSolidEditAlt />
+            Edit
+          </button>
+        </Link>
         <button
-          className="text-sm bg-green-500 text-white rounded p-2 px-2 w-full hover:bg-green-600"
+          size={18}
+          className="text-white flex gap-1 items-center bg-red-500 rounded m-2 text-xs px-2 py-[6px] border cursor-pointer"
+          onClick={handleShowDeleteModal}
+        >
+          <BsFillTrashFill />
+          Delete
+        </button>
+        <button
+          size={18}
+          className="text-white flex gap-1 items-center bg-green-500 m-2 rounded text-xs px-2 py-[6px] border cursor-pointer"
           onClick={handleSubmit}
         >
+          <IoEyeSharp />
           {isRecommending ? "Submitting" : "Recommend"}
         </button>
       </div>
 
+
       {book?.status === "Reading" && (
-        <div className="p-4 border-2 bg-white rounded mt-4">
+        <div className="p-4 mt-1 mx-1 shadow-sm">
           {book.progress > 0 && (
             <CircularProgressbarComponent progress={book.progress} />
           )}
 
-          <div className="mt-6 flex justify-around">
-            <button
-              className="text-sm border border-slate-800 text-base-800 rounded p-1 px-2"
-              onClick={handleShowProgressModal}
-            >
-              {book?.progress > 0 ? "Update progress" : "Start progress"}
-            </button>
-          </div>
+          <button
+            className="text-xs mt-4 text-cyan-600 rounded-full border border-cyan-600 px-3 py-[6px]"
+            onClick={handleShowProgressModal}
+          >
+            {book?.progress > 0 ? "Update progress" : "Start progress"}
+          </button>
         </div>
       )}
     </div>

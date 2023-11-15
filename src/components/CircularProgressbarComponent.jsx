@@ -3,7 +3,7 @@ import "react-circular-progressbar/dist/styles.css";
 
 export default function CircularProgressbarComponent({progress}) {
   return (
-    <div className="max-w-sm mx-auto w-36">
+    <div className="max-w-sm  w-24">
             <CircularProgressbar
               value={progress}
               text={`${progress}%`}
@@ -17,14 +17,14 @@ export default function CircularProgressbarComponent({progress}) {
                 // Colors
                 pathColor: `${
                   progress <= 20
-                    ? "red"
+                    ? "rgb(239 68 68)"
                     : progress > 20 && progress <= 40
-                    ? "violet"
+                    ? "rgb(139 92 246)"
                     : progress > 40 && progress <= 60
-                    ? "blue"
+                    ? "rgb(59 130 246)"
                     : progress > 60 && progress <= 80
-                    ? "yellow"
-                    : "green"
+                    ? "rgb(234 179 8)"
+                    : "rgb(34 197 94)"
                 }`,
                 textColor: "rgb(14 116 144)",
                 trailColor: "#d6d6d6",
