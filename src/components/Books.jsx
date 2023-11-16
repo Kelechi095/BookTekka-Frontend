@@ -12,16 +12,16 @@ export default function Books({ data }) {
     <div className="grid lg:grid-cols-2 gap-2 mt-4">
       {data?.books?.map((book) => (
         <Link to={`/book/${book._id}`} key={book._id}>
-          <div className=" border p-2 shadow-sm flex items-center gap-2 justify-between bg-white h-48">
+          <div className=" border p-2 shadow-sm flex items-center gap-2 justify-between bg-white h-40 lg:h-48">
             <div className="flex gap-2 items-center">
               <img
                 src={book.smallThumbnail}
                 alt={book.title}
-                className="w-24"
+                className="w-20 lg:w-24"
               />
               <div>
-                <p className="text-sm font-bold text-slate-800">{book.title}</p>
-                <p className="text-xs font-medium text-slate-900">
+                <p className="text-sm lg:text-[15px] font-bold text-slate-800">{book.title}</p>
+                <p className="text-xs lg:text-sm font-medium text-slate-900">
                   {book.author}
                 </p>
                 <p className="text-xs font-medium text-slate-900">

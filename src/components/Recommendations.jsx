@@ -7,66 +7,76 @@ export default function Recommendations({
   handleAddToLibrary,
   user,
 }) {
-
-  console.log(data)
+  console.log(data);
   return (
     <div className="grid lg:grid-cols-2 gap-2 mt-4">
       {data?.recommendations?.map((book) => (
-        <div className="border rounded shadow-sm my-4 bg-white py-4 px-2" key={book._id}>
-          <div className="flex items-center gap-2 mb-2">
+        <div
+          className="border rounded shadow-sm my-4 bg-white py-4 px-2"
+          key={book._id}
+        >
+          <div className="flex items-center gap-2 border-b pb-2 mb-2">
             <img
               src={book.posterPhoto}
               alt=""
-              className="w-8 h-8 object-cover rounded-full"
+              className="w-12 h-12 object-cover rounded-full"
             />
-            <p className="font-bold text-xs">{book.poster}</p>
+            <p className="font-semibold text-sm">{book.poster}</p>
           </div>
           <Link to={`/recommendations/${book._id}`} key={book._id}>
-            <div className="  py-2 flex items-center justify-between">
+            <div className="py-2 flex items-center justify-between">
               <div className="flex gap-2 items-center">
                 <img
                   src={book.smallThumbnail}
                   alt={book.title}
-                  className="w-16"
+                  className="w-20 lg:w-28 border shadow-sm"
                 />
                 <div>
-                  <p className="text-sm font-bold text-slate-800">
+                  <p className="text-base font-bold text-slate-800">
                     {book.title}
                   </p>
-                  <p className="text-xs font-medium text-slate-900">
+                  <p className="text-sm font-medium text-slate-900">
                     {book.author}
                   </p>
-                  <p className="text-xs font-medium text-slate-900">
+                  <p className="text-sm font-medium text-slate-900">
                     {book.genre}
-                  </p>
-
-                  <p className="text-xs font-medium text-slate-900">
-                    {book.reviews.length}{" "}
-                    {book.reviews.length === 1 ? "review" : " reviews"}
                   </p>
                 </div>
               </div>
             </div>
           </Link>
-          <button className="text-xs border py-1 px-4 mt-2 rounded-full bg-slate-700 text-white" onClick={() => handleAddToLibrary(book)}>Add to library</button>
-          <div className="flex items-center gap-2 text-sm mt-2">
-            {book?.likers.includes(user?._id) ? (
-              <AiFillHeart
-                size={18}
-                className="cursor-pointer text-red-500"
-                onClick={() => handleLike(book._id)}
-              />
-            ) : (
-              <AiOutlineHeart
-                size={18}
-                className="cursor-pointer"
-                onClick={() => handleLike(book._id)}
-              />
-            )}
 
-            <p>
-              {book?.likes} {book?.likes !== 1 ? "Likes" : "Like"}
+          {/* Buttons */}
+          <div className="flex justify-between items-center border-t pt-4">
+            <p className="text-sm mx-1 font-medium text-slate-900">
+              {book.reviews.length}{" "}
+              {book.reviews.length === 1 ? "review" : " reviews"}
             </p>
+            <div className="flex items-center gap-2 text-sm">
+              {book?.likers.includes(user?._id) ? (
+                <AiFillHeart
+                  size={18}
+                  className="cursor-pointer text-red-500"
+                  onClick={() => handleLike(book._id)}
+                />
+              ) : (
+                <AiOutlineHeart
+                  size={18}
+                  className="cursor-pointer"
+                  onClick={() => handleLike(book._id)}
+                />
+              )}
+
+              <p>
+                {book?.likes} {book?.likes !== 1 ? "Likes" : "Like"}
+              </p>
+            </div>
+            <button
+              className="text-xs border py-2 px-3 rounded-full text-slate-600"
+              onClick={() => handleAddToLibrary(book)}
+            >
+              Add to library
+            </button>
           </div>
         </div>
       ))}

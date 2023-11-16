@@ -12,6 +12,7 @@ import Header from "../components/Header";
 import { useMutation, useQueryClient, useQuery } from "react-query";
 import { customFetch } from "../utils/customFetch";
 import { toast } from "react-toastify";
+import Nav from "../components/Nav";
 
 export default function Book() {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -82,83 +83,97 @@ export default function Book() {
   if (isLoading) return <Loader />;
 
   return (
-    <div className="mx-auto text-slate-900">
-      <h1 className="font-bold text-xl font-mono">Book details</h1>
-      {showDeleteModal && (
-        <DeleteBookModal
-          handleCloseDeleteModal={handleCloseDeleteModal}
-          bookID={id}
-        />
-      )}
+    <div className="mx-auto text-slate-900 grid lg:grid-cols-10 gap-2 relative">
+      <div className="hidden lg:grid justify-center px-4 lg:fixed lg:w-[20%] lg:left-0  bg-white border-r h-screen">
+        <Nav />
+      </div>
+      <div className=" px-4 lg:absolute lg:right-0 lg:w-[80%] my-2 gap-4">
+        {showDeleteModal && (
+          <DeleteBookModal
+            handleCloseDeleteModal={handleCloseDeleteModal}
+            bookID={id}
+          />
+        )}
 
-      {showProgressModal && (
-        <UpdateProgressModal
-          handleCloseProgressModal={handleCloseProgressModal}
-          bookID={id}
-        />
-      )}
-
-      <div className="flex justify-between items-center"></div>
-      <div className="p-4 bg-white mt-4">
-        <img
-          src={book?.thumbnail}
-          alt={book?.title}
-          className="w-40 mx-auto rounded
+        {showProgressModal && (
+          <UpdateProgressModal
+            handleCloseProgressModal={handleCloseProgressModal}
+            bookID={id}
+          />
+        )}
+        <div className="mt-6">
+          <div className="lg:grid-cols-10 grid border-b mb-1 p-4">
+            <div className="col-span-3">
+              <img
+                src={book?.thumbnail}
+                alt={book?.title}
+                className="w-40 lg:w-60
             mb-4"
-        />
-        <h2 className="text-lg font-bold mt-8">{book?.title}</h2>
-        <h2 className="text-sm font-semibold">{book?.author}</h2>
-        <h2 className="text-xs font-semibold">{book?.genre}</h2>
-        {book?.description && (
-          <h2 className="text-xs font-base mt-1">
-            <span className="font-bold">Description: </span> {book?.description}
-          </h2>
+              />
+            </div>
+            <div className="col-span-7">
+              <h2 className="text-lg lg:text-2xl font-bold mt-8">
+                {book?.title}
+              </h2>
+              <h2 className="text-sm lg:text-base font-semibold">
+                <span className="font-bold">Author: </span>
+                {book?.author}
+              </h2>
+              <h2 className="text-sm lg:text-base font-semibold">
+                <span className="font-bold">Genre: </span>
+                {book?.genre}
+              </h2>
+              {book?.description && (
+                <h2 className="text-sm font-base">
+                  <span className="font-bold">Description: </span>{" "}
+                  {book?.description}
+                </h2>
+              )}
+              <div className="my-4 flex gap-2">
+                <Link to={`/edit-book/${id}`}>
+                  <button
+                    size={20}
+                    className="text-white flex items-center gap-1 bg-blue-500 rounded text-xs border py-[6px] px-2 cursor-pointer"
+                  >
+                    <BiSolidEditAlt />
+                    Edit
+                  </button>
+                </Link>
+                <button
+                  size={18}
+                  className="text-white flex gap-1 items-center bg-red-500 rounded text-xs px-2 py-[6px] border cursor-pointer"
+                  onClick={handleShowDeleteModal}
+                >
+                  <BsFillTrashFill />
+                  Delete
+                </button>
+                <button
+                  size={18}
+                  className="text-white flex gap-1 items-center bg-green-500 rounded text-xs px-2 py-[6px] border cursor-pointer"
+                  onClick={handleSubmit}
+                >
+                  <IoEyeSharp />
+                  {isRecommending ? "Submitting" : "Recommend"}
+                </button>
+                {book?.status === 'Reading' && <button
+                  className="flex border-cyan-800 gap-1 items-center bg-white text-cyan-800 rounded text-xs px-2 py-[6px] border cursor-pointer"
+                  onClick={handleShowProgressModal}
+                >
+                  {book?.progress > 0 ? "Update progress" : "Monitor progress"}
+                </button>}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {book?.status === "Reading" && (
+          <div className="p-4 mt-1 lg:w-72 shadow-sm mx-auto">
+            {book.progress > 0 && (
+              <CircularProgressbarComponent progress={book.progress} />
+            )}
+          </div>
         )}
       </div>
-
-      <div className="mx-2 mb-4 flex gap-2">
-        <Link to={`/edit-book/${id}`}>
-          <button
-            size={20}
-            className="text-white flex items-center gap-1 bg-blue-500 rounded m-2 text-xs border py-[6px] px-2 cursor-pointer"
-          >
-            <BiSolidEditAlt />
-            Edit
-          </button>
-        </Link>
-        <button
-          size={18}
-          className="text-white flex gap-1 items-center bg-red-500 rounded m-2 text-xs px-2 py-[6px] border cursor-pointer"
-          onClick={handleShowDeleteModal}
-        >
-          <BsFillTrashFill />
-          Delete
-        </button>
-        <button
-          size={18}
-          className="text-white flex gap-1 items-center bg-green-500 m-2 rounded text-xs px-2 py-[6px] border cursor-pointer"
-          onClick={handleSubmit}
-        >
-          <IoEyeSharp />
-          {isRecommending ? "Submitting" : "Recommend"}
-        </button>
-      </div>
-
-
-      {book?.status === "Reading" && (
-        <div className="p-4 mt-1 mx-1 shadow-sm">
-          {book.progress > 0 && (
-            <CircularProgressbarComponent progress={book.progress} />
-          )}
-
-          <button
-            className="text-xs mt-4 text-cyan-600 rounded-full border border-cyan-600 px-3 py-[6px]"
-            onClick={handleShowProgressModal}
-          >
-            {book?.progress > 0 ? "Update progress" : "Start progress"}
-          </button>
-        </div>
-      )}
     </div>
   );
 }

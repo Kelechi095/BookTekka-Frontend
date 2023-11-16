@@ -22,11 +22,12 @@ export default function Profile1() {
       </div>
       <div className=" px-4 lg:absolute lg:right-0 lg:w-[80%]">
       <Header title={"Profile"} />
-      <div className="my-4 shadow-sm border p-6 flex flex-col items-center gap-2 max-w-sm mx-auto relative">
+      <div className="my-4 shadow-sm p-6 mt-12 flex flex-col items-center gap-2 max-w-sm lg:w-[800px] mx-auto relative">
+        
         <img
           src={data?.profilePicture}
           alt=""
-          className="w-40 h-40 object-cover rounded-full"
+          className="shadow rounded-full w-40 h-40 object-cover border-none"
         />
         <p className="self-start mt-4">
           <span className="font-semibold">Username:</span> {data?.username}
