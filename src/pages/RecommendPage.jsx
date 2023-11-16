@@ -112,13 +112,13 @@ export default function RecommendPage() {
             ))}
           </div>
           <form onSubmit={handleSubmit}>
-            <textarea
+            {/* <textarea
               cols="10"
               rows="5"
               className="border w-[450px] outline-none p-2 text-sm mt-4 mb-1 block mx-w-"
               value={userReview}
               onChange={(e) => setUserReview(e.target.value)}
-            ></textarea>
+            ></textarea> */}
             <button className="text-sm border mb-4 rounded p-1 bg-cyan-600 text-white">
               {isSubmitting ? "Submitting" : "Add review"}
             </button>
