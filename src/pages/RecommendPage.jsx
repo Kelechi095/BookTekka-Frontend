@@ -66,6 +66,57 @@ export default function RecommendPage() {
 
   return (
     <div className="mx-auto text-slate-900 grid lg:grid-cols-10 gap-2 relative">
+      <div className="hidden lg:grid justify-center px-4 lg:fixed lg:w-[20%] lg:left-0  bg-white border-r h-screen">
+        <Nav />
+      </div>
+      <div className=" px-4 lg:absolute lg:right-0 lg:w-[80%] my-2 gap-4">
+        
+        <div className="mt-6">
+          <div className="lg:grid-cols-10 grid gap-4 border-b mb-1 p-4">
+            <div className="col-span-3">
+              <img
+                src={book?.thumbnail}
+                alt={book?.title}
+                className="w-40 lg:w-60
+            mb-4"
+              />
+            </div>
+            <div className="col-span-7">
+              <h2 className="text-lg lg:text-2xl font-bold mt-8">
+                {book?.title}
+              </h2>
+              <h2 className="text-sm lg:text-base font-semibold">
+                <span className="font-bold">Author: </span>
+                {book?.author}
+              </h2>
+              <h2 className="text-sm lg:text-base font-semibold">
+                <span className="font-bold">Genre: </span>
+                {book?.genre}
+              </h2>
+              {book?.description && (
+                <h2 className="text-sm font-base">
+                  <span className="font-bold">Description: </span>{" "}
+                  {book?.description}
+                </h2>
+              )}
+            </div>
+          </div>
+        </div>
+
+        {book?.status === "Reading" && (
+          <div className="p-4 mt-1 lg:w-72 shadow-sm mx-auto">
+            {book.progress > 0 && (
+              <CircularProgressbarComponent progress={book.progress} />
+            )}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+/* 
+<div className="mx-auto text-slate-900 grid lg:grid-cols-10 gap-2 relative">
       <div className="hidden lg:grid justify-center px-4 lg:fixed lg:w-[20%] lg:left-0 bg-white border-r h-screen">
         <Nav />
       </div>
@@ -112,13 +163,13 @@ export default function RecommendPage() {
             ))}
           </div>
           <form onSubmit={handleSubmit}>
-            {/* <textarea
+            <textarea
               cols="10"
               rows="5"
               className="border w-[450px] outline-none p-2 text-sm mt-4 mb-1 block mx-w-"
               value={userReview}
               onChange={(e) => setUserReview(e.target.value)}
-            ></textarea> */}
+            ></textarea>
             <button className="text-sm border mb-4 rounded p-1 bg-cyan-600 text-white">
               {isSubmitting ? "Submitting" : "Add review"}
             </button>
@@ -126,5 +177,4 @@ export default function RecommendPage() {
         </div>
       </div>
     </div>
-  );
-}
+*/
