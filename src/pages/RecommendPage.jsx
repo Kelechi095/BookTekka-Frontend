@@ -101,15 +101,32 @@ export default function RecommendPage() {
               )}
             </div>
           </div>
+          <div>
+            <h2 className="mt-4 font-semibold text-blue-400 mx-2">
+              {book.reviews.length > 0 ? "Reviews" : "No reviews"}
+            </h2>
+            {book.reviews.map((review) => (
+              <div key={review._id} className="text-sm w-96 p-2 px-2 border shadow-sm mt-3 rounded-lg">
+                <p className="font-semibold text-sm text-red-700">{review.reviewer}</p>
+                <p className="text-sm lg:text-base">{review.review}</p>
+              </div>
+            ))}
+          </div>
+          <form onSubmit={handleSubmit}>
+            <textarea
+              cols="10"
+              rows="5"
+              className="border w-[450px] outline-none p-2 text-sm mt-4 mb-1 block mx-w-"
+              value={userReview}
+              onChange={(e) => setUserReview(e.target.value)}
+            ></textarea>
+            <button className="text-sm border mb-4 rounded p-1 bg-cyan-600 text-white">
+              {isSubmitting ? "Submitting" : "Add review"}
+            </button>
+          </form>
         </div>
 
-        {book?.status === "Reading" && (
-          <div className="p-4 mt-1 lg:w-72 shadow-sm mx-auto">
-            {book.progress > 0 && (
-              <CircularProgressbarComponent progress={book.progress} />
-            )}
-          </div>
-        )}
+        
       </div>
     </div>
   );
@@ -151,29 +168,7 @@ export default function RecommendPage() {
           </div>
 
 
-          <div>
-            <h2 className="mt-4 font-semibold text-blue-400 mx-2">
-              {book.reviews.length > 0 ? "Reviews" : "No reviews"}
-            </h2>
-            {book.reviews.map((review) => (
-              <div key={review._id} className="text-sm w-96 p-2 px-2 border shadow-sm mt-3 rounded-lg">
-                <p className="font-semibold text-sm text-red-700">{review.reviewer}</p>
-                <p className="text-sm lg:text-base">{review.review}</p>
-              </div>
-            ))}
-          </div>
-          <form onSubmit={handleSubmit}>
-            <textarea
-              cols="10"
-              rows="5"
-              className="border w-[450px] outline-none p-2 text-sm mt-4 mb-1 block mx-w-"
-              value={userReview}
-              onChange={(e) => setUserReview(e.target.value)}
-            ></textarea>
-            <button className="text-sm border mb-4 rounded p-1 bg-cyan-600 text-white">
-              {isSubmitting ? "Submitting" : "Add review"}
-            </button>
-          </form>
+          
         </div>
       </div>
     </div>
