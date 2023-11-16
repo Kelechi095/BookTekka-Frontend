@@ -24,7 +24,7 @@ export default function Overview() {
       <div className="hidden lg:grid justify-center px-4 lg:fixed lg:w-[20%] lg:left-0  bg-white border-r h-screen">
         <Nav />
       </div>
-      <div className=" px-4 lg:absolute lg:right-0 lg:w-[80%]  mt-2 gap-4">
+      <div className=" px-4 lg:absolute lg:right-0 lg:w-[80%]  my-2 gap-4 ">
         <h2 className="hidden lg:block">Stats</h2>
         <Header title={"Stats"} />
         <div className="lg:grid lg:grid-cols-2  gap-2">
