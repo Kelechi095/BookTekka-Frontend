@@ -22,16 +22,16 @@ export default function SortFilter({
   }, [statusTerm, sortTerm]);
 
   return (
-    <div className="sort_filter relative flex justify-between my-6">
+    <div className="sort_filter relative flex justify-between my-6 lg:mb-4">
       <div
         className="border py-1 px-4 cursor-pointer w-36  rounded flex items-center justify-between"
         onClick={toggleSortBar}
       >
-        <p className="text-sm">{sortTitle}</p>
+        <p className="text-sm lg:text-base">{sortTitle}</p>
         {isSort ? <BiSolidChevronDown /> : <BiSolidChevronRight size={16} />}
       </div>
       {isSort && (
-        <ul className="absolute top-12 bg-white w-36 px-2 py-1 rounded shadow-sm border z-10 text-sm">
+        <ul className="absolute top-12 bg-white w-36 px-2 py-1 rounded shadow-sm border z-10 text-sm lg:text-base">
           {sortButtons.map((button) => (
             <li
               className={
@@ -53,11 +53,11 @@ export default function SortFilter({
         className="border py-1 px-4 cursor-pointer w-36  rounded flex items-center justify-between"
         onClick={toggleFilterBar}
       >
-        <p className="text-sm">{filterTitle}</p>
+        <p className="text-sm lg:text-base">{filterTitle}</p>
         {isFilter ? <BiSolidChevronDown /> : <BiSolidChevronRight size={16} />}
       </div>
       {isFilter && (
-        <ul className="absolute top-12 right-0 bg-white w-36 px-2 py-1 rounded shadow-sm border z-10 text-sm">
+        <ul className="absolute top-12 right-0 bg-white w-36 px-2 py-1 rounded shadow-sm border z-10 text-sm lg:text-base">
           {statusOptions.map((button) => (
             <li
               className={

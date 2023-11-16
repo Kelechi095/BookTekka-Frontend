@@ -2,6 +2,7 @@ import { customFetch } from "../utils/customFetch";
 import { useQuery } from "react-query";
 import Header from "../components/Header";
 import { Link } from "react-router-dom";
+import Nav from "../components/Nav";
 
 export default function Profile1() {
   const getUserProfileFn = async () => {
@@ -15,7 +16,11 @@ export default function Profile1() {
   console.log(data);
 
   return (
-    <div className="mx-auto text-slate-900 m-4 mt-6 px-4 mb-8">
+    <div className="mx-auto text-slate-900 grid lg:grid-cols-10 gap-2 relative">
+      <div className="hidden lg:grid justify-center px-4 lg:fixed lg:w-[20%] lg:left-0  bg-white border-r h-screen">
+        <Nav />
+      </div>
+      <div className=" px-4 lg:absolute bg-purple-50 lg:right-0 lg:w-[80%]">
       <Header title={"Profile"} />
       <div className="my-4 shadow-sm border p-6 flex flex-col items-center gap-2 max-w-sm mx-auto relative">
         <img
@@ -35,6 +40,7 @@ export default function Profile1() {
         >
           Edit Profile
         </Link>
+      </div>
       </div>
     </div>
   );

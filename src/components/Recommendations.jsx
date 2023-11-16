@@ -10,9 +10,9 @@ export default function Recommendations({
 
   console.log(data)
   return (
-    <div>
+    <div className="grid lg:grid-cols-2 gap-2 mt-4">
       {data?.recommendations?.map((book) => (
-        <div className="border rounded shadow-sm mb-4 py-4 px-2" key={book._id}>
+        <div className="border rounded shadow-sm my-4 bg-white py-4 px-2" key={book._id}>
           <div className="flex items-center gap-2 mb-2">
             <img
               src={book.posterPhoto}

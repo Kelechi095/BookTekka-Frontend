@@ -5,6 +5,7 @@ import { customFetch } from "../utils/customFetch";
 import { useMutation } from "react-query";
 import useIsLoggedIn from "../hooks/user/useIsLoggedIn";
 import {toast} from "react-toastify"
+import { capitalizeFirst } from "../utils/capitalizeFirst";
 
 export default function Register() {
   const [formData, setFormData] = useState({});
@@ -21,7 +22,7 @@ export default function Register() {
   };
 
   const registerFn = async () => {
-    const res = await customFetch.post("/auth/register", formData);
+    const res = await customFetch.post("/auth/register", {...formData, username: capitalizeFirst(formData.username)});
     return res.data;
   };
 
@@ -37,11 +38,11 @@ export default function Register() {
       },
       onError: (error) => {
         error?.response?.data?.error?.split(" ")[0] === "E11000"
-        ? toast.success("Email already in use", {
+        ? toast.error("Email already in use", {
           position: toast.POSITION.TOP_CENTER,
           className: "text-xs"
         })
-        : toast.error(error?.response?.data?.error, {
+        : toast.error(error?.response?.data?.msg, {
           position: toast.POSITION.TOP_CENTER,
           className: "text-xs "
         })

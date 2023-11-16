@@ -82,7 +82,7 @@ export default function Book() {
   if (isLoading) return <Loader />;
 
   return (
-    <div className="mx-auto text-slate-900 p-4">
+    <div className="mx-auto text-slate-900">
       <h1 className="font-bold text-xl font-mono">Book details</h1>
       {showDeleteModal && (
         <DeleteBookModal

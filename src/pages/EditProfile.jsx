@@ -5,6 +5,7 @@ import { useQuery, useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { BiCamera } from "react-icons/bi";
 import {toast} from "react-toastify"
+import { capitalizeFirst } from "../utils/capitalizeFirst";
 
 export default function EditProfile() {
   const [newUsername, setNewUsername] = useState("");
@@ -41,7 +42,7 @@ export default function EditProfile() {
   });
 
   const updateProfileFn = async () => {
-    const res = await customFetch.patch("/auth/update", { newUsername, file });
+    const res = await customFetch.patch("/auth/update", { newUsername: capitalizeFirst(newUsername), file });
     return res.data;
   };
 

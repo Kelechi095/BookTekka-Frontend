@@ -10,6 +10,9 @@ import Pagination from "../components/Pagination";
 import Search from "../components/Search";
 import SortFilter from "../components/SortFilter";
 import Books from "../components/Books";
+import { FaTimes } from "react-icons/fa";
+import useGetContext from "../hooks/useGetContext";
+import Nav from "../components/Nav";
 
 export default function Home() {
   const [isFilter, setIsFilter] = useState(false);
@@ -57,57 +60,68 @@ export default function Home() {
     setCurrentPage(1);
   }, [statusTerm, searchTerm]);
 
-  
   return (
-    <div className="mx-auto text-slate-900 m-4 px-4 mb-4">
-      <Header
-        title={"Library"}
-        rightSide={
-          <AiOutlinePlus
-            size={32}
-            className="my-2 cursor-pointer hover:text-blue-500"
-            onClick={handleAddBook}
-          />
-        }
-      />
-
-      <Search setSearchTerm={setSearchTerm} searchTerm={searchTerm} />
-
-      <SortFilter
-        isSort={isSort}
-        isFilter={isFilter}
-        sortTerm={sortTerm}
-        setSortTerm={setSortTerm}
-        setStatusTerm={setStatusTerm}
-        statusTerm={statusTerm}
-        toggleFilterBar={toggleFilterBar}
-        toggleSortBar={toggleSortBar}
-      />
-
-      {isLoading && debouncedValue ? (
-        <Loader />
-      ) : debouncedValue && data?.books?.length < 1 ? (
-        <div className="h-60 flex items-center justify-center">
-          <h2 className="text-slate-800 text-2xl">Search result not found</h2>
-        </div>
-      ) : !debouncedValue && data?.books?.length < 1 ? (
-        <div className="h-60 flex items-center justify-center">
-          <h2 className="text-slate-800 text-2xl">Your library is Empty</h2>
-        </div>
-      ) : isLoading ? <Loader /> :(
-        <Books data={data} />
-      )}
-
-      {isLoading ||
-      data?.books?.length < 1 ||
-      (debouncedValue && data?.books?.length < 1) ? null : (
-        <Pagination
-          data={data}
-          currentPage={currentPage}
-          handlePageNext={handlePageNext}
-          handlePagePrev={handlePagePrev}
+    <div className="mx-auto text-slate-900 grid lg:grid-cols-10 gap-2 relative">
+      <div className="hidden lg:grid justify-center px-4 lg:fixed lg:w-[20%] lg:left-0  bg-white border-r h-screen">
+        <Nav />
+      </div>
+      <div className=" px-4 lg:absolute bg-purple-50 lg:right-0 lg:w-[80%]">
+        <Header
+          title={"Library"}
+          rightSide={
+            <AiOutlinePlus
+              size={32}
+              className="my-2 cursor-pointer hover:text-blue-500"
+              onClick={handleAddBook}
+            />
+          }
         />
-      )}
+
+        <div className="bg-white py-4 px-2 lg:px-16 mx-auto shadow-sm">
+          <h2 className="hidden lg:block text-center text-2xl px-4 py-2 font-semibold uppercase text-slate-600">
+            Library
+          </h2>
+          <Search setSearchTerm={setSearchTerm} searchTerm={searchTerm} />
+
+          <SortFilter
+            isSort={isSort}
+            isFilter={isFilter}
+            sortTerm={sortTerm}
+            setSortTerm={setSortTerm}
+            setStatusTerm={setStatusTerm}
+            statusTerm={statusTerm}
+            toggleFilterBar={toggleFilterBar}
+            toggleSortBar={toggleSortBar}
+          />
+        </div>
+
+        {isLoading && debouncedValue ? (
+          <Loader />
+        ) : debouncedValue && data?.books?.length < 1 ? (
+          <div className="h-60 flex items-center justify-center">
+            <h2 className="text-slate-800 text-2xl">Search result not found</h2>
+          </div>
+        ) : !debouncedValue && data?.books?.length < 1 ? (
+          <div className="h-60 flex items-center justify-center">
+            <h2 className="text-slate-800 text-2xl">Your library is Empty</h2>
+          </div>
+        ) : isLoading ? (
+          <Loader />
+        ) : (
+          <Books data={data} />
+        )}
+
+        {isLoading ||
+        data?.books?.length < 1 ||
+        (debouncedValue && data?.books?.length < 1) ? null : (
+          <Pagination
+            data={data}
+            currentPage={currentPage}
+            handlePageNext={handlePageNext}
+            handlePagePrev={handlePagePrev}
+          />
+        )}
+      </div>
     </div>
   );
 }

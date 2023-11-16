@@ -7,7 +7,7 @@ export default function Header({ title, rightSide }) {
   const { handleSidebar } = useGetContext();
 
   return (
-    <div className="flex justify-between items-center">
+    <div className="flex justify-between items-center lg:hidden my-4">
       <div className="flex gap-4 items-center mb-2">
         <HiMenuAlt2
           size={25}

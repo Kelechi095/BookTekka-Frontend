@@ -12,6 +12,7 @@ import Pagination from "../components/Pagination";
 import Search from "../components/Search";
 import SortGenre from "../components/SortGenre";
 import Recommendations from "../components/Recommendations";
+import Nav from "../components/Nav";
 
 export default function Recommendation() {
   
@@ -136,8 +137,15 @@ export default function Recommendation() {
 
 
   return (
-    <div className="mx-auto text-slate-900 m-4 mt-6 px-4 mb-8">
+    <div className="mx-auto text-slate-900 grid lg:grid-cols-10 gap-2 relative">
+      <div className="hidden lg:grid justify-center px-4 lg:fixed lg:w-[20%] lg:left-0  bg-white border-r h-screen">
+        <Nav />
+      </div>
+      <div className=" px-4 lg:absolute bg-purple-50 lg:right-0 lg:w-[80%]">
       <Header title={"Book Recommendations"} />
+
+      <div className="bg-white py-4 px-2 lg:px-16 mx-auto shadow-sm">
+        <h2 className="hidden lg:block text-center text-2xl py-2 px-4 font-semibold uppercase text-slate-600">Recommendations</h2>
       <Search setSearchTerm={setSearchTerm} searchTerm={searchTerm} />
 
       <SortGenre
@@ -150,6 +158,7 @@ export default function Recommendation() {
         toggleFilterBar={toggleFilterBar}
         toggleSortBar={toggleSortBar}
       />
+      </div>
 
       {isLoading && debouncedValue ? (
         <Loader />
@@ -182,33 +191,8 @@ export default function Recommendation() {
           handlePagePrev={handlePagePrev}
         />
       )}
+      </div>
     </div>
   );
 }
 
-/*   const { data, isLoading } = useQuery([searchQuery], () =>
-    fetchBooks(searchQuery)
-  );
-
-  
-*/
-
-/* <div className="flex items-center gap-2 text-sm px-2">
-            {book?.likers.includes(user?.username) ? (
-              <AiFillHeart
-                size={18}
-                className="cursor-pointer text-red-500"
-                onClick={() => handleLike(book._id)}
-              />
-            ) : (
-              <AiOutlineHeart
-                size={18}
-                className="cursor-pointer"
-                onClick={() => handleLike(book._id)}
-              />
-            )}
-
-            <p>
-              {book?.likes} {book?.likes !== 1 ? "Likes" : "Like"}
-            </p>
-          </div> */

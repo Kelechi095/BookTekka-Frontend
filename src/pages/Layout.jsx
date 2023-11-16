@@ -7,7 +7,7 @@ export default function Layout() {
   return (
     <div className="relative">
       <Sidebar />
-      <Outlet />
+      <Outlet/>
     </div>
   );
 }
