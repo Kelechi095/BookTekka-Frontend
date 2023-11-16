@@ -106,9 +106,9 @@ export default function RecommendPage() {
               {book.reviews.length > 0 ? "Reviews" : "No reviews"}
             </h2>
             {book.reviews.map((review) => (
-              <div key={review._id} className="text-sm max-w-xs p-2 px-2 border shadow-sm mt-3 rounded-lg">
+              <div key={review._id} className="text-sm w-full max-w-xs lg:max-w-lg p-2 px-2 border shadow-sm mt-3 rounded-lg">
                 <p className="font-semibold text-sm text-red-700">{review.reviewer}</p>
-                <p className="text-sm lg:text-base">{review.review}</p>
+                <p className="text-sm lg:text-sm">{review.review}</p>
               </div>
             ))}
           </div>
@@ -116,11 +116,11 @@ export default function RecommendPage() {
             <textarea
               cols="10"
               rows="5"
-              className="border w-[320px] outline-none p-2 text-sm mt-4 mb-1 block mx-w-"
+              className="border w-full max-w-xs lg:max-w-lg outline-none block p-2 text-sm mt-4 mb-1"
               value={userReview}
               onChange={(e) => setUserReview(e.target.value)}
             ></textarea>
-            <button className="text-sm border mb-4 rounded p-1 bg-cyan-600 text-white">
+            <button className="text-sm border mb-4 mt-1 rounded p-1 bg-cyan-600 text-white">
               {isSubmitting ? "Submitting" : "Add review"}
             </button>
           </form>
