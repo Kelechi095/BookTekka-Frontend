@@ -112,7 +112,7 @@ export default function RecommendPage() {
               </div>
             ))}
           </div>
-          {/* <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit}>
             <textarea
               cols="10"
               rows="5"
@@ -123,7 +123,7 @@ export default function RecommendPage() {
             <button className="text-sm border mb-4 rounded p-1 bg-cyan-600 text-white">
               {isSubmitting ? "Submitting" : "Add review"}
             </button>
-          </form> */}
+          </form>
         </div>
 
         
