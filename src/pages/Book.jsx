@@ -102,7 +102,7 @@ export default function Book() {
           />
         )}
         <div className="mt-6">
-          <div className="lg:grid-cols-10 grid border-b mb-1 p-4">
+          <div className="lg:grid-cols-10 grid gap-4 border-b mb-1 p-4">
             <div className="col-span-3">
               <img
                 src={book?.thumbnail}

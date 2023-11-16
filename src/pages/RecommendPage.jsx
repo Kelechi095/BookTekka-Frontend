@@ -65,8 +65,8 @@ export default function RecommendPage() {
   if (isLoading) return <Loader />;
 
   return (
-    <div className="mx-auto text-slate-900 grid lg:grid-cols-10 gap-2 relative">
-      <div className="hidden lg:grid justify-center px-4 lg:fixed lg:w-[20%] lg:left-0  bg-white border-r h-screen">
+    <div className="mx-auto text-slate-900 grid lg:grid-cols-10 gap-2 relative ">
+      <div className="hidden lg:grid justify-center px-4 lg:fixed lg:w-[20%] lg:left-0 bg-white border-r h-screen">
         <Nav />
       </div>
       <div className=" px-4 lg:absolute lg:right-0 lg:w-[80%] my-2 gap-4">
@@ -80,7 +80,7 @@ export default function RecommendPage() {
             mb-4"
               />
             </div>
-            <div className="col-span-7">
+            <div className="col-span-7 max-w-md w-full lg:max-w-none">
               <h2 className="text-lg lg:text-2xl font-bold mt-8">
                 {book?.title}
               </h2>
