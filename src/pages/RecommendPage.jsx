@@ -106,7 +106,7 @@ export default function RecommendPage() {
               {book.reviews.length > 0 ? "Reviews" : "No reviews"}
             </h2>
             {book.reviews.map((review) => (
-              <div key={review._id} className="text-sm w-96 p-2 px-2 border shadow-sm mt-3 rounded-lg">
+              <div key={review._id} className="text-sm max-w-xs p-2 px-2 border shadow-sm mt-3 rounded-lg">
                 <p className="font-semibold text-sm text-red-700">{review.reviewer}</p>
                 <p className="text-sm lg:text-base">{review.review}</p>
               </div>
