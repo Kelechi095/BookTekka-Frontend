@@ -107,12 +107,11 @@ export default function Book() {
               <img
                 src={book?.thumbnail}
                 alt={book?.title}
-                className="w-40 lg:w-60
-            mb-4"
+                className="w-40 lg:w-60"
               />
             </div>
             <div className="col-span-7">
-              <h2 className="text-lg lg:text-2xl font-bold mt-8">
+              <h2 className="text-lg lg:text-2xl font-bold mt-2">
                 {book?.title}
               </h2>
               <h2 className="text-sm lg:text-base font-semibold">

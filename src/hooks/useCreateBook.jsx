@@ -13,7 +13,7 @@ export default function useCreateBook() {
     onSuccess: () => {
       queryClient.invalidateQueries("books");
       navigate("/")
-      toast.success("Review added", {
+      toast.success("Book added to library", {
         position: toast.POSITION.TOP_CENTER,
         className: "text-xs",
       });
