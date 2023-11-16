@@ -17,7 +17,7 @@ export default function DeleteBookModal({ handleCloseDeleteModal, bookID }) {
       onClick={handleCloseDeleteModal}
     >
       <div
-        className="h-40 w-96 max-w-xs border bg-white mb-24 p-2 rounded shadow-sm text-sm"
+        className="h-40 w-full max-w-xs lg:max-w-sm  border bg-white mb-24 p-2 rounded shadow-sm text-sm"
         onClick={(e) => e.stopPropagation()}
       >
         <button className="px-1 mb-2 text-red-500" onClick={handleCloseDeleteModal}>

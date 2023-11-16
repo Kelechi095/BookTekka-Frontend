@@ -155,13 +155,13 @@ export default function Book() {
                   <IoEyeSharp />
                   {isRecommending ? "Submitting" : "Recommend"}
                 </button>
+              </div>
                 {book?.status === 'Reading' && <button
                   className="flex border-cyan-800 gap-1 items-center bg-white text-cyan-800 rounded text-xs px-2 py-[6px] border cursor-pointer"
                   onClick={handleShowProgressModal}
                 >
                   {book?.progress > 0 ? "Update progress" : "Monitor progress"}
                 </button>}
-              </div>
             </div>
           </div>
         </div>

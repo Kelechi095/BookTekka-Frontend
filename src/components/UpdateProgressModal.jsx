@@ -45,7 +45,7 @@ export default function UpdateProgressModal({
 
   return (
     <div className=" inset-0 fixed  bg-black bg-opacity-30 min-h-screen z-10 flex items-center justify-center">
-      <div className="h-50 w-96 border bg-white mb-24 p-3 rounded shadow-sm text-sm">
+      <div className="h-50 w-full max-w-xs lg:max-w-sm border bg-white mb-24 p-3 rounded shadow-sm text-sm">
       <button className="px-1 mb-2 text-red-500" onClick={handleCloseProgressModal}>
           <FaTimes size={22}/>
         </button>
