@@ -81,6 +81,9 @@ export default function Home() {
           <h2 className="hidden lg:block text-center text-2xl px-4 py-2 font-semibold uppercase text-slate-600">
             Library
           </h2>
+          <div className="justify-end hidden lg:flex ">
+            <AiOutlinePlus size={30} className=" hover:text-blue-500 cursor-pointer" onClick={handleAddBook}/>
+          </div>
           <Search setSearchTerm={setSearchTerm} searchTerm={searchTerm} />
 
           <SortFilter

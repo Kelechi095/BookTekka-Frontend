@@ -6,7 +6,7 @@ import Sidebar from "../components/Sidebar";
 export default function Layout() {
   return (
     <div className="relative">
-      <Sidebar />
+      <Sidebar/>
       <Outlet/>
     </div>
   );

@@ -12,11 +12,11 @@ export default function SearchBook({
 
   return (
     <div className="mt-4">
-      <div className="mx-auto max-w-sm bg-zinc-200 mb-4">
+      <div className="bg-zinc-100 border px-6 lg:mt-4 flex items-center gap-2 rounded-full">
         <input
           type="text"
           placeholder="Search for book..."
-          className="border-1 outline-none px-2 py-1 w-full shadow-sm rounded mx-auto bg-zinc-200"
+          className="bg-zinc-100 outline-none px-2 py-[10px] lg:py-1 w-full text-sm lg:text-lg"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />

@@ -13,8 +13,6 @@ export default function Profile1() {
 
   const { data } = useQuery("user", getUserProfileFn);
 
-  console.log(data);
-
   return (
     <div className="mx-auto text-slate-900 grid lg:grid-cols-10 gap-2 relative">
       <div className="hidden lg:grid justify-center px-4 lg:fixed lg:w-[20%] lg:left-0  bg-white border-r h-screen">
