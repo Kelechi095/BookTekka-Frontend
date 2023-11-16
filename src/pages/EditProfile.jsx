@@ -88,7 +88,7 @@ export default function EditProfile() {
       <div className=" px-4 lg:absolute lg:right-0 lg:w-[80%]">
         <h1 className="font-bold text-2xl mt-8 text-center font-mono">Edit Profile</h1>
 
-        <form className="flex flex-col mt-4 gap-4 w-[500px] mx-auto" onSubmit={handleSubmit}>
+        <form className="flex flex-col mt-4 max-w-sm lg:max-w-md gap-4 mx-auto" onSubmit={handleSubmit}>
           <div className="flex flex-col gap-2 mt-8">
             <div
               className="rounded-full w-32 h-32 bg-black self-center relative bg-opacity-30 cursor-pointer flex justify-center items-center"
@@ -116,12 +116,12 @@ export default function EditProfile() {
               onChange={(e) => setNewUsername(e.target.value)}
             />
             <label className="text-xs mt-4 text-gray-600">Bio</label>
-            {/* <textarea
+            <textarea
               type="text"
               className="bg-white border outline-none p-2 py-8 text-sm "
               value={bio}
               onChange={(e) => setBio(e.target.value)}
-            /> */}
+            />
           </div>
 
           <button
