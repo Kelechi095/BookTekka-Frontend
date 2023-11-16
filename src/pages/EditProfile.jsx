@@ -116,12 +116,12 @@ export default function EditProfile() {
               onChange={(e) => setNewUsername(e.target.value)}
             />
             <label className="text-xs mt-4 text-gray-600">Bio</label>
-            <textarea
+            {/* <textarea
               type="text"
               className="bg-white border outline-none p-2 py-8 text-sm "
               value={bio}
               onChange={(e) => setBio(e.target.value)}
-            />
+            /> */}
           </div>
 
           <button
