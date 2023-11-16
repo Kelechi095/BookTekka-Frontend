@@ -102,7 +102,7 @@ export default function RecommendPage() {
 
           <div>
             <h2 className="mt-4 font-semibold text-blue-400 mx-2">
-              {book.reviews.length > 0 ? "Reviews" : "No reviews"}
+              {book.reviews.length > 0 ? "Reviewss" : "No reviews"}
             </h2>
             {book.reviews.map((review) => (
               <div key={review._id} className="text-sm w-96 p-1 border shadow-sm mt-3 max-w-xs rounded-lg">
