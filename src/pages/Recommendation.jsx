@@ -141,7 +141,7 @@ export default function Recommendation() {
       <div className="hidden lg:grid justify-center px-4 lg:fixed lg:w-[20%] lg:left-0  bg-white border-r h-screen">
         <Nav />
       </div>
-      <div className=" px-4 lg:absolute bg-purple-50 lg:right-0 lg:w-[80%]">
+      <div className=" px-4 lg:absolute lg:right-0 lg:w-[80%]">
       <Header title={"Book Recommendations"} />
 
       <div className="bg-white py-4 px-2 lg:px-16 mx-auto shadow-sm">

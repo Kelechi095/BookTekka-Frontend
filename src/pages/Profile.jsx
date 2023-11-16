@@ -20,7 +20,7 @@ export default function Profile1() {
       <div className="hidden lg:grid justify-center px-4 lg:fixed lg:w-[20%] lg:left-0  bg-white border-r h-screen">
         <Nav />
       </div>
-      <div className=" px-4 lg:absolute bg-purple-50 lg:right-0 lg:w-[80%]">
+      <div className=" px-4 lg:absolute lg:right-0 lg:w-[80%]">
       <Header title={"Profile"} />
       <div className="my-4 shadow-sm border p-6 flex flex-col items-center gap-2 max-w-sm mx-auto relative">
         <img
