@@ -116,7 +116,7 @@ export default function RecommendPage() {
             <textarea
               cols="10"
               rows="5"
-              className="border w-[450px] outline-none p-2 text-sm mt-4 mb-1 block mx-w-"
+              className="border max-w-xs outline-none p-2 text-sm mt-4 mb-1 block mx-w-"
               value={userReview}
               onChange={(e) => setUserReview(e.target.value)}
             ></textarea>
