@@ -5,13 +5,14 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { BiSolidEditAlt } from "react-icons/bi";
 import { BsFillTrashFill } from "react-icons/bs";
 import { IoEyeSharp } from "react-icons/io5";
-import CircularProgressbarComponent from "../components/CircularProgressbarComponent";
+import ProgressbarComponent from "../components/CircularProgressbarComponent";
 import UpdateProgressModal from "../components/UpdateProgressModal";
 import DeleteBookModal from "../components/DeleteBookModal";
 import { useMutation, useQueryClient, useQuery } from "react-query";
 import { customFetch } from "../utils/customFetch";
 import { toast } from "react-toastify";
 import Nav from "../components/Nav";
+import CircularProgressbarComponent from "../components/CircularProgressbarComponent";
 
 export default function Book() {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -61,6 +62,8 @@ export default function Book() {
     }
   );
 
+  console.log(book);
+
   const handleShowMore = () => {
     setIsFull(!isFull);
   };
@@ -101,6 +104,9 @@ export default function Book() {
           <UpdateProgressModal
             handleCloseProgressModal={handleCloseProgressModal}
             bookID={id}
+            pagesRemaining={book.pagesRemaining}
+            currentPage={book.currentPage}
+            totalPages={book.totalPages}
           />
         )}
 
@@ -113,7 +119,7 @@ export default function Book() {
                 <img
                   src={book?.thumbnail}
                   alt={book?.title}
-                  className="w-40 lg:w-44"
+                  className="w-40 lg:w-44 rounded"
                 />
               </div>
               <div className="col-span-7">
@@ -142,7 +148,7 @@ export default function Book() {
                   </h2>
                 )}
                 <div className="my-4 flex gap-2">
-                  <Link to={`/edit-book/${id}`}>
+                  <Link to={`/library/edit-book/${id}`}>
                     <button
                       size={20}
                       className="text-white flex items-center gap-1 bg-blue-500 rounded text-xs border py-[6px] px-2 cursor-pointer"
@@ -184,9 +190,24 @@ export default function Book() {
         )}
 
         {book?.status === "Reading" && (
-          <div className="p-4 mt-1 lg:w-72 shadow-sm mx-auto">
+          <div className="p-4 mt-1 w-full mx-auto">
             {book.progress > 0 && (
-              <CircularProgressbarComponent progress={book.progress} />
+              <div className="p-2 mt-1 w-full mx-auto grid grid-cols-2">
+                <div className="flex justify-center flex-col">
+                  <h2 className="font-semibold text-sm mt-2">
+                    Total Pages: {book.totalPages}
+                  </h2>
+                  <h2 className="font-semibold mt-2 text-sm">
+                    Current Page: {book.currentPage}
+                  </h2>
+                  <h2 className="font-semibold text-sm mt-2">
+                    Pages Remaining: {book.pagesRemaining}
+                  </h2>
+                </div>
+                <div className="mx-auto flex flex-col justify-center">
+                  <CircularProgressbarComponent progress={book.progress} />
+                </div>
+              </div>
             )}
           </div>
         )}

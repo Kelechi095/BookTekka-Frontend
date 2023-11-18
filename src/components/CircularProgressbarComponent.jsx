@@ -3,7 +3,7 @@ import "react-circular-progressbar/dist/styles.css";
 
 export default function CircularProgressbarComponent({progress}) {
   return (
-    <div className="max-w-sm w-40 mx-auto">
+    <div className="max-w-sm w-20 lg:w-24 mx-auto">
             <CircularProgressbar
               value={progress}
               text={`${progress}%`}

@@ -88,9 +88,9 @@ export default function Recommendation() {
         queryClient.invalidateQueries("books");
         toast.success("Book added to library", {
           position: toast.POSITION.TOP_CENTER,
-          className: "text-xs w-fit h-fit mx-auto",
+          className: "text-xs",
         }),
-          navigate("/");
+          navigate("/library");
       },
       onError: (error) => {
         toast.error(
@@ -142,8 +142,8 @@ export default function Recommendation() {
       <div className="hidden lg:grid justify-center px-4 lg:fixed lg:w-[20%] lg:left-0  bg-white border-r h-screen">
         <Nav />
       </div>
-      <div className=" px-4 lg:absolute lg:right-0 lg:w-[80%]">
-      <Header title={"Book Recommendations"} />
+      <div className=" px-4 lg:absolute lg:right-0 lg:w-[80%] py-4 lg:py-0">
+      <Header title={"BookTekka"} />
 
       <div className="bg-white py-4 px-2 lg:px-16 mx-auto shadow-sm">
         <h2 className="hidden lg:block text-center text-2xl py-2 px-4 font-semibold uppercase text-slate-600">Recommendations</h2>

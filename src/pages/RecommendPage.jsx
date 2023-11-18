@@ -16,6 +16,8 @@ export default function RecommendPage() {
 
   const queryClient = useQueryClient();
 
+    
+
   const fetchUser = async () => {
     const response = await customFetch.get("/auth/user");
     return response.data;
@@ -80,7 +82,7 @@ export default function RecommendPage() {
                 <img
                   src={book?.thumbnail}
                   alt={book?.title}
-                  className="w-40 lg:w-44"
+                  className="w-40 lg:w-44 rounded"
                 />
               </div>
               <div className="col-span-7">

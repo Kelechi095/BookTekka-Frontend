@@ -65,7 +65,7 @@ export default function Home() {
       <div className="hidden lg:grid justify-center px-4 lg:fixed lg:w-[20%] lg:left-0  bg-white border-r h-screen">
         <Nav />
       </div>
-      <div className=" px-4 lg:absolute lg:right-0 lg:w-[80%]">
+      <div className=" p-4 lg:absolute lg:right-0 lg:w-[80%] lg:py-0">
         <Header
           title={"Library"}
           rightSide={

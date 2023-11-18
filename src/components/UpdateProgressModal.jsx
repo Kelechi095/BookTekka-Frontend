@@ -6,10 +6,13 @@ import { FaTimes } from "react-icons/fa";
 export default function UpdateProgressModal({
   handleCloseProgressModal,
   bookID,
+  currentPage,
+  totalPages,
+  pagesRemaining
 }) {
   const [pageData, setPageData] = useState({
-    totalPages: "",
-    currentPage: "",
+    totalPages: totalPages,
+    currentPage: currentPage,
   });
 
   const updateProgress = async () => {

@@ -15,7 +15,7 @@ export default function Recommendations({
           className="border rounded shadow-sm my-4 bg-white py-4 px-2"
           key={book._id}
         >
-          <div className="flex items-center gap-2 border-b pb-2 mb-2">
+          <div className="flex items-center gap-2 border-b pb-2">
           <Link to={`/public-profile/${book.posterId}`}>
             <img
               src={book.posterPhoto}
@@ -27,11 +27,11 @@ export default function Recommendations({
           </div>
           <Link to={`/${book._id}`} key={book._id}>
             <div className="py-2 flex items-center justify-between">
-              <div className="flex gap-2 items-center">
+              <div className="flex gap-2 items-center h-40 lg:h-48">
                 <img
                   src={book.smallThumbnail}
                   alt={book.title}
-                  className="w-20 lg:w-28 border shadow-sm"
+                  className="w-20 lg:w-28 border shadow-sm rounded"
                 />
                 <div>
                   <p className="text-base font-bold text-slate-800">
