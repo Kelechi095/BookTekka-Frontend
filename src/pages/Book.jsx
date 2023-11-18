@@ -4,7 +4,12 @@ import Loader from "../components/Loader";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { BiSolidEditAlt } from "react-icons/bi";
 import { BsFillTrashFill } from "react-icons/bs";
+import { FaBookOpen } from "react-icons/fa6";
+import { TbDropletHalf2Filled } from "react-icons/tb";
+
 import { IoEyeSharp } from "react-icons/io5";
+import { GiSandsOfTime } from "react-icons/gi";
+
 import ProgressbarComponent from "../components/CircularProgressbarComponent";
 import UpdateProgressModal from "../components/UpdateProgressModal";
 import DeleteBookModal from "../components/DeleteBookModal";
@@ -160,7 +165,7 @@ export default function Book() {
                   </Link>
                   <button
                     size={18}
-                    className="text-white flex gap-1 items-center bg-red-500 rounded text-xs px-2 py-[6px] border cursor-pointer"
+                    className="text-white flex gap-1 items-center bg-red-400 rounded text-xs px-2 py-[6px] border cursor-pointer"
                     onClick={handleShowDeleteModal}
                   >
                     <BsFillTrashFill />
@@ -168,7 +173,7 @@ export default function Book() {
                   </button>
                   <button
                     size={18}
-                    className="text-white flex gap-1 items-center bg-green-500 rounded text-xs px-2 py-[6px] border cursor-pointer"
+                    className="text-white flex gap-1 items-center bg-green-400 rounded text-xs px-2 py-[6px] border cursor-pointer"
                     onClick={handleSubmit}
                   >
                     <IoEyeSharp />
@@ -177,7 +182,7 @@ export default function Book() {
                 </div>
                 {book?.status === "Reading" && (
                   <button
-                    className="flex border-cyan-500 gap-1 items-center bg-white text-cyan-500 rounded text-xs px-2 py-[6px] border cursor-pointer"
+                    className="flex border-cyan-500 gap-1 items-center bg-white text-cyan-400 rounded text-xs px-2 py-[6px] border cursor-pointer"
                     onClick={handleShowProgressModal}
                   >
                     {book?.progress > 0
@@ -194,47 +199,47 @@ export default function Book() {
           <div className="lg:p-4 mt-1">
             {book.progress > 0 && (
               <div className="my-2 gap-2 lg:grid lg:grid-cols-2 items-center">
-                <div className="border border-b-[6px] shadow-sm  border-b-cyan-500 rounded-b h-36 mt-8 p-8 flex flex-col justify-between">
+                <div className="border border-b-[6px] shadow-sm  border-b-purple-400 rounded-b h-36 mt-8 p-8 flex flex-col justify-between">
                   <div className="flex justify-between items-center">
-                    <p className="font-bold text-2xl text-cyan-500">
+                    <p className="font-bold text-2xl text-purple-400">
                       {book.progress}%
                     </p>
-                    <BiSolidBookAlt size={30} className="text-cyan-500" />
+                    <GiSandsOfTime size={30} className="text-purple-400" />
                   </div>
-                  <p className="font-semibold text-cyan-500 text-lg">
+                  <p className="font-semibold text-purple-400 text-lg">
                     Reading Progress
                   </p>
                 </div>
-                <div className="border border-b-[6px] shadow-sm  border-b-cyan-500 rounded-b h-36 mt-8 p-8 flex flex-col justify-between">
+                <div className="border border-b-[6px] shadow-sm  border-b-green-400 rounded-b h-36 mt-8 p-8 flex flex-col justify-between">
                   <div className="flex justify-between items-center">
-                    <p className="font-bold text-2xl text-cyan-500">
+                    <p className="font-bold text-2xl text-green-400">
                       {book.currentPage}
                     </p>
-                    <BiSolidBookAlt size={30} className="text-cyan-500" />
+                    <FaBookOpen size={30} className="text-green-400" />
                   </div>
-                  <p className="font-semibold text-cyan-500 text-lg">
+                  <p className="font-semibold text-green-500 text-lg">
                     Current Page
                   </p>
                 </div>
-                <div className="border border-b-[6px]  border-b-cyan-500 rounded-b h-36 mt-8 p-8 flex flex-col justify-between">
+                <div className="border border-b-[6px]  border-b-blue-400 rounded-b h-36 mt-8 p-8 flex flex-col justify-between">
                   <div className="flex justify-between items-center">
-                    <p className="font-bold text-2xl text-cyan-500">
+                    <p className="font-bold text-2xl text-blue-400">
                       {book.totalPages}
                     </p>
-                    <BiSolidBookAlt size={30} className="text-cyan-500" />
+                    <BiSolidBookAlt size={30} className="text-blue-400" />
                   </div>
-                  <p className="font-semibold text-cyan-500 text-lg">
+                  <p className="font-semibold text-blue-400 text-lg">
                     Total Pages
                   </p>
                 </div>
-                <div className="border border-b-[6px]  border-b-cyan-500 rounded-b h-36 mt-8 p-8 flex flex-col justify-between">
+                <div className="border border-b-[6px]  border-b-red-400 rounded-b h-36 mt-8 p-8 flex flex-col justify-between">
                   <div className="flex justify-between items-center">
-                    <p className="font-bold text-2xl text-cyan-500">
+                    <p className="font-bold text-2xl text-red-400">
                       {book.pagesRemaining}
                     </p>
-                    <BiSolidBookAlt size={30} className="text-cyan-500" />
+                    <TbDropletHalf2Filled size={30} className="text-red-400" />
                   </div>
-                  <p className="font-semibold text-cyan-500 text-lg">
+                  <p className="font-semibold text-red-400 text-lg">
                     Pages Remaining
                   </p>
                 </div>
