@@ -34,7 +34,7 @@ export default function Profile1() {
           <span className="font-semibold mb-4">Email:</span> {data?.email}
         </p>
         <Link
-          to="/edit-profile"
+          to="/profile/edit-profile"
           className="border px-2 py-1 rounded bg-cyan-600 text-white text-sm self-start"
         >
           Edit Profile

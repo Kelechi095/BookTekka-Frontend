@@ -12,7 +12,7 @@ export default function useCreateBook() {
   const {mutate: createBookMutation, isLoading: isSubmitting} = useMutation((book) => createBook(book), {
     onSuccess: () => {
       queryClient.invalidateQueries("books");
-      navigate("/")
+      navigate("/library")
       toast.success("Book added to library", {
         position: toast.POSITION.TOP_CENTER,
         className: "text-xs",

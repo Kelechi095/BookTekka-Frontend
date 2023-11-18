@@ -16,14 +16,16 @@ export default function Recommendations({
           key={book._id}
         >
           <div className="flex items-center gap-2 border-b pb-2 mb-2">
+          <Link to={`/public-profile/${book.posterId}`}>
             <img
               src={book.posterPhoto}
               alt=""
-              className="w-12 h-12 object-cover rounded-full"
+              className="w-10 h-10 object-cover rounded-full"
             />
+            </Link>
             <p className="font-semibold text-sm">{book.poster}</p>
           </div>
-          <Link to={`/recommendations/${book._id}`} key={book._id}>
+          <Link to={`/${book._id}`} key={book._id}>
             <div className="py-2 flex items-center justify-between">
               <div className="flex gap-2 items-center">
                 <img

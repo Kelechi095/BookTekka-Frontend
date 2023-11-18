@@ -1,9 +1,7 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import useGetBookData from "../hooks/useGetBookData";
 import BookBoarding from "../components/BookBoarding";
 import SearchBook from "../components/SearchBook";
-import Header from "../components/Header";
 import Nav from "../components/Nav";
 
 export default function AddTodo() {
@@ -11,6 +9,8 @@ export default function AddTodo() {
   const [bookInfo, setBookInfo] = useState(null);
 
   const { bookData } = useGetBookData(searchTerm);
+
+  console.log(bookData)
 
   return (
     <div className="mx-auto text-slate-900 grid lg:grid-cols-10 gap-2 relative">

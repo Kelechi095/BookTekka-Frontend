@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
 import AddBook from "./pages/AddBook";
+import Library from './pages/Library'
 import EditBook from "./pages/EditBook";
 import Book from "./pages/Book";
 import Profile from "./pages/Profile";
@@ -15,9 +15,10 @@ import Register from "./pages/Register";
 import ProtectedRoute from "./pages/ProtectedRoutes";
 import Dashboard from "./pages/Dashboard";
 import EditProfile from "./pages/EditProfile";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import RecommendPage from "./pages/RecommendPage";
+import PublicProfile from "./pages/PublicProfile";
 
 function App() {
   return (
@@ -33,14 +34,15 @@ function App() {
               </ProtectedRoute>
             }
           >
-            <Route index element={<Home />} />
-            <Route path="/add-book" element={<AddBook />} />
-            <Route path="/edit-book/:id" element={<EditBook />} />
-            <Route path="/book/:id" element={<Book />} />
-            <Route path="/recommendations/:id" element={<RecommendPage />} />
-            <Route path="/recommendations" element={<Recommendation />} />
+            <Route index element={<Recommendation />} />
+            <Route path=":id" element={<RecommendPage />} />
+            <Route path="/library" element={<Library />} />
+            <Route path="/library/add-book" element={<AddBook />} />
+            <Route path="/library/edit-book/:id" element={<EditBook />} />
+            <Route path="/library/:id" element={<Book />} />
             <Route path="/profile" element={<Profile />} />
-            <Route path="/edit-profile" element={<EditProfile />} />
+            <Route path="/profile/edit-profile" element={<EditProfile />} />
+            <Route path="/public-profile/:userId" element={<PublicProfile/>} />
             <Route path="/overview" element={<Overview />} />
             <Route path="/settings" element={<Settings />} />
           </Route>

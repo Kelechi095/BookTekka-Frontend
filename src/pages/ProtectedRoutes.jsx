@@ -3,6 +3,7 @@ import useLogoutUser from "../hooks/user/useLogoutUser";
 import { customFetch } from "../utils/customFetch";
 import useRefresh from "../hooks/user/useRefresh";
 import Loader from "../components/Loader";
+import { useLocation } from "react-router-dom";
 
 export default function ProtectedRoute({ children}) {
   const [isAuthError, setIsAuthError] = useState(false)
@@ -11,6 +12,14 @@ export default function ProtectedRoute({ children}) {
 
   const { logoutMutation } = useLogoutUser();
 
+  const location = useLocation();
+
+    useEffect(() => {
+      if (!location.hash) {
+        window.scrollTo(0, 0);
+      }
+    }, [location]);
+  
 
   customFetch.interceptors.response.use(
     (response) => {
@@ -23,6 +32,8 @@ export default function ProtectedRoute({ children}) {
       return Promise.reject(error);
     }
   );
+
+
 
   const handleLogout = (e) => {
     logoutMutation();

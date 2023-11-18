@@ -13,7 +13,7 @@ export const GlobalProvider = ({children}) => {
         <GlobalContext.Provider value={{
             handleSidebar,
             setIsSidebarOpen,
-            isSidebarOpen
+            isSidebarOpen,
         }}>
             {children}
         </GlobalContext.Provider>

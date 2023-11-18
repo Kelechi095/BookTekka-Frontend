@@ -11,6 +11,7 @@ import useLogoutUser from "../hooks/user/useLogoutUser";
 
 export default function Sidebar() {
   const { isSidebarOpen, handleSidebar, setIsSidebarOpen } = useGetContext();
+  const { logoutMutation } = useLogoutUser();
 
   const closeSidebar = () => {
     setIsSidebarOpen(false);
@@ -21,7 +22,6 @@ export default function Sidebar() {
     setIsSidebarOpen(false);
   };
 
-  const { logoutMutation } = useLogoutUser();
 
   return (
     <div
@@ -59,6 +59,18 @@ export default function Sidebar() {
             }
           >
             <li className="cursor-pointer flex gap-4 items-center mt-8">
+              <BsPeopleFill size={28} />
+              <span className="font-semibold text-base ">Home</span>
+            </li>
+          </NavLink>
+          <NavLink
+            to="/library"
+            onClick={closeSidebar}
+            className={({ isActive }) =>
+              isActive ? "text-cyan-600" : "text-gray-700"
+            }
+          >
+            <li className="cursor-pointer flex gap-4 items-center mt-8">
               <MdMenuBook size={28} />
               <span className={"font-semibold text-base"}>Library</span>
             </li>
@@ -73,18 +85,6 @@ export default function Sidebar() {
             <li className="cursor-pointer flex gap-4 items-center mt-8">
               <CgProfile size={28} />
               <span className="font-semibold text-base">Profile</span>
-            </li>
-          </NavLink>
-          <NavLink
-            to="/recommendations"
-            onClick={closeSidebar}
-            className={({ isActive }) =>
-              isActive ? "text-cyan-600" : "text-gray-700"
-            }
-          >
-            <li className="cursor-pointer flex gap-4 items-center mt-8">
-              <BsPeopleFill size={28} />
-              <span className="font-semibold text-base ">Recommendations</span>
             </li>
           </NavLink>
           <NavLink

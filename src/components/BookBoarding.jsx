@@ -52,7 +52,7 @@ export default function BookBoarding({ bookInfo }) {
         <h1 className="text-lg text-center font-semibold text-slate-800">
           Complete Book Details
         </h1>
-        <div className="grid gap-4 p-4 w-full max-w-xs lg:max-w-md mx-auto">
+        <div className="grid gap-4 p-4 w-full max-w-xs lg:max-w-lg mx-auto">
           <select
             name="genre"
             value={formData.genre}

@@ -34,7 +34,7 @@ export default function Home() {
   );
 
   const handleAddBook = () => {
-    navigate("/add-book");
+    navigate("add-book");
   };
 
   const toggleFilterBar = () => {
