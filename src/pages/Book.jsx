@@ -194,13 +194,13 @@ export default function Book() {
             {book.progress > 0 && (
               <div className="p-2 mt-1 w-full mx-auto grid grid-cols-2">
                 <div className="flex justify-center flex-col">
-                  <h2 className="font-semibold text-sm mt-2">
+                  <h2 className="font-semibold text-xs lg:text-sm mt-2">
                     Total Pages: {book.totalPages}
                   </h2>
-                  <h2 className="font-semibold mt-2 text-sm">
+                  <h2 className="font-semibold mt-2 text-xs lg:text-sm">
                     Current Page: {book.currentPage}
                   </h2>
-                  <h2 className="font-semibold text-sm mt-2">
+                  <h2 className="font-semibold text-xs lg:text-sm">
                     Pages Remaining: {book.pagesRemaining}
                   </h2>
                 </div>
