@@ -193,7 +193,7 @@ export default function Book() {
         {book?.status === "Reading" && (
           <div className="p-4 mt-1">
             {book.progress > 0 && (
-              <div className="p-4 mt-1 gap-2 grid lg:grid-cols-2 items-center">
+              <div className="p-4 mt-1 gap-2 grid grid-cols-1 lg:grid-cols-2 items-center">
                 <div className="border border-b-[6px] shadow-sm  border-b-cyan-500 rounded-b h-36 mt-8 p-8 flex flex-col justify-between">
                   <div className="flex justify-between items-center">
                     <p className="font-bold text-2xl text-cyan-500">
