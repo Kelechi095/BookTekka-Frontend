@@ -13,6 +13,7 @@ import { customFetch } from "../utils/customFetch";
 import { toast } from "react-toastify";
 import Nav from "../components/Nav";
 import CircularProgressbarComponent from "../components/CircularProgressbarComponent";
+import { BiSolidBookAlt } from "react-icons/bi";
 
 export default function Book() {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -176,7 +177,7 @@ export default function Book() {
                 </div>
                 {book?.status === "Reading" && (
                   <button
-                    className="flex border-cyan-800 gap-1 items-center bg-white text-cyan-800 rounded text-xs px-2 py-[6px] border cursor-pointer"
+                    className="flex border-cyan-500 gap-1 items-center bg-white text-cyan-500 rounded text-xs px-2 py-[6px] border cursor-pointer"
                     onClick={handleShowProgressModal}
                   >
                     {book?.progress > 0
@@ -190,22 +191,52 @@ export default function Book() {
         )}
 
         {book?.status === "Reading" && (
-          <div className="p-4 mt-1 w-full mx-auto">
+          <div className="p-4 mt-1">
             {book.progress > 0 && (
-              <div className="p-2 mt-1 w-full mx-auto grid grid-cols-2">
-                <div className="flex justify-center flex-col">
-                  <h2 className="font-semibold text-xs lg:text-sm mt-2">
-                    Total Pages: {book.totalPages}
-                  </h2>
-                  <h2 className="font-semibold mt-2 text-xs lg:text-sm">
-                    Current Page: {book.currentPage}
-                  </h2>
-                  <h2 className="font-semibold text-xs lg:text-sm">
-                    Pages Remaining: {book.pagesRemaining}
-                  </h2>
+              <div className="p-4 mt-1 gap-2 grid lg:grid-cols-2 items-center">
+                <div className="border border-b-[6px] shadow-sm  border-b-cyan-500 rounded-b h-36 mt-8 p-8 flex flex-col justify-between">
+                  <div className="flex justify-between items-center">
+                    <p className="font-bold text-2xl text-cyan-500">
+                      {book.progress}%
+                    </p>
+                    <BiSolidBookAlt size={30} className="text-cyan-500" />
+                  </div>
+                  <p className="font-semibold text-cyan-500 text-lg">
+                    Reading Progress
+                  </p>
                 </div>
-                <div className="mx-auto flex flex-col justify-center">
-                  <CircularProgressbarComponent progress={book.progress} />
+                <div className="border border-b-[6px] shadow-sm  border-b-cyan-500 rounded-b h-36 mt-8 p-8 flex flex-col justify-between">
+                  <div className="flex justify-between items-center">
+                    <p className="font-bold text-2xl text-cyan-500">
+                      {book.currentPage}
+                    </p>
+                    <BiSolidBookAlt size={30} className="text-cyan-500" />
+                  </div>
+                  <p className="font-semibold text-cyan-500 text-lg">
+                    Current Page
+                  </p>
+                </div>
+                <div className="border border-b-[6px]  border-b-cyan-500 rounded-b h-36 mt-8 p-8 flex flex-col justify-between">
+                  <div className="flex justify-between items-center">
+                    <p className="font-bold text-2xl text-cyan-500">
+                      {book.totalPages}
+                    </p>
+                    <BiSolidBookAlt size={30} className="text-cyan-500" />
+                  </div>
+                  <p className="font-semibold text-cyan-500 text-lg">
+                    Total Pages
+                  </p>
+                </div>
+                <div className="border border-b-[6px]  border-b-cyan-500 rounded-b h-36 mt-8 p-8 flex flex-col justify-between">
+                  <div className="flex justify-between items-center">
+                    <p className="font-bold text-2xl text-cyan-500">
+                      {book.pagesRemaining}
+                    </p>
+                    <BiSolidBookAlt size={30} className="text-cyan-500" />
+                  </div>
+                  <p className="font-semibold text-cyan-500 text-lg">
+                    Pages Remaining
+                  </p>
                 </div>
               </div>
             )}
