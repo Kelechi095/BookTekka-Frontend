@@ -6,7 +6,7 @@ const Button = ({ label, onClick, disabled, outline, small, Icon, isLoading }) =
     <button
       onClick={onClick}
       disabled={disabled}
-      className={`relative disabled:opacity-70 disabled:cursor-not-allowed rounded-lg hover:opacity-80 transition w-full 
+      className={`relative disabled:opacity-70 text-sm lg:text-base disabled:cursor-not-allowed rounded-lg hover:opacity-80 transition w-full 
     ${outline ? "bg-white" : "bg-blue-500"}
     ${outline ? "border-black" : "border-none"}
     ${outline ? "text-black" : "text-white"}

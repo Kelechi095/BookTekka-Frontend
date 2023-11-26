@@ -51,7 +51,7 @@ input:-webkit-autofill:active {
     @apply w-full md:w-4/6 lg:w-3/6 xl:w-2/5 my-6 mx-auto min-h-full py-6;
   }
   .page_content {
-    @apply border-0 rounded-lg shadow-lg relative flex flex-col bg-white outline-none focus:outline-none py-4;
+    @apply relative flex flex-col bg-white outline-none focus:outline-none py-4;
   }
   .page_header {
     @apply flex items-center p-2 text-2xl font-semibold text-center text-blue-500 rounded-t justify-center relative border-b-[1px];
