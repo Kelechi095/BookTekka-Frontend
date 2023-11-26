@@ -4,9 +4,9 @@ import { customFetch } from "../utils/customFetch";
 import { useNavigate } from "react-router-dom";
 import { useMutation } from "react-query";
 import { saveUserToLocalStorage } from "../utils/localstorage/saveUser";
-import {toast} from "react-toastify"
+import { toast } from "react-toastify";
 
-export default function Oauth() {
+export default function useOauth() {
   const navigate = useNavigate();
 
   const googleFn = async () => {
@@ -28,40 +28,33 @@ export default function Oauth() {
 
   const { mutate: googleMutation, isLoading } = useMutation(() => googleFn(), {
     onSuccess: (data) => {
-      console.log(data)
+      console.log(data);
       saveUserToLocalStorage(token, data.accessToken);
       saveUserToLocalStorage(user, data.username);
       navigate("/");
       toast.success("Login Successful", {
         position: toast.POSITION.TOP_CENTER,
-        className: "text-xs"
+        className: "text-xs",
       });
     },
     onError: (error) => {
-        error?.response?.data?.error?.split(" ")[0] === "E11000"
-          ? toast.success("Email already in use", {
+      error?.response?.data?.error?.split(" ")[0] === "E11000"
+        ? toast.success("Email already in use", {
             position: toast.POSITION.TOP_CENTER,
-            className: "text-xs"
+            className: "text-xs",
           })
-          : toast.error(error?.response?.data?.error, {
+        : toast.error(error?.response?.data?.error, {
             position: toast.POSITION.TOP_CENTER,
-            className: "text-xs "
+            className: "text-xs ",
           });
-      },
+    },
   });
 
-  const handleSubmit = (e) => {
+  const handleGoogleAuth = (e) => {
     e.preventDefault();
+    console.log('clicked google')
     googleMutation();
   };
 
-  return (
-    <button
-      type="button"
-      className="bg-green-500 text-white p-2 uppercase hover:opacity-95"
-      onClick={handleSubmit}
-    >
-      Continue with google
-    </button>
-  );
+    return {handleGoogleAuth};
 }

@@ -15,16 +15,15 @@ import Register from "./pages/Register";
 import ProtectedRoute from "./pages/ProtectedRoutes";
 import Dashboard from "./pages/Dashboard";
 import EditProfile from "./pages/EditProfile";
-import { ToastContainer} from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import RecommendPage from "./pages/RecommendPage";
 import PublicProfile from "./pages/PublicProfile";
+import ToastProvider from "./context/ToastProvider";
 
 function App() {
   return (
     <GlobalProvider>
       <BrowserRouter>
-        <ToastContainer />
+        <ToastProvider />
         <Routes>
           <Route
             path="/"

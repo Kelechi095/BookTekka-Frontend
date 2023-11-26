@@ -1,16 +1,22 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { customFetch } from "../utils/customFetch";
-//import Oauth from "../components/Oauth";
+import useOauth from "../hooks/useOauth";
 import { useMutation } from "react-query";
 import useIsLoggedIn from "../hooks/user/useIsLoggedIn";
-import {toast} from "react-toastify"
+import { toast } from "react-hot-toast";
 import { capitalizeFirst } from "../utils/capitalizeFirst";
+import NewUser from "../components/NewUser";
 
 export default function Register() {
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState({
+    username: "",
+    email: "",
+    password: "",
+  });
 
   const { isLoggedIn } = useIsLoggedIn();
+  const { handleGoogleAuth } = useOauth();
 
   const navigate = useNavigate();
 
@@ -22,7 +28,10 @@ export default function Register() {
   };
 
   const registerFn = async () => {
-    const res = await customFetch.post("/auth/register", {...formData, username: capitalizeFirst(formData.username)});
+    const res = await customFetch.post("/auth/register", {
+      ...formData,
+      username: capitalizeFirst(formData.username),
+    });
     return res.data;
   };
 
@@ -31,27 +40,20 @@ export default function Register() {
     {
       onSuccess: () => {
         navigate("/login");
-        toast.success("Registration Successful", {
-          position: toast.POSITION.TOP_CENTER,
-          className: "text-xs"
-        });
+        toast.success("Registration Successful");
       },
       onError: (error) => {
         error?.response?.data?.error?.split(" ")[0] === "E11000"
-        ? toast.error("Email already in use", {
-          position: toast.POSITION.TOP_CENTER,
-          className: "text-xs"
-        })
-        : toast.error(error?.response?.data?.msg, {
-          position: toast.POSITION.TOP_CENTER,
-          className: "text-xs "
-        })
+          ? toast.error("Email already in use")
+          : toast.error(error?.response?.data?.msg);
       },
     }
   );
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!formData.email || !formData.username || !formData.password)
+      return toast.error("Please fill all fields");
     registerMutation();
   };
 
@@ -60,50 +62,19 @@ export default function Register() {
   }, [isLoggedIn]);
 
   return (
-    <div className="p-3 max-w-xs mx-auto">
-      <h1 className="text-3xl font-bold my-8 mt-16 ">Hello</h1>
-      <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
-        <div className="flex flex-col gap-2">
-          <label className="text-xs text-gray-600">Username</label>
-          <input
-            type="text"
-            id="username"
-            className="bg-white border-b border-purple-300 outline-none text-sm"
-            onChange={handleChange}
-          />
-        </div>
-        <div className="flex flex-col gap-2">
-          <label className="text-xs text-gray-600">Email</label>
-          <input
-            type="email"
-            id="email"
-            className="bg-white border-b border-purple-300 outline-none text-sm"
-            onChange={handleChange}
-          />
-        </div>
-        <div className="flex flex-col gap-2">
-          <label className="text-xs text-gray-600">Password</label>
-          <input
-            type="password"
-            id="password"
-            className="bg-white border-b border-purple-300 outline-none text-sm"
-            onChange={handleChange}
-          />
-        </div>
-        <button
-          className="bg-purple-800 text-white p-2 hover:opacity-95 disabled:opacity-80"
-          disabled={isLoading}
-        >
-          {isLoading ? "Submitting..." : "Register"}
-        </button>
-        {/* <Oauth /> */}
-      </form>
-      <div className="flex gap-2 mt-5 text-[15px]">
-        <p>Have an account?</p>
-        <Link to="/login" className="text-purple-700">
-          Login
-        </Link>
-      </div>
-    </div>
+    <NewUser
+      title="Welcome to BookTekka"
+      subtitle="Register"
+      label1="Username"
+      id1="username"
+      isLoading={isLoading}
+      linkText="login"
+      footerTitle="Already have an account"
+      footerLinkTitle="Login"
+      onGoogleSubmit={handleGoogleAuth}
+      onSubmit={handleSubmit}
+      onChange={handleChange}
+      buttonTitle="Register"
+    />
   );
 }
