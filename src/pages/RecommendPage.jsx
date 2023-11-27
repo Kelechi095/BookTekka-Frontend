@@ -4,7 +4,7 @@ import Loader from "../components/Loader";
 import { useParams } from "react-router-dom";
 import { useMutation, useQueryClient, useQuery } from "react-query";
 import { customFetch } from "../utils/customFetch";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 import useGetSingleRecommendation from "../hooks/recommendation/useGetSingleRecommendation";
 
 export default function RecommendPage() {
