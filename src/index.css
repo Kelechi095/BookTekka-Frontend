@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+html,
+body,
+:root {
+  height: 100%;
+}
+
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
@@ -11,7 +17,13 @@ input:-webkit-autofill:active {
 
 @layer components {
   .nav {
-    @apply fixed w-full bg-white z-10 shadow-sm;
+    @apply fixed w-full bg-white z-10 shadow-sm hidden lg:block border;
+  }
+  .container {
+    @apply mx-auto text-slate-900 py-4;
+  }
+  .content {
+    @apply bg-white lg:pt-20 pt-4 mb-6 px-2 lg:px-16 mx-auto;
   }
   .wrapper {
     @apply max-w-[2500px] mx-auto xl:px-20 md:px-10 px-2;
@@ -19,23 +31,12 @@ input:-webkit-autofill:active {
   .inner-nav {
     @apply flex flex-row items-center justify-between gap-3 md:gap-0;
   }
-  .search {
-    @apply border-[1px] w-full md:w-auto py-2 rounded-full shadow-sm hover:shadow-md transition cursor-pointer;
-  }
-  .week {
-    @apply hidden sm:block text-sm font-semibold px-6 border-x-[3px] flex-1 text-center;
-  }
-  .guests {
-    @apply text-sm font-semibold pl-6 pr-2 text-gray-600 flex flex-row items-center gap-3;
-  }
-  .search_icon_container {
-    @apply p-2 bg-rose-500 rounded-full text-white;
-  }
+
   .logo_image {
     @apply hidden md:block cursor-pointer;
   }
   .your_home {
-    @apply hidden md:block text-sm font-semibold py-3 px-4 rounded-full hover:bg-neutral-100 transition cursor-pointer;
+    @apply hidden md:block text-sm font-semibold py-3 px-4 rounded-full transition cursor-pointer;
   }
   .toggle_dropdown {
     @apply p-4 md:py-1 md:px-2 border-[1px] border-neutral-200 flex flex-row items-center gap-3 rounded-full cursor-pointer hover:shadow-md transition;
@@ -57,6 +58,6 @@ input:-webkit-autofill:active {
     @apply flex items-center p-2 text-2xl font-semibold text-center text-blue-500 rounded-t justify-center relative border-b-[1px];
   }
   .modal_close_button {
-  @apply p-1 border-0 hover:opacity-70 transition absolute left-9
+    @apply p-1 border-0 hover:opacity-70 transition absolute left-9;
   }
 }

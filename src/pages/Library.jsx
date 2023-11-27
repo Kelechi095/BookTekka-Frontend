@@ -61,11 +61,8 @@ export default function Home() {
   }, [statusTerm, searchTerm]);
 
   return (
-    <div className="mx-auto text-slate-900 grid lg:grid-cols-10 gap-2 relative">
-      <div className="hidden lg:grid justify-center px-4 lg:fixed lg:w-[20%] lg:left-0  bg-white border-r h-screen">
-        <Nav />
-      </div>
-      <div className=" p-4 lg:absolute lg:right-0 lg:w-[80%] lg:py-0">
+    <div className="container">
+      <div className="px-4">
         <Header
           title={"Library"}
           rightSide={
@@ -77,13 +74,11 @@ export default function Home() {
           }
         />
 
-        <div className="bg-white py-4 px-2 lg:px-16 mx-auto shadow-sm">
-          <h2 className="hidden lg:block text-center text-2xl px-4 py-2 font-semibold uppercase text-slate-600">
+        <div className="content">
+          <h2 className="hidden lg:block text-center text-3xl py-2 px-4 font-semibold uppercase font-mono text-neutral-500">
             Library
           </h2>
-          <div className="justify-end hidden lg:flex ">
-            <AiOutlinePlus size={30} className=" hover:text-blue-500 cursor-pointer" onClick={handleAddBook}/>
-          </div>
+          
           <Search setSearchTerm={setSearchTerm} searchTerm={searchTerm} />
 
           <SortFilter

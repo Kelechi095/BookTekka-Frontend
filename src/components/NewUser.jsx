@@ -21,7 +21,7 @@ const NewUser = ({
   const navigate = useNavigate();
 
   return (
-    <div className="page">
+    <div className="page lg:shadow-md rounded-md border-0">
       <div className="page_content">
         <h2 className="page_header">{title}</h2>
         <div className="text-start px-6 py-4">

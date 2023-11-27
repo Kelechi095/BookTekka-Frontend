@@ -1,25 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { dItems } from "../utils/dashboardItems";
-import { BiChevronsRight, BiChevronsLeft } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
 
 export default function Dashboard() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const navigate = useNavigate()
 
-  /* useEffect(() => {
-    const id = setInterval(() => {
-      if (currentIndex === 2) {
-        setCurrentIndex(0);
-      } else {
-        setCurrentIndex((prev) => prev + 1);
-      }
-    }, 3000);
-
-    return () => clearInterval(id);
-  }, [currentIndex]);
- */
-
+  
   return (
     <div className="py-4 px-4 lg:px-12 lg:py-6 bg-lighterCyan min-h-screen">
       <div>

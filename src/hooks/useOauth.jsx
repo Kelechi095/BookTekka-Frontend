@@ -4,7 +4,7 @@ import { customFetch } from "../utils/customFetch";
 import { useNavigate } from "react-router-dom";
 import { useMutation } from "react-query";
 import { saveUserToLocalStorage } from "../utils/localstorage/saveUser";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 
 export default function useOauth() {
   const navigate = useNavigate();
@@ -32,21 +32,12 @@ export default function useOauth() {
       saveUserToLocalStorage(token, data.accessToken);
       saveUserToLocalStorage(user, data.username);
       navigate("/");
-      toast.success("Login Successful", {
-        position: toast.POSITION.TOP_CENTER,
-        className: "text-xs",
-      });
+      toast.success("Login Successful");
     },
     onError: (error) => {
       error?.response?.data?.error?.split(" ")[0] === "E11000"
-        ? toast.success("Email already in use", {
-            position: toast.POSITION.TOP_CENTER,
-            className: "text-xs",
-          })
-        : toast.error(error?.response?.data?.error, {
-            position: toast.POSITION.TOP_CENTER,
-            className: "text-xs ",
-          });
+        ? toast.success("Email already in use")
+        : toast.error(error?.response?.data?.error);
     },
   });
 

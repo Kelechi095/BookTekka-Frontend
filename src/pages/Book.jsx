@@ -10,14 +10,11 @@ import { TbDropletHalf2Filled } from "react-icons/tb";
 import { IoEyeSharp } from "react-icons/io5";
 import { GiSandsOfTime } from "react-icons/gi";
 
-import ProgressbarComponent from "../components/CircularProgressbarComponent";
 import UpdateProgressModal from "../components/UpdateProgressModal";
 import DeleteBookModal from "../components/DeleteBookModal";
 import { useMutation, useQueryClient, useQuery } from "react-query";
 import { customFetch } from "../utils/customFetch";
-import { toast } from "react-toastify";
-import Nav from "../components/Nav";
-import CircularProgressbarComponent from "../components/CircularProgressbarComponent";
+import { toast } from "react-hot-toast"
 import { BiSolidBookAlt } from "react-icons/bi";
 
 export default function Book() {
@@ -50,25 +47,16 @@ export default function Book() {
     {
       onSuccess: () => {
         queryClient.invalidateQueries("recommendation");
-        toast.success("Book added to recommendation list", {
-          position: toast.POSITION.TOP_CENTER,
-          className: "text-xs",
-        }),
+        toast.success("Book added to recommendation list"),
           navigate("/");
       },
       onError: (error) => {
         toast.error(
-          error?.response?.data?.msg || error?.response?.data?.error,
-          {
-            position: toast.POSITION.TOP_CENTER,
-            className: "text-xs",
-          }
-        );
-      },
+          error?.response?.data?.msg || error?.response?.data?.error);
+      }
     }
   );
 
-  console.log(book);
 
   const handleShowMore = () => {
     setIsFull(!isFull);
@@ -94,11 +82,9 @@ export default function Book() {
   };
 
   return (
-    <div className="mx-auto text-slate-900 grid lg:grid-cols-10 gap-2 relative">
-      <div className="hidden lg:grid justify-center px-4 lg:fixed lg:w-[20%] lg:left-0  bg-white border-r h-screen">
-        <Nav />
-      </div>
-      <div className=" px-4 lg:absolute lg:right-0 lg:w-[80%] my-2 gap-4">
+    <div className="container">
+      
+      <div className="px-4">
         {showDeleteModal && (
           <DeleteBookModal
             handleCloseDeleteModal={handleCloseDeleteModal}
@@ -119,7 +105,7 @@ export default function Book() {
         {isLoading ? (
           <Loader />
         ) : (
-          <div className="mt-6">
+          <div className="content">
             <div className="lg:grid-cols-10 grid gap-4 border-b mb-1 p-4">
               <div className="col-span-3">
                 <img

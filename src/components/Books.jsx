@@ -9,10 +9,10 @@ import { getDate } from "../utils/dateMaker";
 
 export default function Books({ data }) {
   return (
-    <div className="grid lg:grid-cols-2 gap-2 mt-4">
+    <div className="grid lg:grid-cols-2 gap-2 lg:gap-6 mt-4">
       {data?.books?.map((book) => (
         <Link to={`/library/${book._id}`} key={book._id}>
-          <div className=" border p-2 shadow-sm flex items-center gap-2 justify-between bg-white h-40 lg:h-48">
+          <div className=" border-2 rounded p-2 shadow-sm flex items-center gap-2 justify-between bg-white h-40 lg:h-48">
             <div className="flex gap-2 items-center">
               <img
                 src={book.smallThumbnail}

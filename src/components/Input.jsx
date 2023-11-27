@@ -26,7 +26,8 @@ const Input = ({
           pt-6 
           pl-4 
           bg-white 
-          border-2
+          border
+          border-neutral-400
           rounded-md
           outline-none
           transition
@@ -37,19 +38,21 @@ const Input = ({
       <label
         className={`
           absolute 
-          text-md
           duration-150 
           transform 
           -translate-y-3
+          peer-first:
           text-neutral-500 
           top-5 
           z-10 
           origin-[0] 
           left-4
-          peer-placeholder-shown:scale-100 
+          peer-placeholder-shown:scale-100
           peer-placeholder-shown:translate-y-0 
           peer-focus:scale-75
           peer-focus:-translate-y-4
+          peer-active:scale-75
+
         `}
       >
         {label}

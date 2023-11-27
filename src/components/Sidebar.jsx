@@ -1,4 +1,3 @@
-import { LiaTimesSolid } from "react-icons/lia";
 import { FaTimes } from "react-icons/fa";
 import useGetContext from "../hooks/useGetContext";
 import { MdMenuBook } from "react-icons/md";

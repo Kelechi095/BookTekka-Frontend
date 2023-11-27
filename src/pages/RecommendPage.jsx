@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
 import useGetBook from "../hooks/useGetBook";
 import Loader from "../components/Loader";
-import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useMutation, useQueryClient, useQuery } from "react-query";
 import { customFetch } from "../utils/customFetch";
 import { toast } from "react-toastify";
 import useGetSingleRecommendation from "../hooks/recommendation/useGetSingleRecommendation";
-import Nav from "../components/Nav";
 
 export default function RecommendPage() {
   const { id } = useParams();
@@ -15,8 +14,6 @@ export default function RecommendPage() {
   const [isFull, setIsFull] = useState(false);
 
   const queryClient = useQueryClient();
-
-    
 
   const fetchUser = async () => {
     const response = await customFetch.get("/auth/user");
@@ -44,20 +41,10 @@ export default function RecommendPage() {
       onSuccess: () => {
         queryClient.invalidateQueries("singleRecommendation");
         setUserReview("");
-
-        toast.success("Review added", {
-          position: toast.POSITION.TOP_CENTER,
-          className: "text-xs",
-        });
+        toast.success("Review added");
       },
       onError: (error) => {
-        toast.error(
-          error?.response?.data?.msg || error?.response?.data?.error,
-          {
-            position: toast.POSITION.TOP_CENTER,
-            className: "text-xs",
-          }
-        );
+        toast.error(error?.response?.data?.msg || error?.response?.data?.error);
       },
     }
   );
@@ -68,15 +55,12 @@ export default function RecommendPage() {
   };
 
   return (
-    <div className="mx-auto text-slate-900 grid lg:grid-cols-10 gap-2 relative">
-      <div className="hidden lg:grid justify-center px-4 lg:fixed lg:w-[20%] lg:left-0  bg-white border-r h-screen">
-        <Nav />
-      </div>
-      <div className=" px-4 lg:absolute lg:right-0 lg:w-[80%] my-2 gap-4">
+    <div className="container">
+      <div className=" px-4">
         {isLoading ? (
           <Loader />
         ) : (
-          <div className="mt-6">
+          <div className="content">
             <div className="lg:grid-cols-10 grid gap-4 border-b mb-1 p-4">
               <div className="col-span-3">
                 <img
@@ -116,7 +100,7 @@ export default function RecommendPage() {
               <h2 className="mt-4 font-semibold text-blue-400 mx-2">
                 {book.reviews.length > 0 ? "Reviews" : "No reviews"}
               </h2>
-              {book.reviews.map((review) => (
+              {book?.reviews.map((review) => (
                 <div
                   key={review._id}
                   className="text-sm w-full max-w-xs lg:max-w-lg p-2 px-2 border shadow-sm mt-3 rounded-lg"

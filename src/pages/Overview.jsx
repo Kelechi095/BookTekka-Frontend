@@ -18,18 +18,16 @@ export default function Overview() {
   const { data, isLoading } = useQuery("stats", fetchStats);
 
   return (
-    <div className="mx-auto text-slate-900 grid lg:grid-cols-10 gap-2 relative">
-      <div className="hidden lg:grid justify-center px-4 lg:fixed lg:w-[20%] lg:left-0  bg-white border-r h-screen">
-        <Nav />
-      </div>
-      <div className=" px-4 lg:absolute lg:right-0 lg:w-[80%]  my-2 mb-4 gap-4 ">
+    <div className="container">
+      
+      <div className=" px-4">
         {isLoading ? (
           <Loader />
         ) : (
-          <>
-            <h2 className="hidden lg:block">Stats</h2>
+          <div className="content">
+            <h2 className="hidden lg:block text-center text-3xl py-2 px-4 font-semibold uppercase font-mono text-neutral-500">Stats</h2>
             <Header title={"Stats"} />
-            <div className="lg:grid lg:grid-cols-2  gap-2">
+            <div className="lg:grid lg:grid-cols-2  gap-2 lg:gap-8">
               <div className="border border-b-[6px] shadow-sm border-b-red-500 rounded-b -lg h-48 mt-8 p-8 flex flex-col justify-between">
                 <div className="flex justify-between items-center">
                   <p className="font-bold text-4xl text-red-500">
@@ -69,7 +67,7 @@ export default function Overview() {
                 </p>
               </div>
             </div>
-          </>
+          </div>
         )}
       </div>
     </div>

@@ -4,7 +4,7 @@ import { customFetch } from "../utils/customFetch";
 import { useQuery, useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { BiCamera } from "react-icons/bi";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 import { capitalizeFirst } from "../utils/capitalizeFirst";
 import Nav from "../components/Nav";
 
@@ -56,21 +56,12 @@ export default function EditProfile() {
       onSuccess: (data) => {
         localStorage.setItem("user", data.username);
         navigate("/profile");
-        toast.success("Profile updated", {
-          position: toast.POSITION.TOP_CENTER,
-          className: "text-xs",
-        });
+        toast.success("Profile updated");
       },
       onError: (error) => {
         error?.response?.data?.error?.split(" ")[0] === "E11000"
-          ? toast.error("Already used", {
-              position: toast.POSITION.TOP_CENTER,
-              className: "text-xs",
-            })
-          : toast.error(error?.response?.data?.msg, {
-              position: toast.POSITION.TOP_CENTER,
-              className: "text-xs",
-            });
+          ? toast.error("Already used")
+          : toast.error(error?.response?.data?.msg);
       },
     }
   );
@@ -81,14 +72,17 @@ export default function EditProfile() {
   };
 
   return (
-    <div className="mx-auto text-slate-900 grid lg:grid-cols-10 gap-2 relative">
-      <div className="hidden lg:grid justify-center px-4 lg:fixed lg:w-[20%] lg:left-0  bg-white border-r h-screen">
-        <Nav />
-      </div>
-      <div className=" px-4 lg:absolute lg:right-0 lg:w-[80%]">
-        <h1 className="font-bold text-2xl mt-8 text-center font-mono">Edit Profile</h1>
+    <div className="container">
+      
+      <div className=" px-4 lg:pt-20">
+        <h1 className="font-bold text-2xl mt-8 text-center font-mono">
+          Edit Profile
+        </h1>
 
-        <form className="flex flex-col mt-4 max-w-xs lg:max-w-lg gap-4 mx-auto" onSubmit={handleSubmit}>
+        <form
+          className="flex flex-col mt-4 max-w-xs lg:max-w-lg gap-4 mx-auto"
+          onSubmit={handleSubmit}
+        >
           <div className="flex flex-col gap-2 mt-8">
             <div
               className="rounded-full w-32 h-32 bg-black self-center relative bg-opacity-30 cursor-pointer flex justify-center items-center"

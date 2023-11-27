@@ -7,8 +7,7 @@ import { statusOptions } from "../utils/buttons";
 import useGetBook from "../hooks/useGetBook";
 import Loader from "../components/Loader";
 import { customFetch } from "../utils/customFetch";
-import Nav from "../components/Nav";
-import {toast} from 'react-toastify'
+import {toast} from 'react-hot-toast'
 
 export default function EditTodo() {
   const [formData, setFormData] = useState({
@@ -43,17 +42,11 @@ export default function EditTodo() {
     {
       onSuccess: () => {
         queryClient.invalidateQueries("books");
-        toast.success("Book updated", {
-          position: toast.POSITION.TOP_CENTER,
-          className: "text-xs",
-        });
+        toast.success("Book updated");
         navigate("/library");
       },
       onError: (error) => {
-        toast.error(error?.response?.data?.error.split(' ')[0] === "Book" ? "Status is not a valid input" : '', {
-              position: toast.POSITION.TOP_CENTER,
-              className: "text-xs",
-            });
+        toast.error(error?.response?.data?.error.split(' ')[0] === "Book" ? "Status is not a valid input" : '');
       },
     }
   );
@@ -72,15 +65,13 @@ export default function EditTodo() {
   };
 
   return (
-    <div className="mx-auto text-slate-900 grid lg:grid-cols-10 gap-2 relative">
-      <div className="hidden lg:grid justify-center px-4 lg:fixed lg:w-[20%] lg:left-0  bg-white border-r h-screen">
-        <Nav />
-      </div>
-      <div className=" px-4 lg:absolute lg:right-0 lg:w-[80%] mb-4 mt-8 p-2">
+    <div className="container">
+      
+      <div className=" px-4">
         {isLoading ? (
           <Loader />
         ) : (
-          <>
+          <div className="content">
             <h1 className="font-bold text-xl font-mono">Edit book</h1>
             <img
               src={book?.thumbnail}
@@ -126,7 +117,7 @@ export default function EditTodo() {
                 </div>
               </form>
             )}
-          </>
+          </div>
         )}
       </div>
     </div>

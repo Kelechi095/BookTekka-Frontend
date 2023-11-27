@@ -18,13 +18,12 @@ export default function Profile1() {
   });
 
   return (
-    <div className="mx-auto text-slate-900 grid lg:grid-cols-10 gap-2 relative">
-      <div className="hidden lg:grid justify-center px-4 lg:fixed lg:w-[20%] lg:left-0  bg-white border-r h-screen">
-        <Nav />
-      </div>
-      <div className=" px-4 lg:absolute lg:right-0 lg:w-[80%]">
+    <div className="container">
+      
+      <div className=" px-4">
         <Header title={"Profile"} />
-        <div className="my-4 shadow-sm p-6 mt-12 gap-2 mx-auto relative">
+        <div className="content">
+          <div className="w-96 mx-auto flex flex-col items-center justify-center">
           <img
             src={data?.profilePicture}
             alt=""
@@ -42,10 +41,12 @@ export default function Profile1() {
             {data?.totalRecommendations}
           </p>
 
-          <div className="flex gap-3">
+          <p className="self-start mt-4 font-semibold">Recently added</p>
+          <div className="flex gap-3 self-start">
             {data?.recentlyAdded?.slice(0, 3).map((book) => (
-              <img src={book.thumbnail} alt="" className="border rounded w-20" />
+              <img src={book.thumbnail} alt="" className="border rounded w-20 mt-2" />
             ))}
+          </div>
           </div>
         </div>
       </div>

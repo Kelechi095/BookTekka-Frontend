@@ -36,7 +36,7 @@ function App() {
             <Route index element={<Recommendation />} />
             <Route path=":id" element={<RecommendPage />} />
             <Route path="/library" element={<Library />} />
-            <Route path="/library/add-book" element={<AddBook />} />
+            <Route path="add-book" element={<AddBook />} />
             <Route path="/library/edit-book/:id" element={<EditBook />} />
             <Route path="/library/:id" element={<Book />} />
             <Route path="/profile" element={<Profile />} />
