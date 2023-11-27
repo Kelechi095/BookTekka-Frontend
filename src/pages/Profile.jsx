@@ -10,7 +10,7 @@ export default function Profile1() {
       <div className="px-4">
         <Header title={"Profile"} />
         <div className="content">
-          <div className="w-96 mx-auto mt-24 flex flex-col items-center justify-center">
+          <div className="max-w-sm mx-auto mt-24 flex flex-col items-center justify-center">
             <img
               src={user?.profilePicture}
               alt=""
