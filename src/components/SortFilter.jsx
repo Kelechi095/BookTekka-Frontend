@@ -32,8 +32,9 @@ export default function SortFilter({
       </div>
       {isSort && (
         <ul className="absolute top-12 bg-white w-36 px-2 py-1 rounded shadow-sm border z-10 text-sm lg:text-base">
-          {sortButtons.map((button) => (
+          {sortButtons.map((button, index) => (
             <li
+            key={index}
               className={
                 sortTerm === button
                   ? "list-none my-2 cursor-pointer hover:text-blue-500 w-fit font-bold"

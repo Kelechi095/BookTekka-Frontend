@@ -24,15 +24,18 @@ export default function Recommendation() {
   const navigate = useNavigate();
   /* const searchParams = new URLSearchParams(location.search) */
 
+  const debouncedValue = useDebounce(searchTerm, 500);
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const [sortQueryTerm, setSortQueryTerm] = useState('Newest')
-  const [genreQueryTerm, setGenreQueryTerm] = useState('All')
+  const [sortQueryTerm, setSortQueryTerm] = useState("Newest");
+  const [genreQueryTerm, setGenreQueryTerm] = useState("All");
+  const [searchQueryTerm, setSearchQueryTerm] = useState("");
 
-  const debouncedValue = useDebounce(searchTerm, 500);
+  const searchQuery = `sort=${sortQueryTerm || "Newest"}&genre=${
+    genreQueryTerm || "All"
+  }&search=${debouncedValue || ""}&limit=10&page=${currentPage}`;
 
-  const searchQuery = `sort=${sortQueryTerm || 'Newest'}&genre=${genreQueryTerm || 'All'}&search=${debouncedValue}&limit=10&page=${currentPage}`;
-
+  console.log(searchQuery);
 
   const queryClient = useQueryClient();
 
@@ -54,10 +57,6 @@ export default function Recommendation() {
   const likeBook = async (id) => {
     await customFetch.patch(`/recommend/likes/${id}`);
   };
-
-  useEffect(() => {
-
-  }, [])
 
   const { data: user } = useQuery("user", fetchUser);
 
@@ -116,10 +115,6 @@ export default function Recommendation() {
     }
   };
 
- /*  useEffect(() => {
-    setCurrentPage(1);
-  }, [genreTerm, searchTerm]);
- */
   const handleLike = (id) => {
     likeMutate(id);
   };
@@ -131,25 +126,33 @@ export default function Recommendation() {
   const handleSort = (arg) => {
     searchParams.set("sort", arg);
     setSearchParams(searchParams);
-    
   };
   const handleGenre = (arg) => {
     searchParams.set("genre", arg);
     setSearchParams(searchParams);
   };
 
+  useEffect(() => {
+    if (debouncedValue) {
+      searchParams.set("search", debouncedValue);
+      setSearchParams(searchParams);
+    }
+  }, [debouncedValue]);
 
-   useEffect(() => {
-    setSortQueryTerm(searchParams.get('sort'))
-    setGenreQueryTerm(searchParams.get('genre'))
-  }, [searchParams])
- 
+  useEffect(() => {
+    setSortQueryTerm(searchParams.get("sort"));
+    setGenreQueryTerm(searchParams.get("genre"));
+  }, [searchParams]);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [genreQueryTerm, searchTerm]);
 
   return (
     <div className="container">
       <div className=" px-4">
         <Header title={"BookTekka"} />
-        
+
         <div className="content">
           <h2 className="hidden lg:block text-center text-3xl py-2 px-4 font-semibold uppercase font-mono text-neutral-500">
             Recommendations

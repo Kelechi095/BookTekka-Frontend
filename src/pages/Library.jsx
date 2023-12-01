@@ -10,9 +10,6 @@ import Pagination from "../components/Pagination";
 import Search from "../components/Search";
 import SortFilter from "../components/SortFilter";
 import Books from "../components/Books";
-import { FaTimes } from "react-icons/fa";
-import useGetContext from "../hooks/useGetContext";
-import Nav from "../components/Nav";
 
 export default function Home() {
   const [isFilter, setIsFilter] = useState(false);
@@ -30,7 +27,7 @@ export default function Home() {
 
   const debouncedValue = useDebounce(searchTerm, 500);
 
-  const searchQuery = `sort=${sortQueryTerm || 'Newest'}&status=${statusQueryTerm || 'All'}&search=${debouncedValue}&limit=10&page=${currentPage}`;
+  const searchQuery = `sort=${sortQueryTerm || 'Newest'}&status=${statusQueryTerm || 'All'}&search=${debouncedValue || ""}&limit=10&page=${currentPage}`;
 
   const { data, isLoading } = useQuery([searchQuery], () =>
     fetchBooks(searchQuery)
@@ -59,10 +56,7 @@ export default function Home() {
     }
   };
 
-  /* useEffect(() => {
-    setCurrentPage(1);
-  }, [statusTerm, searchTerm]);
- */
+   
   const handleSort = (arg) => {
     searchParams.set("sort", arg);
     setSearchParams(searchParams);
@@ -73,11 +67,26 @@ export default function Home() {
     setSearchParams(searchParams);
   };
 
+  useEffect(() => {
+    if(debouncedValue) {
+      searchParams.set("search", debouncedValue)
+    setSearchParams(searchParams);
+    }
+    
+  }, [debouncedValue])
+
+
 
    useEffect(() => {
     setSortQueryTerm(searchParams.get('sort'))
     setStatusQueryTerm(searchParams.get('status'))
   }, [searchParams])
+
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [statusQueryTerm, searchTerm]);
+ 
  
 
 
