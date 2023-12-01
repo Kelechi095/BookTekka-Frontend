@@ -7,7 +7,7 @@ export default function Recommendations({
   handleAddToLibrary,
   user,
 }) {
-  console.log(data);
+  
   return (
     <div className="grid lg:grid-cols-2 gap-6 mt-4">
       {data?.recommendations?.map((book) => (

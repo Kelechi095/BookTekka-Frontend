@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import Loader from "../components/Loader";
 import { AiOutlinePlus } from "react-icons/ai";
 import { useQuery } from "react-query";
@@ -18,16 +18,19 @@ export default function Home() {
   const [isFilter, setIsFilter] = useState(false);
   const [isSort, setIsSort] = useState(false);
 
-  const [sortTerm, setSortTerm] = useState("Newest");
-  const [statusTerm, setStatusTerm] = useState("All");
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
+
+  const [searchParams, setSearchParams] = useSearchParams()
+
+  const [sortQueryTerm, setSortQueryTerm] = useState('Newest')
+  const [statusQueryTerm, setStatusQueryTerm] = useState('All')
 
   const navigate = useNavigate();
 
   const debouncedValue = useDebounce(searchTerm, 500);
 
-  const searchQuery = `sort=${sortTerm}&status=${statusTerm}&search=${debouncedValue}&limit=10&page=${currentPage}`;
+  const searchQuery = `sort=${sortQueryTerm || 'Newest'}&status=${statusQueryTerm || 'All'}&search=${debouncedValue}&limit=10&page=${currentPage}`;
 
   const { data, isLoading } = useQuery([searchQuery], () =>
     fetchBooks(searchQuery)
@@ -56,9 +59,27 @@ export default function Home() {
     }
   };
 
-  useEffect(() => {
+  /* useEffect(() => {
     setCurrentPage(1);
   }, [statusTerm, searchTerm]);
+ */
+  const handleSort = (arg) => {
+    searchParams.set("sort", arg);
+    setSearchParams(searchParams);
+    
+  };
+  const handleStatus = (arg) => {
+    searchParams.set("status", arg);
+    setSearchParams(searchParams);
+  };
+
+
+   useEffect(() => {
+    setSortQueryTerm(searchParams.get('sort'))
+    setStatusQueryTerm(searchParams.get('status'))
+  }, [searchParams])
+ 
+
 
   return (
     <div className="container">
@@ -84,10 +105,8 @@ export default function Home() {
           <SortFilter
             isSort={isSort}
             isFilter={isFilter}
-            sortTerm={sortTerm}
-            setSortTerm={setSortTerm}
-            setStatusTerm={setStatusTerm}
-            statusTerm={statusTerm}
+            handleSort={handleSort}
+            handleStatus={handleStatus}
             toggleFilterBar={toggleFilterBar}
             toggleSortBar={toggleSortBar}
           />

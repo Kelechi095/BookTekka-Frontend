@@ -12,25 +12,29 @@ import Pagination from "../components/Pagination";
 import Search from "../components/Search";
 import SortGenre from "../components/SortGenre";
 import Recommendations from "../components/Recommendations";
+import { useSearchParams, useLocation } from "react-router-dom";
 
 export default function Recommendation() {
   const [isFilter, setIsFilter] = useState(false);
   const [isSort, setIsSort] = useState(false);
 
-  const [sortTerm, setSortTerm] = useState("Newest");
-  const [genreTerm, setGenreTerm] = useState("All");
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
 
   const navigate = useNavigate();
+  /* const searchParams = new URLSearchParams(location.search) */
+
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const [sortQueryTerm, setSortQueryTerm] = useState('Newest')
+  const [genreQueryTerm, setGenreQueryTerm] = useState('All')
 
   const debouncedValue = useDebounce(searchTerm, 500);
 
-  const searchQuery = `sort=${sortTerm}&genre=${genreTerm}&search=${debouncedValue}&limit=10&page=${currentPage}`;
+  const searchQuery = `sort=${sortQueryTerm || 'Newest'}&genre=${genreQueryTerm || 'All'}&search=${debouncedValue}&limit=10&page=${currentPage}`;
+
 
   const queryClient = useQueryClient();
-
-  console.log(searchQuery);
 
   const fetchUser = async () => {
     const response = await customFetch.get("/auth/user");
@@ -50,6 +54,10 @@ export default function Recommendation() {
   const likeBook = async (id) => {
     await customFetch.patch(`/recommend/likes/${id}`);
   };
+
+  useEffect(() => {
+
+  }, [])
 
   const { data: user } = useQuery("user", fetchUser);
 
@@ -108,10 +116,10 @@ export default function Recommendation() {
     }
   };
 
-  useEffect(() => {
+ /*  useEffect(() => {
     setCurrentPage(1);
   }, [genreTerm, searchTerm]);
-
+ */
   const handleLike = (id) => {
     likeMutate(id);
   };
@@ -120,11 +128,28 @@ export default function Recommendation() {
     addBookLibMutation(book);
   };
 
+  const handleSort = (arg) => {
+    searchParams.set("sort", arg);
+    setSearchParams(searchParams);
+    
+  };
+  const handleGenre = (arg) => {
+    searchParams.set("genre", arg);
+    setSearchParams(searchParams);
+  };
+
+
+   useEffect(() => {
+    setSortQueryTerm(searchParams.get('sort'))
+    setGenreQueryTerm(searchParams.get('genre'))
+  }, [searchParams])
+ 
+
   return (
     <div className="container">
       <div className=" px-4">
         <Header title={"BookTekka"} />
-
+        
         <div className="content">
           <h2 className="hidden lg:block text-center text-3xl py-2 px-4 font-semibold uppercase font-mono text-neutral-500">
             Recommendations
@@ -134,12 +159,10 @@ export default function Recommendation() {
           <SortGenre
             isSort={isSort}
             isFilter={isFilter}
-            sortTerm={sortTerm}
-            setSortTerm={setSortTerm}
-            setGenreTerm={setGenreTerm}
-            genreTerm={genreTerm}
             toggleFilterBar={toggleFilterBar}
             toggleSortBar={toggleSortBar}
+            handleSort={handleSort}
+            handleGenre={handleGenre}
           />
         </div>
 

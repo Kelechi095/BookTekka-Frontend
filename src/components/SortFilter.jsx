@@ -6,15 +6,15 @@ import { BiSolidChevronDown, BiSolidChevronRight } from "react-icons/bi";
 export default function SortFilter({
   isSort,
   isFilter,
-  sortTerm,
-  statusTerm,
+  handleSort,
+  handleStatus,
   toggleSortBar,
   toggleFilterBar,
-  setSortTerm,
-  setStatusTerm,
 }) {
   const [sortTitle, setSortTitle] = useState("Sort");
   const [filterTitle, setFilterTitle] = useState("Filter");
+  const [sortTerm, setSortTerm] = useState("Newest");
+  const [statusTerm, setStatusTerm] = useState("All");
 
   useEffect(() => {
     setSortTitle(sortTerm);
@@ -42,6 +42,7 @@ export default function SortFilter({
               onClick={() => {
                 setSortTerm(button);
                 toggleSortBar();
+                handleSort(button)
               }}
             >
               {button}
@@ -68,6 +69,7 @@ export default function SortFilter({
               onClick={() => {
                 setStatusTerm(button);
                 toggleFilterBar();
+                handleStatus(button)
               }}
             >
               {button}

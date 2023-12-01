@@ -6,22 +6,20 @@ import { BiSolidChevronDown, BiSolidChevronRight } from "react-icons/bi";
 export default function SortGenre({
   isSort,
   isFilter,
-  sortTerm,
-  genreTerm,
+  handleSort,
+  handleGenre,
   toggleSortBar,
   toggleFilterBar,
-  setSortTerm,
-  setGenreTerm,
 }) {
   const [sortTitle, setSortTitle] = useState("Sort");
   const [filterTitle, setFilterTitle] = useState("Filter");
+  const [sortTerm, setSortTerm] = useState("Newest");
+  const [genreTerm, setGenreTerm] = useState("All");
 
   useEffect(() => {
     setSortTitle(sortTerm);
     setFilterTitle(genreTerm);
   }, [genreTerm, sortTerm]);
-
-  console.log(genreTerm)
 
   return (
     <div className="sort_filter relative flex justify-between my-6">
@@ -35,7 +33,8 @@ export default function SortGenre({
       {isSort && (
         <ul className="absolute top-12 bg-white w-36 px-2 py-1 rounded shadow-sm border z-10 text-sm lg:text-base">
           {sortButtons.map((button, index) => (
-            <li key={index}
+            <li
+              key={index}
               className={
                 sortTerm === button
                   ? "list-none my-2 cursor-pointer hover:text-blue-500 w-fit font-bold"
@@ -44,6 +43,7 @@ export default function SortGenre({
               onClick={() => {
                 setSortTerm(button);
                 toggleSortBar();
+                handleSort(button)
               }}
             >
               {button}
@@ -61,7 +61,8 @@ export default function SortGenre({
       {isFilter && (
         <ul className="absolute top-12 right-0 bg-white w-36 px-2 py-1 rounded shadow-sm border z-10 text-sm lg:text-base">
           {filterGenres2.map((button, index) => (
-            <li key={index}
+            <li
+              key={index}
               className={
                 genreTerm === button
                   ? "list-none my-2 cursor-pointer hover:text-blue-500 w-fit font-bold"
@@ -70,6 +71,7 @@ export default function SortGenre({
               onClick={() => {
                 setGenreTerm(button);
                 toggleFilterBar();
+                handleGenre(button)
               }}
             >
               {button}

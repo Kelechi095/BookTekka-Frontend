@@ -12,7 +12,7 @@ export default function useDeletebooks() {
     onSuccess: () => {
       queryClient.invalidateQueries(["books"]);
       toast.success("Book deleted");
-      navigate("/");
+      navigate("/library");
     },
   });
 
