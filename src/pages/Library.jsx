@@ -22,12 +22,14 @@ export default function Home() {
 
   const [sortQueryTerm, setSortQueryTerm] = useState('Newest')
   const [statusQueryTerm, setStatusQueryTerm] = useState('All')
+  const [searchQueryTerm, setSearchQueryTerm] = useState("");
+
 
   const navigate = useNavigate();
 
   const debouncedValue = useDebounce(searchTerm, 500);
 
-  const searchQuery = `sort=${sortQueryTerm || 'Newest'}&status=${statusQueryTerm || 'All'}&search=${debouncedValue || ""}&limit=10&page=${currentPage}`;
+  const searchQuery = `sort=${sortQueryTerm || 'Newest'}&status=${statusQueryTerm || 'All'}&search=${searchQueryTerm || ""}&limit=10&page=${currentPage}`;
 
   const { data, isLoading } = useQuery([searchQuery], () =>
     fetchBooks(searchQuery)
@@ -80,6 +82,8 @@ export default function Home() {
    useEffect(() => {
     setSortQueryTerm(searchParams.get('sort'))
     setStatusQueryTerm(searchParams.get('status'))
+    setSearchQueryTerm(searchParams.get('search'))
+
   }, [searchParams])
 
 

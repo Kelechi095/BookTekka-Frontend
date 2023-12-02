@@ -33,7 +33,7 @@ export default function Recommendation() {
 
   const searchQuery = `sort=${sortQueryTerm || "Newest"}&genre=${
     genreQueryTerm || "All"
-  }&search=${debouncedValue || ""}&limit=10&page=${currentPage}`;
+  }&search=${searchQueryTerm || ""}&limit=10&page=${currentPage}`;
 
   console.log(searchQuery);
 
@@ -142,6 +142,7 @@ export default function Recommendation() {
   useEffect(() => {
     setSortQueryTerm(searchParams.get("sort"));
     setGenreQueryTerm(searchParams.get("genre"));
+    setSearchQueryTerm(searchParams.get('search'))
   }, [searchParams]);
 
   useEffect(() => {
