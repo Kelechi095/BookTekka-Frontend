@@ -20,6 +20,8 @@ export default function RecommendPage() {
     return response.data;
   };
 
+  
+
   const handleShowMore = () => {
     setIsFull(!isFull);
   };

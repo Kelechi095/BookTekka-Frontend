@@ -16,20 +16,22 @@ export default function Home() {
   const [isSort, setIsSort] = useState(false);
 
   const [searchTerm, setSearchTerm] = useState("");
-  const [currentPage, setCurrentPage] = useState(1);
 
-  const [searchParams, setSearchParams] = useSearchParams()
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  const [sortQueryTerm, setSortQueryTerm] = useState('Newest')
-  const [statusQueryTerm, setStatusQueryTerm] = useState('All')
+  const [sortQueryTerm, setSortQueryTerm] = useState("Newest");
+  const [statusQueryTerm, setStatusQueryTerm] = useState("All");
   const [searchQueryTerm, setSearchQueryTerm] = useState("");
-
+  const [currentPage, setCurrentPage] = useState(!searchParams.get("page") ? 1 : Number(searchParams.get("page")) );
+  const [pageQueryTerm, setPageQueryTerm] = useState(null);
 
   const navigate = useNavigate();
 
   const debouncedValue = useDebounce(searchTerm, 500);
 
-  const searchQuery = `sort=${sortQueryTerm || 'Newest'}&status=${statusQueryTerm || 'All'}&search=${searchQueryTerm || ""}&limit=10&page=${currentPage}`;
+  const searchQuery = `sort=${sortQueryTerm || "Newest"}&status=${
+    statusQueryTerm || "All"
+  }&search=${searchQueryTerm || ""}&limit=4&page=${pageQueryTerm}`;
 
   const { data, isLoading } = useQuery([searchQuery], () =>
     fetchBooks(searchQuery)
@@ -49,50 +51,61 @@ export default function Home() {
   const handlePageNext = () => {
     if (currentPage < data?.numOfPages) {
       setCurrentPage((prev) => prev + 1);
+      searchParams.set("page", currentPage + 1);
+      setSearchParams(searchParams);
     }
   };
+
+  const clickPaginate = (value) => {
+    setPageQueryTerm(value);
+    setCurrentPage(value)
+    searchParams.set("page", value);
+    setSearchParams(searchParams);
+  };
+
 
   const handlePagePrev = () => {
     if (currentPage > 1) {
       setCurrentPage((prev) => prev - 1);
+      searchParams.set("page", currentPage - 1);
+      setSearchParams(searchParams);
     }
   };
 
-   
   const handleSort = (arg) => {
+    searchParams.delete("page");
+    setCurrentPage(1);
     searchParams.set("sort", arg);
     setSearchParams(searchParams);
-    
   };
+
   const handleStatus = (arg) => {
+    searchParams.delete("page");
+    setCurrentPage(1);
     searchParams.set("status", arg);
     setSearchParams(searchParams);
   };
 
   useEffect(() => {
-    if(debouncedValue) {
-      searchParams.set("search", debouncedValue)
-    setSearchParams(searchParams);
+    if (debouncedValue) {
+      searchParams.delete("page");
+      setCurrentPage(1);
+      searchParams.set("search", debouncedValue);
+      setSearchParams(searchParams);
+    } else {
+      searchParams.delete("search");
+      setSearchParams(searchParams);
     }
-    
-  }, [debouncedValue])
-
-
-
-   useEffect(() => {
-    setSortQueryTerm(searchParams.get('sort'))
-    setStatusQueryTerm(searchParams.get('status'))
-    setSearchQueryTerm(searchParams.get('search'))
-
-  }, [searchParams])
-
+  }, [debouncedValue]);
 
   useEffect(() => {
-    setCurrentPage(1);
-  }, [statusQueryTerm, searchTerm]);
- 
- 
+    setSortQueryTerm(searchParams.get("sort"));
+    setStatusQueryTerm(searchParams.get("status"));
+    setSearchQueryTerm(searchParams.get("search"));
+    setPageQueryTerm(searchParams.get("page"));
+  }, [searchParams]);
 
+  const pagArrayLength = data?.numOfPages + 1
 
   return (
     <div className="container">
@@ -112,7 +125,7 @@ export default function Home() {
           <h2 className="hidden lg:block text-center text-3xl py-2 px-4 font-semibold uppercase font-mono text-neutral-500">
             Library
           </h2>
-          
+
           <Search setSearchTerm={setSearchTerm} searchTerm={searchTerm} />
 
           <SortFilter
@@ -149,6 +162,8 @@ export default function Home() {
             currentPage={currentPage}
             handlePageNext={handlePageNext}
             handlePagePrev={handlePagePrev}
+            pagArrayLength={pagArrayLength}
+            clickPaginate={clickPaginate}
           />
         )}
       </div>

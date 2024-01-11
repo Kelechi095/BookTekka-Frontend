@@ -14,15 +14,15 @@ import SortGenre from "../components/SortGenre";
 import Recommendations from "../components/Recommendations";
 import { useSearchParams, useLocation } from "react-router-dom";
 
+const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
 export default function Recommendation() {
   const [isFilter, setIsFilter] = useState(false);
   const [isSort, setIsSort] = useState(false);
 
   const [searchTerm, setSearchTerm] = useState("");
-  const [currentPage, setCurrentPage] = useState(1);
 
   const navigate = useNavigate();
-  /* const searchParams = new URLSearchParams(location.search) */
 
   const debouncedValue = useDebounce(searchTerm, 500);
   const [searchParams, setSearchParams] = useSearchParams();
@@ -30,14 +30,19 @@ export default function Recommendation() {
   const [sortQueryTerm, setSortQueryTerm] = useState("Newest");
   const [genreQueryTerm, setGenreQueryTerm] = useState("All");
   const [searchQueryTerm, setSearchQueryTerm] = useState("");
+  const [currentPage, setCurrentPage] = useState(
+    !searchParams.get("page") ? 1 : Number(searchParams.get("page"))
+  );
+  const [pageQueryTerm, setPageQueryTerm] = useState(null);
 
   const searchQuery = `sort=${sortQueryTerm || "Newest"}&genre=${
     genreQueryTerm || "All"
-  }&search=${searchQueryTerm || ""}&limit=10&page=${currentPage}`;
-
-  console.log(searchQuery);
+  }&search=${searchQueryTerm || ""}&limit=4&page=${pageQueryTerm}`;
 
   const queryClient = useQueryClient();
+
+  console.log("currentPage:", currentPage)
+  console.log("pageQueryTerm:", pageQueryTerm)
 
   const fetchUser = async () => {
     const response = await customFetch.get("/auth/user");
@@ -106,13 +111,26 @@ export default function Recommendation() {
   const handlePageNext = () => {
     if (currentPage < data?.numOfPages) {
       setCurrentPage((prev) => prev + 1);
+      searchParams.set("page", currentPage + 1);
+      setSearchParams(searchParams);
     }
   };
+
+  
 
   const handlePagePrev = () => {
     if (currentPage > 1) {
       setCurrentPage((prev) => prev - 1);
+      searchParams.set("page", currentPage - 1);
+      setSearchParams(searchParams);
     }
+  };
+
+  const clickPaginate = (value) => {
+    setPageQueryTerm(value);
+    setCurrentPage(value)
+    searchParams.set("page", value);
+    setSearchParams(searchParams);
   };
 
   const handleLike = (id) => {
@@ -124,17 +142,26 @@ export default function Recommendation() {
   };
 
   const handleSort = (arg) => {
+    searchParams.delete("page");
+    setCurrentPage(1);
     searchParams.set("sort", arg);
     setSearchParams(searchParams);
   };
   const handleGenre = (arg) => {
+    searchParams.delete("page");
+    setCurrentPage(1);
     searchParams.set("genre", arg);
     setSearchParams(searchParams);
   };
 
   useEffect(() => {
     if (debouncedValue) {
+      searchParams.delete("page");
+      setCurrentPage(1);
       searchParams.set("search", debouncedValue);
+      setSearchParams(searchParams);
+    } else {
+      searchParams.delete("search");
       setSearchParams(searchParams);
     }
   }, [debouncedValue]);
@@ -142,12 +169,11 @@ export default function Recommendation() {
   useEffect(() => {
     setSortQueryTerm(searchParams.get("sort"));
     setGenreQueryTerm(searchParams.get("genre"));
-    setSearchQueryTerm(searchParams.get('search'))
+    setSearchQueryTerm(searchParams.get("search"));
+    setPageQueryTerm(searchParams.get("page"));
   }, [searchParams]);
 
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [genreQueryTerm, searchTerm]);
+  const pagArrayLength = data?.numOfPages + 1
 
   return (
     <div className="container">
@@ -196,12 +222,16 @@ export default function Recommendation() {
         (debouncedValue && data?.books?.length < 1) ? null : (
           <Pagination
             data={data}
-            currentPage={currentPage}
             handlePageNext={handlePageNext}
             handlePagePrev={handlePagePrev}
+            currentPage={currentPage}
+            pagArrayLength={pagArrayLength}
+            clickPaginate={clickPaginate}
+            pageQueryTerm={pageQueryTerm}
           />
         )}
       </div>
+      
     </div>
   );
 }

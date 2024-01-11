@@ -62,6 +62,7 @@ export default function SortFilter({
         <ul className="absolute top-12 right-0 bg-white w-36 px-2 py-1 rounded shadow-sm border z-10 text-sm lg:text-base">
           {statusOptions.map((button) => (
             <li
+            key={button}
               className={
                 statusTerm === button
                   ? "list-none my-2 cursor-pointer hover:text-blue-500 w-fit font-bold"
