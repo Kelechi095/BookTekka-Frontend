@@ -26,21 +26,21 @@ export default function Profile1() {
             <img
               src={data?.profilePicture}
               alt=""
-              className="shadow rounded-full w-60 h-60 object-cover border-none mx-auto"
+              className="shadow rounded-full w-48 h-48 md:w-60 md:h-60 object-cover border-none mx-auto"
             />
-            <p className="self-center mt-4">{data?.username}</p>
+            <p className="self-center mt-4 text-lg font-bold">{data?.username}</p>
             <p className="self-center mt-4">
               {data?.totalBooks} books in library
             </p>
             <p className="self-center mt-4">
-            {data?.totalRecommendations} books recommended
+            {data?.totalRecommendations} {data?.totalRecommendations.length === 1 ? 'book' : 'books'} recommended
               
             </p>
 
             <p className="self-center mt-4 font-semibold underline text-cyan-500">
               Recently added
             </p>
-            <div className="flex gap-3 self-center mb-4">
+            <div className="flex gap-3 self-center">
               {data?.recentlyAdded?.slice(0, 3).map((book) => (
                 <img
                   src={book.thumbnail}
