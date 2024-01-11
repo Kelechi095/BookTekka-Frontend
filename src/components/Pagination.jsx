@@ -9,8 +9,11 @@ export default function Pagination({
   clickPaginate
 }) {
 
+  const firstSl = currentPage
+  const secondSl = currentPage + 2
+
   return (
-    <div className="flex justify-end items-center gap-8 my-[12px] lg:my-4">
+    <div className="flex justify-center md:justify-end items-center gap-8 my-[12px] lg:my-4">
       <button
         className="border shadow-sm flex items-center rounded lg:text-lg text-cyan-500 px-2 bg-white disabled:text-gray-400 cursor-pointer"
         disabled={currentPage === 1 || 0}
@@ -22,7 +25,7 @@ export default function Pagination({
         <BiChevronsLeft size={20} className=" mt-1 " />
       </button>
       
-      {[...Array(pagArrayLength).keys()].slice(1).map(num => (
+      {[...Array(pagArrayLength).keys()].slice(firstSl, secondSl).map(num => (
         <button className={
           `border rounded px-4
           ${currentPage === num ? "bg-cyan-500 text-white border-cyan-500" : "bg-white text-slate-600"}
