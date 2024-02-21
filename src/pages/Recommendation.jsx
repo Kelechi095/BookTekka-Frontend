@@ -37,7 +37,7 @@ export default function Recommendation() {
 
   const searchQuery = `sort=${sortQueryTerm || "Newest"}&genre=${
     genreQueryTerm || "All"
-  }&search=${searchQueryTerm || ""}&limit=4&page=${pageQueryTerm}`;
+  }&search=${searchQueryTerm || ""}&limit=8&page=${pageQueryTerm}`;
 
   const queryClient = useQueryClient();
 

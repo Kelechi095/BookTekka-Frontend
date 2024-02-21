@@ -25,7 +25,7 @@ export default function RecommendPage() {
   const handleShowMore = () => {
     setIsFull(!isFull);
   };
-
+z
   const { data: user } = useQuery("user", fetchUser);
 
   const addReview = async () => {
@@ -131,4 +131,4 @@ export default function RecommendPage() {
       </div>
     </div>
   );
-}
+}z

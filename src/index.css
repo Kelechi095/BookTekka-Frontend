@@ -23,7 +23,7 @@ input:-webkit-autofill:active {
     @apply mx-auto text-slate-900 py-4;
   }
   .content {
-    @apply bg-white lg:pt-20 pt-4 mb-6 px-2 lg:px-16 mx-auto;
+    @apply bg-white lg:pt-20 pt-4 mb-6 px-4 lg:px-16 mx-auto;
   }
   .wrapper {
     @apply max-w-[2500px] mx-auto xl:px-20 md:px-10 px-2;

@@ -58,7 +58,7 @@ export default function Overview() {
               <div className="border border-b-[6px] shadow-sm border-b-purple-500 rounded-b-lg h-48 mt-8 p-8 flex flex-col justify-between">
                 <div className="flex justify-between items-center">
                   <p className="font-bold text-4xl text-purple-500">
-                    {data?.totalRecommendations}
+                    {data?.totalRecommendations}z
                   </p>
                   <IoEyeSharp size={40} className="text-purple-500" />
                 </div>

@@ -77,7 +77,7 @@ export default function EditProfile() {
       <div className=" px-4 lg:pt-20">
         <h1 className="font-bold text-2xl mt-8 text-center font-mono">
           Edit Profile
-        </h1>
+        </h1>z
 
         <form
           className="flex flex-col mt-4 max-w-xs lg:max-w-lg gap-4 mx-auto"

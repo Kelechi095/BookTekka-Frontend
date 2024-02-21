@@ -31,7 +31,7 @@ export default function Home() {
 
   const searchQuery = `sort=${sortQueryTerm || "Newest"}&status=${
     statusQueryTerm || "All"
-  }&search=${searchQueryTerm || ""}&limit=4&page=${pageQueryTerm}`;
+  }&search=${searchQueryTerm || ""}&limit=8&page=${pageQueryTerm}`;
 
   const { data, isLoading } = useQuery([searchQuery], () =>
     fetchBooks(searchQuery)
